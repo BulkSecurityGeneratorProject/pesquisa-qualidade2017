@@ -1,0 +1,23 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "professorBanca",
+            "otherEntityName": "professorBanca",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "flgaprovadasecretaria",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20171012224558",
+    "entityTableName": "banca",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "angularJSSuffix": "mySuffix"
+}

@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "banca",
+            "otherEntityName": "banca",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "apresentacao"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "data",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "flgagendamentoaprovado",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20171012224557",
+    "entityTableName": "apresentacao",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "angularJSSuffix": "mySuffix"
+}

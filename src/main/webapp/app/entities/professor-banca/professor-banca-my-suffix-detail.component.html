@@ -1,0 +1,25 @@
+
+<div *ngIf="professorBanca">
+    <h2><span jhiTranslate="jhipsterApp.professorBanca.detail.title">Professor Banca</span> {{professorBanca.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="jhipsterApp.professorBanca.nota">Nota</span></dt>
+        <dd>
+            <span>{{professorBanca.nota}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'professor-banca-my-suffix/'+ professorBanca.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,22 @@
+{
+    "jhipsterApp": {
+        "banca" : {
+            "home": {
+                "title": "Bancas",
+                "createLabel": "Criar novo Banca",
+                "createOrEditLabel": "Criar ou editar Banca"
+            },
+            "created": "Um novo Banca foi criado com o identificador {{ param }}",
+            "updated": "Um Banca foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Banca foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Banca {{ id }}?"
+            },
+            "detail": {
+                "title": "Banca"
+            },
+            "flgaprovadasecretaria": "Flgaprovadasecretaria",
+            "professorBanca": "Professor Banca"
+        }
+    }
+}

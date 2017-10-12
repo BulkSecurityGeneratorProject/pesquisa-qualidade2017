@@ -1,0 +1,23 @@
+{
+    "jhipsterApp": {
+        "professorBanca" : {
+            "home": {
+                "title": "Professor Bancas",
+                "createLabel": "Create a new Professor Banca",
+                "createOrEditLabel": "Create or edit a Professor Banca"
+            },
+            "created": "A new Professor Banca is created with identifier {{ param }}",
+            "updated": "A Professor Banca is updated with identifier {{ param }}",
+            "deleted": "A Professor Banca is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Professor Banca {{ id }}?"
+            },
+            "detail": {
+                "title": "Professor Banca"
+            },
+            "nota": "Nota",
+            "professor": "Professor",
+            "banca": "Banca"
+        }
+    }
+}

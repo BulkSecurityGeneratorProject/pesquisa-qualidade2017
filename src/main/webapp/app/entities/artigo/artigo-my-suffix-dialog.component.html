@@ -1,0 +1,73 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myArtigoLabel" jhiTranslate="jhipsterApp.artigo.home.createOrEditLabel">Create or edit a Artigo</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!artigo.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="artigo.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.artigo.nome" for="field_nome">Nome</label>
+            <input type="text" class="form-control" name="nome" id="field_nome"
+                [(ngModel)]="artigo.nome" required />
+            <div [hidden]="!(editForm.controls.nome?.dirty && editForm.controls.nome?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nome?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.artigo.titulo" for="field_titulo">Titulo</label>
+            <input type="text" class="form-control" name="titulo" id="field_titulo"
+                [(ngModel)]="artigo.titulo" required />
+            <div [hidden]="!(editForm.controls.titulo?.dirty && editForm.controls.titulo?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.titulo?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.artigo.datapublicacao" for="field_datapublicacao">Datapublicacao</label>
+            <div class="input-group">
+                <input id="field_datapublicacao" type="text" class="form-control" name="datapublicacao" ngbDatepicker  #datapublicacaoDp="ngbDatepicker" [(ngModel)]="artigo.datapublicacao"
+                />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="datapublicacaoDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.artigo.link" for="field_link">Link</label>
+            <input type="text" class="form-control" name="link" id="field_link"
+                [(ngModel)]="artigo.link"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.artigo.flgrelacionadopesquisa" for="field_flgrelacionadopesquisa">Flgrelacionadopesquisa</label>
+            <input type="checkbox" class="form-control" name="flgrelacionadopesquisa" id="field_flgrelacionadopesquisa"
+                [(ngModel)]="artigo.flgrelacionadopesquisa"  />
+            <div [hidden]="!(editForm.controls.flgrelacionadopesquisa?.dirty && editForm.controls.flgrelacionadopesquisa?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.flgrelacionadopesquisa?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,46 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "apresentacao",
+            "otherEntityName": "apresentacao",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "propostaTese"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "aluno",
+            "otherEntityName": "aluno",
+            "otherEntityRelationshipName": "propostaTese"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "tema",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "descricao",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "flgaprovado",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "link",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171012224555",
+    "entityTableName": "proposta_tese",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "angularJSSuffix": "mySuffix"
+}

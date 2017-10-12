@@ -1,0 +1,41 @@
+
+<div *ngIf="artigo">
+    <h2><span jhiTranslate="jhipsterApp.artigo.detail.title">Artigo</span> {{artigo.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="jhipsterApp.artigo.nome">Nome</span></dt>
+        <dd>
+            <span>{{artigo.nome}}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.artigo.titulo">Titulo</span></dt>
+        <dd>
+            <span>{{artigo.titulo}}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.artigo.datapublicacao">Datapublicacao</span></dt>
+        <dd>
+            <span>{{artigo.datapublicacao | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.artigo.link">Link</span></dt>
+        <dd>
+            <span>{{artigo.link}}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.artigo.flgrelacionadopesquisa">Flgrelacionadopesquisa</span></dt>
+        <dd>
+            <span>{{artigo.flgrelacionadopesquisa}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'artigo-my-suffix/'+ artigo.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

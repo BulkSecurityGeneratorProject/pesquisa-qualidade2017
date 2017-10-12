@@ -1,0 +1,51 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myAlunoLabel" jhiTranslate="jhipsterApp.aluno.home.createOrEditLabel">Create or edit a Aluno</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!aluno.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="aluno.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.aluno.nome" for="field_nome">Nome</label>
+            <input type="text" class="form-control" name="nome" id="field_nome"
+                [(ngModel)]="aluno.nome"  />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.aluno.artigo" for="field_artigo">Artigo</label>
+            <select class="form-control" id="field_artigo" name="artigo" [(ngModel)]="aluno.artigoId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="artigoOption.id" *ngFor="let artigoOption of artigos; trackBy: trackArtigoById">{{artigoOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.aluno.propostaTese" for="field_propostaTese">Proposta Tese</label>
+            <select class="form-control" id="field_propostaTese" name="propostaTese" [(ngModel)]="aluno.propostaTeseId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="propostaTeseOption.id" *ngFor="let propostaTeseOption of propostatese; trackBy: trackPropostaTeseById">{{propostaTeseOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.aluno.coOrientador" for="field_coOrientador">Co Orientador</label>
+            <select class="form-control" id="field_coOrientador" name="coOrientador" [(ngModel)]="aluno.coOrientadorId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="coOrientadorOption.id" *ngFor="let coOrientadorOption of coorientadors; trackBy: trackCoOrientadorById">{{coOrientadorOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

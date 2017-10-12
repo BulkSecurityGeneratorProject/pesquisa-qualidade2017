@@ -1,0 +1,22 @@
+{
+    "jhipsterApp": {
+        "coOrientador" : {
+            "home": {
+                "title": "Co Orientadors",
+                "createLabel": "Criar novo Co Orientador",
+                "createOrEditLabel": "Criar ou editar Co Orientador"
+            },
+            "created": "Um novo Co Orientador foi criado com o identificador {{ param }}",
+            "updated": "Um Co Orientador foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Co Orientador foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Co Orientador {{ id }}?"
+            },
+            "detail": {
+                "title": "Co Orientador"
+            },
+            "aluno": "Aluno",
+            "professor": "Professor"
+        }
+    }
+}

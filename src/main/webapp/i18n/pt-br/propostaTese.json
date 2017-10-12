@@ -1,0 +1,26 @@
+{
+    "jhipsterApp": {
+        "propostaTese" : {
+            "home": {
+                "title": "Proposta Tese",
+                "createLabel": "Criar novo Proposta Tese",
+                "createOrEditLabel": "Criar ou editar Proposta Tese"
+            },
+            "created": "Um novo Proposta Tese foi criado com o identificador {{ param }}",
+            "updated": "Um Proposta Tese foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Proposta Tese foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Proposta Tese {{ id }}?"
+            },
+            "detail": {
+                "title": "Proposta Tese"
+            },
+            "tema": "Tema",
+            "descricao": "Descricao",
+            "flgaprovado": "Flgaprovado",
+            "link": "Link",
+            "apresentacao": "Apresentacao",
+            "aluno": "Aluno"
+        }
+    }
+}

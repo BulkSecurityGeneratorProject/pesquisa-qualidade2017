@@ -1,0 +1,24 @@
+{
+    "jhipsterApp": {
+        "tese" : {
+            "home": {
+                "title": "Tese",
+                "createLabel": "Criar novo Tese",
+                "createOrEditLabel": "Criar ou editar Tese"
+            },
+            "created": "Um novo Tese foi criado com o identificador {{ param }}",
+            "updated": "Um Tese foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Tese foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Tese {{ id }}?"
+            },
+            "detail": {
+                "title": "Tese"
+            },
+            "nota": "Nota",
+            "link": "Link",
+            "aluno": "Aluno",
+            "apresentacao": "Apresentacao"
+        }
+    }
+}

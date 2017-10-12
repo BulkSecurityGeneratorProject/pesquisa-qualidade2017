@@ -1,0 +1,35 @@
+
+<div *ngIf="apresentacao">
+    <h2><span jhiTranslate="jhipsterApp.apresentacao.detail.title">Apresentacao</span> {{apresentacao.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="jhipsterApp.apresentacao.data">Data</span></dt>
+        <dd>
+            <span>{{apresentacao.data | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.apresentacao.flgagendamentoaprovado">Flgagendamentoaprovado</span></dt>
+        <dd>
+            <span>{{apresentacao.flgagendamentoaprovado}}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.apresentacao.banca">Banca</span></dt>
+        <dd>
+            <div *ngIf="apresentacao.bancaId">
+                <a [routerLink]="['/banca-my-suffix', apresentacao.bancaId]">{{apresentacao.bancaId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'apresentacao-my-suffix/'+ apresentacao.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

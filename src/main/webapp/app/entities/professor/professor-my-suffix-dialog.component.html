@@ -1,0 +1,58 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myProfessorLabel" jhiTranslate="jhipsterApp.professor.home.createOrEditLabel">Create or edit a Professor</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!professor.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="professor.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.professor.nome" for="field_nome">Nome</label>
+            <input type="text" class="form-control" name="nome" id="field_nome"
+                [(ngModel)]="professor.nome"  />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.professor.professorBanca" for="field_professorBanca">Professor Banca</label>
+            <select class="form-control" id="field_professorBanca" name="professorBanca" [(ngModel)]="professor.professorBancaId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="professorBancaOption.id" *ngFor="let professorBancaOption of professorbancas; trackBy: trackProfessorBancaById">{{professorBancaOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.professor.aluno" for="field_aluno">Aluno</label>
+            <select class="form-control" id="field_aluno" name="aluno" [(ngModel)]="professor.alunoId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="alunoOption.id" *ngFor="let alunoOption of alunos; trackBy: trackAlunoById">{{alunoOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.professor.area" for="field_area">Area</label>
+            <select class="form-control" id="field_area" name="area" [(ngModel)]="professor.areaId">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="areaPesquisaOption.id" *ngFor="let areaPesquisaOption of areas; trackBy: trackAreaPesquisaById">{{areaPesquisaOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.professor.coOrientador" for="field_coOrientador">Co Orientador</label>
+            <select class="form-control" id="field_coOrientador" name="coOrientador" [(ngModel)]="professor.coOrientadorId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="coOrientadorOption.id" *ngFor="let coOrientadorOption of coorientadors; trackBy: trackCoOrientadorById">{{coOrientadorOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

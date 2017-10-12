@@ -1,0 +1,85 @@
+entity Artigo {
+	nome String required,
+    titulo String required,
+    data_publicacao LocalDate,
+    link String,
+	flg_relacionado_pesquisa Boolean required
+}
+
+entity PropostaTese {
+	tema String required,
+    descricao String,
+    flg_aprovado String,
+    link String
+}
+
+entity Tese {
+	nota Double,
+    link String
+}
+
+entity Apresentacao {
+	data LocalDate,
+    flg_agendamento_aprovado Boolean,
+    flg_proposta Boolean required
+}
+
+entity Banca {
+	flg_aprovada_secretaria Boolean
+}
+
+entity Funcionario {
+	nome String
+}
+
+entity ProfessorBanca {
+	nota Double
+}
+
+
+entity Aluno {
+	nome String
+}
+
+
+entity Professor {
+	nome String
+}
+
+entity CoOrientador {
+}
+
+entity AreaPesquisa {
+	nome String,
+    descricao String
+}
+
+relationship OneToMany {
+	Artigo{aluno} to Aluno,
+	PropostaTese{aluno} to Aluno,
+    CoOrientador{aluno} to Aluno,
+    ProfessorBanca{professor} to Professor,
+    CoOrientador{professor} to Professor,
+    Aluno{orientador} to Professor,
+    ProfessorBanca{banca} to Banca
+}
+
+
+
+relationship OneToOne {
+	Tese{aluno} to Aluno,
+    Professor{area} to AreaPesquisa,
+    Apresentacao{banca} to Banca,
+    Tese{apresentacao} to Apresentacao,
+    PropostaTese{apresentacao} to Apresentacao    
+}
+
+
+paginate * with infinite-scroll
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Aluno, Funcionario, Professor
+// Set an angular suffix
+angularSuffix * with mySuffix

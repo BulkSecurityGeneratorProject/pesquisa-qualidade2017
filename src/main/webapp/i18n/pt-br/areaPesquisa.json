@@ -1,0 +1,22 @@
+{
+    "jhipsterApp": {
+        "areaPesquisa" : {
+            "home": {
+                "title": "Area Pesquisas",
+                "createLabel": "Criar novo Area Pesquisa",
+                "createOrEditLabel": "Criar ou editar Area Pesquisa"
+            },
+            "created": "Um novo Area Pesquisa foi criado com o identificador {{ param }}",
+            "updated": "Um Area Pesquisa foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Area Pesquisa foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Area Pesquisa {{ id }}?"
+            },
+            "detail": {
+                "title": "Area Pesquisa"
+            },
+            "nome": "Nome",
+            "descricao": "Descricao"
+        }
+    }
+}

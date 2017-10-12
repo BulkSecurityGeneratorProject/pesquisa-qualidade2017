@@ -1,0 +1,26 @@
+{
+    "jhipsterApp": {
+        "artigo" : {
+            "home": {
+                "title": "Artigos",
+                "createLabel": "Criar novo Artigo",
+                "createOrEditLabel": "Criar ou editar Artigo"
+            },
+            "created": "Um novo Artigo foi criado com o identificador {{ param }}",
+            "updated": "Um Artigo foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Artigo foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Artigo {{ id }}?"
+            },
+            "detail": {
+                "title": "Artigo"
+            },
+            "nome": "Nome",
+            "titulo": "Titulo",
+            "datapublicacao": "Datapublicacao",
+            "link": "Link",
+            "flgrelacionadopesquisa": "Flgrelacionadopesquisa",
+            "aluno": "Aluno"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "professor",
+            "otherEntityName": "professor",
+            "otherEntityRelationshipName": "professorBanca"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "banca",
+            "otherEntityName": "banca",
+            "otherEntityRelationshipName": "professorBanca"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nota",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20171012224600",
+    "entityTableName": "professor_banca",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "angularJSSuffix": "mySuffix"
+}

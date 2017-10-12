@@ -1,0 +1,41 @@
+
+<div *ngIf="tese">
+    <h2><span jhiTranslate="jhipsterApp.tese.detail.title">Tese</span> {{tese.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="jhipsterApp.tese.nota">Nota</span></dt>
+        <dd>
+            <span>{{tese.nota}}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.tese.link">Link</span></dt>
+        <dd>
+            <span>{{tese.link}}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.tese.aluno">Aluno</span></dt>
+        <dd>
+            <div *ngIf="tese.alunoId">
+                <a [routerLink]="['/aluno-my-suffix', tese.alunoId]">{{tese.alunoId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.tese.apresentacao">Apresentacao</span></dt>
+        <dd>
+            <div *ngIf="tese.apresentacaoId">
+                <a [routerLink]="['/apresentacao-my-suffix', tese.apresentacaoId]">{{tese.apresentacaoId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'tese-my-suffix/'+ tese.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

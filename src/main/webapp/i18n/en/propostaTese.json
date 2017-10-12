@@ -1,0 +1,26 @@
+{
+    "jhipsterApp": {
+        "propostaTese" : {
+            "home": {
+                "title": "Proposta Tese",
+                "createLabel": "Create a new Proposta Tese",
+                "createOrEditLabel": "Create or edit a Proposta Tese"
+            },
+            "created": "A new Proposta Tese is created with identifier {{ param }}",
+            "updated": "A Proposta Tese is updated with identifier {{ param }}",
+            "deleted": "A Proposta Tese is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Proposta Tese {{ id }}?"
+            },
+            "detail": {
+                "title": "Proposta Tese"
+            },
+            "tema": "Tema",
+            "descricao": "Descricao",
+            "flgaprovado": "Flgaprovado",
+            "link": "Link",
+            "apresentacao": "Apresentacao",
+            "aluno": "Aluno"
+        }
+    }
+}

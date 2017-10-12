@@ -1,0 +1,22 @@
+{
+    "jhipsterApp": {
+        "banca" : {
+            "home": {
+                "title": "Bancas",
+                "createLabel": "Create a new Banca",
+                "createOrEditLabel": "Create or edit a Banca"
+            },
+            "created": "A new Banca is created with identifier {{ param }}",
+            "updated": "A Banca is updated with identifier {{ param }}",
+            "deleted": "A Banca is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Banca {{ id }}?"
+            },
+            "detail": {
+                "title": "Banca"
+            },
+            "flgaprovadasecretaria": "Flgaprovadasecretaria",
+            "professorBanca": "Professor Banca"
+        }
+    }
+}
