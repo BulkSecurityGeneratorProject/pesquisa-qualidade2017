@@ -1,13 +1,10 @@
 package com.qualidade.pesquisa.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.qualidade.pesquisa.domain.Professor;
-
-import com.qualidade.pesquisa.repository.ProfessorRepository;
+import com.qualidade.pesquisa.service.ProfessorService;
 import com.qualidade.pesquisa.web.rest.util.HeaderUtil;
 import com.qualidade.pesquisa.web.rest.util.PaginationUtil;
 import com.qualidade.pesquisa.service.dto.ProfessorDTO;
-import com.qualidade.pesquisa.service.mapper.ProfessorMapper;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -36,13 +33,10 @@ public class ProfessorResource {
 
     private static final String ENTITY_NAME = "professor";
 
-    private final ProfessorRepository professorRepository;
+    private final ProfessorService professorService;
 
-    private final ProfessorMapper professorMapper;
-
-    public ProfessorResource(ProfessorRepository professorRepository, ProfessorMapper professorMapper) {
-        this.professorRepository = professorRepository;
-        this.professorMapper = professorMapper;
+    public ProfessorResource(ProfessorService professorService) {
+        this.professorService = professorService;
     }
 
     /**
@@ -59,9 +53,7 @@ public class ProfessorResource {
         if (professorDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new professor cannot already have an ID")).body(null);
         }
-        Professor professor = professorMapper.toEntity(professorDTO);
-        professor = professorRepository.save(professor);
-        ProfessorDTO result = professorMapper.toDto(professor);
+        ProfessorDTO result = professorService.save(professorDTO);
         return ResponseEntity.created(new URI("/api/professors/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -83,9 +75,7 @@ public class ProfessorResource {
         if (professorDTO.getId() == null) {
             return createProfessor(professorDTO);
         }
-        Professor professor = professorMapper.toEntity(professorDTO);
-        professor = professorRepository.save(professor);
-        ProfessorDTO result = professorMapper.toDto(professor);
+        ProfessorDTO result = professorService.save(professorDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, professorDTO.getId().toString()))
             .body(result);
@@ -101,9 +91,9 @@ public class ProfessorResource {
     @Timed
     public ResponseEntity<List<ProfessorDTO>> getAllProfessors(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Professors");
-        Page<Professor> page = professorRepository.findAll(pageable);
+        Page<ProfessorDTO> page = professorService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/professors");
-        return new ResponseEntity<>(professorMapper.toDto(page.getContent()), headers, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
@@ -116,8 +106,7 @@ public class ProfessorResource {
     @Timed
     public ResponseEntity<ProfessorDTO> getProfessor(@PathVariable Long id) {
         log.debug("REST request to get Professor : {}", id);
-        Professor professor = professorRepository.findOne(id);
-        ProfessorDTO professorDTO = professorMapper.toDto(professor);
+        ProfessorDTO professorDTO = professorService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(professorDTO));
     }
 
@@ -131,7 +120,7 @@ public class ProfessorResource {
     @Timed
     public ResponseEntity<Void> deleteProfessor(@PathVariable Long id) {
         log.debug("REST request to delete Professor : {}", id);
-        professorRepository.delete(id);
+        professorService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

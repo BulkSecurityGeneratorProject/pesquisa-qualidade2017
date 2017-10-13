@@ -2,6 +2,8 @@ package com.qualidade.pesquisa.service.dto;
 
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -11,7 +13,7 @@ public class FuncionarioDTO implements Serializable {
 
     private Long id;
 
-    private String nome;
+    private Long userId;
 
     public Long getId() {
         return id;
@@ -21,12 +23,12 @@ public class FuncionarioDTO implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -54,7 +56,6 @@ public class FuncionarioDTO implements Serializable {
     public String toString() {
         return "FuncionarioDTO{" +
             "id=" + getId() +
-            ", nome='" + getNome() + "'" +
             "}";
     }
 }

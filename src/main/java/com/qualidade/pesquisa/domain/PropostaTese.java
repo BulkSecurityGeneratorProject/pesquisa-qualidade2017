@@ -34,7 +34,7 @@ public class PropostaTese implements Serializable {
     private String descricao;
 
     @Column(name = "flgaprovado")
-    private String flgaprovado;
+    private Boolean flgaprovado;
 
     @Column(name = "jhi_link")
     private String link;
@@ -83,16 +83,16 @@ public class PropostaTese implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getFlgaprovado() {
+    public Boolean isFlgaprovado() {
         return flgaprovado;
     }
 
-    public PropostaTese flgaprovado(String flgaprovado) {
+    public PropostaTese flgaprovado(Boolean flgaprovado) {
         this.flgaprovado = flgaprovado;
         return this;
     }
 
-    public void setFlgaprovado(String flgaprovado) {
+    public void setFlgaprovado(Boolean flgaprovado) {
         this.flgaprovado = flgaprovado;
     }
 
@@ -174,7 +174,7 @@ public class PropostaTese implements Serializable {
             "id=" + getId() +
             ", tema='" + getTema() + "'" +
             ", descricao='" + getDescricao() + "'" +
-            ", flgaprovado='" + getFlgaprovado() + "'" +
+            ", flgaprovado='" + isFlgaprovado() + "'" +
             ", link='" + getLink() + "'" +
             "}";
     }

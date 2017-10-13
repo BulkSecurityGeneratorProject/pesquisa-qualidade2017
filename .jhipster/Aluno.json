@@ -14,6 +14,14 @@
             "otherEntityField": "id"
         },
         {
+            "relationshipType": "one-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "aluno"
+        },
+        {
             "relationshipType": "one-to-many",
             "relationshipName": "orientador",
             "otherEntityName": "professor",
@@ -26,16 +34,10 @@
             "otherEntityField": "id"
         }
     ],
-    "fields": [
-        {
-            "fieldName": "nome",
-            "fieldType": "String"
-        }
-    ],
-    "changelogDate": "20171012224601",
+    "fields": [],
+    "changelogDate": "20171013015202",
     "entityTableName": "aluno",
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
-    "service": "no",
-    "angularJSSuffix": "mySuffix"
+    "service": "serviceImpl"
 }

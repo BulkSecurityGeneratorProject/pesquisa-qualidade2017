@@ -1,13 +1,10 @@
 package com.qualidade.pesquisa.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.qualidade.pesquisa.domain.Aluno;
-
-import com.qualidade.pesquisa.repository.AlunoRepository;
+import com.qualidade.pesquisa.service.AlunoService;
 import com.qualidade.pesquisa.web.rest.util.HeaderUtil;
 import com.qualidade.pesquisa.web.rest.util.PaginationUtil;
 import com.qualidade.pesquisa.service.dto.AlunoDTO;
-import com.qualidade.pesquisa.service.mapper.AlunoMapper;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -36,13 +33,10 @@ public class AlunoResource {
 
     private static final String ENTITY_NAME = "aluno";
 
-    private final AlunoRepository alunoRepository;
+    private final AlunoService alunoService;
 
-    private final AlunoMapper alunoMapper;
-
-    public AlunoResource(AlunoRepository alunoRepository, AlunoMapper alunoMapper) {
-        this.alunoRepository = alunoRepository;
-        this.alunoMapper = alunoMapper;
+    public AlunoResource(AlunoService alunoService) {
+        this.alunoService = alunoService;
     }
 
     /**
@@ -59,9 +53,7 @@ public class AlunoResource {
         if (alunoDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new aluno cannot already have an ID")).body(null);
         }
-        Aluno aluno = alunoMapper.toEntity(alunoDTO);
-        aluno = alunoRepository.save(aluno);
-        AlunoDTO result = alunoMapper.toDto(aluno);
+        AlunoDTO result = alunoService.save(alunoDTO);
         return ResponseEntity.created(new URI("/api/alunos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -83,9 +75,7 @@ public class AlunoResource {
         if (alunoDTO.getId() == null) {
             return createAluno(alunoDTO);
         }
-        Aluno aluno = alunoMapper.toEntity(alunoDTO);
-        aluno = alunoRepository.save(aluno);
-        AlunoDTO result = alunoMapper.toDto(aluno);
+        AlunoDTO result = alunoService.save(alunoDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, alunoDTO.getId().toString()))
             .body(result);
@@ -101,9 +91,9 @@ public class AlunoResource {
     @Timed
     public ResponseEntity<List<AlunoDTO>> getAllAlunos(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Alunos");
-        Page<Aluno> page = alunoRepository.findAll(pageable);
+        Page<AlunoDTO> page = alunoService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/alunos");
-        return new ResponseEntity<>(alunoMapper.toDto(page.getContent()), headers, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
@@ -116,8 +106,7 @@ public class AlunoResource {
     @Timed
     public ResponseEntity<AlunoDTO> getAluno(@PathVariable Long id) {
         log.debug("REST request to get Aluno : {}", id);
-        Aluno aluno = alunoRepository.findOne(id);
-        AlunoDTO alunoDTO = alunoMapper.toDto(aluno);
+        AlunoDTO alunoDTO = alunoService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(alunoDTO));
     }
 
@@ -131,7 +120,7 @@ public class AlunoResource {
     @Timed
     public ResponseEntity<Void> deleteAluno(@PathVariable Long id) {
         log.debug("REST request to delete Aluno : {}", id);
-        alunoRepository.delete(id);
+        alunoService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

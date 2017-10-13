@@ -4,6 +4,7 @@ import com.qualidade.pesquisa.JhipsterApp;
 
 import com.qualidade.pesquisa.domain.Funcionario;
 import com.qualidade.pesquisa.repository.FuncionarioRepository;
+import com.qualidade.pesquisa.service.FuncionarioService;
 import com.qualidade.pesquisa.service.dto.FuncionarioDTO;
 import com.qualidade.pesquisa.service.mapper.FuncionarioMapper;
 import com.qualidade.pesquisa.web.rest.errors.ExceptionTranslator;
@@ -39,14 +40,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = JhipsterApp.class)
 public class FuncionarioResourceIntTest {
 
-    private static final String DEFAULT_NOME = "AAAAAAAAAA";
-    private static final String UPDATED_NOME = "BBBBBBBBBB";
-
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
     @Autowired
     private FuncionarioMapper funcionarioMapper;
+
+    @Autowired
+    private FuncionarioService funcionarioService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -67,7 +68,7 @@ public class FuncionarioResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final FuncionarioResource funcionarioResource = new FuncionarioResource(funcionarioRepository, funcionarioMapper);
+        final FuncionarioResource funcionarioResource = new FuncionarioResource(funcionarioService);
         this.restFuncionarioMockMvc = MockMvcBuilders.standaloneSetup(funcionarioResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -81,8 +82,7 @@ public class FuncionarioResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static Funcionario createEntity(EntityManager em) {
-        Funcionario funcionario = new Funcionario()
-            .nome(DEFAULT_NOME);
+        Funcionario funcionario = new Funcionario();
         return funcionario;
     }
 
@@ -107,7 +107,6 @@ public class FuncionarioResourceIntTest {
         List<Funcionario> funcionarioList = funcionarioRepository.findAll();
         assertThat(funcionarioList).hasSize(databaseSizeBeforeCreate + 1);
         Funcionario testFuncionario = funcionarioList.get(funcionarioList.size() - 1);
-        assertThat(testFuncionario.getNome()).isEqualTo(DEFAULT_NOME);
     }
 
     @Test
@@ -140,8 +139,7 @@ public class FuncionarioResourceIntTest {
         restFuncionarioMockMvc.perform(get("/api/funcionarios?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(funcionario.getId().intValue())))
-            .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME.toString())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(funcionario.getId().intValue())));
     }
 
     @Test
@@ -154,8 +152,7 @@ public class FuncionarioResourceIntTest {
         restFuncionarioMockMvc.perform(get("/api/funcionarios/{id}", funcionario.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(funcionario.getId().intValue()))
-            .andExpect(jsonPath("$.nome").value(DEFAULT_NOME.toString()));
+            .andExpect(jsonPath("$.id").value(funcionario.getId().intValue()));
     }
 
     @Test
@@ -175,8 +172,6 @@ public class FuncionarioResourceIntTest {
 
         // Update the funcionario
         Funcionario updatedFuncionario = funcionarioRepository.findOne(funcionario.getId());
-        updatedFuncionario
-            .nome(UPDATED_NOME);
         FuncionarioDTO funcionarioDTO = funcionarioMapper.toDto(updatedFuncionario);
 
         restFuncionarioMockMvc.perform(put("/api/funcionarios")
@@ -188,7 +183,6 @@ public class FuncionarioResourceIntTest {
         List<Funcionario> funcionarioList = funcionarioRepository.findAll();
         assertThat(funcionarioList).hasSize(databaseSizeBeforeUpdate);
         Funcionario testFuncionario = funcionarioList.get(funcionarioList.size() - 1);
-        assertThat(testFuncionario.getNome()).isEqualTo(UPDATED_NOME);
     }
 
     @Test

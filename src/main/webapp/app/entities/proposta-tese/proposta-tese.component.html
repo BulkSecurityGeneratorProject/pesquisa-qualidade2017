@@ -1,0 +1,68 @@
+<div>
+    <h2>
+        <span jhiTranslate="jhipsterApp.propostaTese.home.title">Proposta Tese</span>
+        <button class="btn btn-primary float-right jh-create-entity create-proposta-tese" [routerLink]="['/', { outlets: { popup: ['proposta-tese-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="jhipsterApp.propostaTese.home.createLabel">
+            Create new Proposta Tese
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="propostaTese">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="tema"><span jhiTranslate="jhipsterApp.propostaTese.tema">Tema</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="descricao"><span jhiTranslate="jhipsterApp.propostaTese.descricao">Descricao</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="flgaprovado"><span jhiTranslate="jhipsterApp.propostaTese.flgaprovado">Flgaprovado</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="link"><span jhiTranslate="jhipsterApp.propostaTese.link">Link</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="apresentacaoId"><span jhiTranslate="jhipsterApp.propostaTese.apresentacao">Apresentacao</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let propostaTese of propostaTese ;trackBy: trackId">
+                <td><a [routerLink]="['../proposta-tese', propostaTese.id ]">{{propostaTese.id}}</a></td>
+                <td>{{propostaTese.tema}}</td>
+                <td>{{propostaTese.descricao}}</td>
+                <td>{{propostaTese.flgaprovado}}</td>
+                <td>{{propostaTese.link}}</td>
+                <td>
+                    <div *ngIf="propostaTese.apresentacaoId">
+                        <a [routerLink]="['../apresentacao', propostaTese.apresentacaoId  ]" >{{propostaTese.apresentacaoId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../proposta-tese', propostaTese.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'proposta-tese/'+ propostaTese.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'proposta-tese/'+ propostaTese.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

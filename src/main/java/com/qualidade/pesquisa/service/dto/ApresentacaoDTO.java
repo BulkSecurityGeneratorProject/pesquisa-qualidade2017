@@ -2,6 +2,7 @@ package com.qualidade.pesquisa.service.dto;
 
 
 import java.time.LocalDate;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +18,9 @@ public class ApresentacaoDTO implements Serializable {
     private LocalDate data;
 
     private Boolean flgagendamentoaprovado;
+
+    @NotNull
+    private Boolean flgproposta;
 
     private Long bancaId;
 
@@ -42,6 +46,14 @@ public class ApresentacaoDTO implements Serializable {
 
     public void setFlgagendamentoaprovado(Boolean flgagendamentoaprovado) {
         this.flgagendamentoaprovado = flgagendamentoaprovado;
+    }
+
+    public Boolean isFlgproposta() {
+        return flgproposta;
+    }
+
+    public void setFlgproposta(Boolean flgproposta) {
+        this.flgproposta = flgproposta;
     }
 
     public Long getBancaId() {
@@ -79,6 +91,7 @@ public class ApresentacaoDTO implements Serializable {
             "id=" + getId() +
             ", data='" + getData() + "'" +
             ", flgagendamentoaprovado='" + isFlgagendamentoaprovado() + "'" +
+            ", flgproposta='" + isFlgproposta() + "'" +
             "}";
     }
 }

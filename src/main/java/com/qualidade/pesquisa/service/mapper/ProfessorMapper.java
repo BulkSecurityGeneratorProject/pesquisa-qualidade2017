@@ -8,7 +8,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Professor and its DTO ProfessorDTO.
  */
-@Mapper(componentModel = "spring", uses = {ProfessorBancaMapper.class, AlunoMapper.class, AreaPesquisaMapper.class, CoOrientadorMapper.class, })
+@Mapper(componentModel = "spring", uses = {ProfessorBancaMapper.class, AlunoMapper.class, AreaPesquisaMapper.class, UserMapper.class, CoOrientadorMapper.class, })
 public interface ProfessorMapper extends EntityMapper <ProfessorDTO, Professor> {
 
     @Mapping(source = "professorBanca.id", target = "professorBancaId")
@@ -16,6 +16,8 @@ public interface ProfessorMapper extends EntityMapper <ProfessorDTO, Professor> 
     @Mapping(source = "aluno.id", target = "alunoId")
 
     @Mapping(source = "area.id", target = "areaId")
+
+    @Mapping(source = "user.id", target = "userId")
 
     @Mapping(source = "coOrientador.id", target = "coOrientadorId")
     ProfessorDTO toDto(Professor professor); 
@@ -25,6 +27,8 @@ public interface ProfessorMapper extends EntityMapper <ProfessorDTO, Professor> 
     @Mapping(source = "alunoId", target = "aluno")
 
     @Mapping(source = "areaId", target = "area")
+
+    @Mapping(source = "userId", target = "user")
 
     @Mapping(source = "coOrientadorId", target = "coOrientador")
     Professor toEntity(ProfessorDTO professorDTO); 

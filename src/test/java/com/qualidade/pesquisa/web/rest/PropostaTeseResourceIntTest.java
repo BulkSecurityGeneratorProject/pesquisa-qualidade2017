@@ -46,8 +46,8 @@ public class PropostaTeseResourceIntTest {
     private static final String DEFAULT_DESCRICAO = "AAAAAAAAAA";
     private static final String UPDATED_DESCRICAO = "BBBBBBBBBB";
 
-    private static final String DEFAULT_FLGAPROVADO = "AAAAAAAAAA";
-    private static final String UPDATED_FLGAPROVADO = "BBBBBBBBBB";
+    private static final Boolean DEFAULT_FLGAPROVADO = false;
+    private static final Boolean UPDATED_FLGAPROVADO = true;
 
     private static final String DEFAULT_LINK = "AAAAAAAAAA";
     private static final String UPDATED_LINK = "BBBBBBBBBB";
@@ -125,7 +125,7 @@ public class PropostaTeseResourceIntTest {
         PropostaTese testPropostaTese = propostaTeseList.get(propostaTeseList.size() - 1);
         assertThat(testPropostaTese.getTema()).isEqualTo(DEFAULT_TEMA);
         assertThat(testPropostaTese.getDescricao()).isEqualTo(DEFAULT_DESCRICAO);
-        assertThat(testPropostaTese.getFlgaprovado()).isEqualTo(DEFAULT_FLGAPROVADO);
+        assertThat(testPropostaTese.isFlgaprovado()).isEqualTo(DEFAULT_FLGAPROVADO);
         assertThat(testPropostaTese.getLink()).isEqualTo(DEFAULT_LINK);
     }
 
@@ -181,7 +181,7 @@ public class PropostaTeseResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(propostaTese.getId().intValue())))
             .andExpect(jsonPath("$.[*].tema").value(hasItem(DEFAULT_TEMA.toString())))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO.toString())))
-            .andExpect(jsonPath("$.[*].flgaprovado").value(hasItem(DEFAULT_FLGAPROVADO.toString())))
+            .andExpect(jsonPath("$.[*].flgaprovado").value(hasItem(DEFAULT_FLGAPROVADO.booleanValue())))
             .andExpect(jsonPath("$.[*].link").value(hasItem(DEFAULT_LINK.toString())));
     }
 
@@ -198,7 +198,7 @@ public class PropostaTeseResourceIntTest {
             .andExpect(jsonPath("$.id").value(propostaTese.getId().intValue()))
             .andExpect(jsonPath("$.tema").value(DEFAULT_TEMA.toString()))
             .andExpect(jsonPath("$.descricao").value(DEFAULT_DESCRICAO.toString()))
-            .andExpect(jsonPath("$.flgaprovado").value(DEFAULT_FLGAPROVADO.toString()))
+            .andExpect(jsonPath("$.flgaprovado").value(DEFAULT_FLGAPROVADO.booleanValue()))
             .andExpect(jsonPath("$.link").value(DEFAULT_LINK.toString()));
     }
 
@@ -237,7 +237,7 @@ public class PropostaTeseResourceIntTest {
         PropostaTese testPropostaTese = propostaTeseList.get(propostaTeseList.size() - 1);
         assertThat(testPropostaTese.getTema()).isEqualTo(UPDATED_TEMA);
         assertThat(testPropostaTese.getDescricao()).isEqualTo(UPDATED_DESCRICAO);
-        assertThat(testPropostaTese.getFlgaprovado()).isEqualTo(UPDATED_FLGAPROVADO);
+        assertThat(testPropostaTese.isFlgaprovado()).isEqualTo(UPDATED_FLGAPROVADO);
         assertThat(testPropostaTese.getLink()).isEqualTo(UPDATED_LINK);
     }
 

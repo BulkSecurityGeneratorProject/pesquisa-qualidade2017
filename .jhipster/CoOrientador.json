@@ -15,10 +15,9 @@
         }
     ],
     "fields": [],
-    "changelogDate": "20171012224603",
+    "changelogDate": "20171013015204",
     "entityTableName": "co_orientador",
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
-    "service": "serviceImpl",
-    "angularJSSuffix": "mySuffix"
+    "service": "serviceImpl"
 }

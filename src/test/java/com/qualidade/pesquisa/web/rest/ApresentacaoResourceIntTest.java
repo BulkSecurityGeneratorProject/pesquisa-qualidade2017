@@ -48,6 +48,9 @@ public class ApresentacaoResourceIntTest {
     private static final Boolean DEFAULT_FLGAGENDAMENTOAPROVADO = false;
     private static final Boolean UPDATED_FLGAGENDAMENTOAPROVADO = true;
 
+    private static final Boolean DEFAULT_FLGPROPOSTA = false;
+    private static final Boolean UPDATED_FLGPROPOSTA = true;
+
     @Autowired
     private ApresentacaoRepository apresentacaoRepository;
 
@@ -92,7 +95,8 @@ public class ApresentacaoResourceIntTest {
     public static Apresentacao createEntity(EntityManager em) {
         Apresentacao apresentacao = new Apresentacao()
             .data(DEFAULT_DATA)
-            .flgagendamentoaprovado(DEFAULT_FLGAGENDAMENTOAPROVADO);
+            .flgagendamentoaprovado(DEFAULT_FLGAGENDAMENTOAPROVADO)
+            .flgproposta(DEFAULT_FLGPROPOSTA);
         return apresentacao;
     }
 
@@ -119,6 +123,7 @@ public class ApresentacaoResourceIntTest {
         Apresentacao testApresentacao = apresentacaoList.get(apresentacaoList.size() - 1);
         assertThat(testApresentacao.getData()).isEqualTo(DEFAULT_DATA);
         assertThat(testApresentacao.isFlgagendamentoaprovado()).isEqualTo(DEFAULT_FLGAGENDAMENTOAPROVADO);
+        assertThat(testApresentacao.isFlgproposta()).isEqualTo(DEFAULT_FLGPROPOSTA);
     }
 
     @Test
@@ -143,6 +148,25 @@ public class ApresentacaoResourceIntTest {
 
     @Test
     @Transactional
+    public void checkFlgpropostaIsRequired() throws Exception {
+        int databaseSizeBeforeTest = apresentacaoRepository.findAll().size();
+        // set the field null
+        apresentacao.setFlgproposta(null);
+
+        // Create the Apresentacao, which fails.
+        ApresentacaoDTO apresentacaoDTO = apresentacaoMapper.toDto(apresentacao);
+
+        restApresentacaoMockMvc.perform(post("/api/apresentacaos")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(apresentacaoDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Apresentacao> apresentacaoList = apresentacaoRepository.findAll();
+        assertThat(apresentacaoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllApresentacaos() throws Exception {
         // Initialize the database
         apresentacaoRepository.saveAndFlush(apresentacao);
@@ -153,7 +177,8 @@ public class ApresentacaoResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(apresentacao.getId().intValue())))
             .andExpect(jsonPath("$.[*].data").value(hasItem(DEFAULT_DATA.toString())))
-            .andExpect(jsonPath("$.[*].flgagendamentoaprovado").value(hasItem(DEFAULT_FLGAGENDAMENTOAPROVADO.booleanValue())));
+            .andExpect(jsonPath("$.[*].flgagendamentoaprovado").value(hasItem(DEFAULT_FLGAGENDAMENTOAPROVADO.booleanValue())))
+            .andExpect(jsonPath("$.[*].flgproposta").value(hasItem(DEFAULT_FLGPROPOSTA.booleanValue())));
     }
 
     @Test
@@ -168,7 +193,8 @@ public class ApresentacaoResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(apresentacao.getId().intValue()))
             .andExpect(jsonPath("$.data").value(DEFAULT_DATA.toString()))
-            .andExpect(jsonPath("$.flgagendamentoaprovado").value(DEFAULT_FLGAGENDAMENTOAPROVADO.booleanValue()));
+            .andExpect(jsonPath("$.flgagendamentoaprovado").value(DEFAULT_FLGAGENDAMENTOAPROVADO.booleanValue()))
+            .andExpect(jsonPath("$.flgproposta").value(DEFAULT_FLGPROPOSTA.booleanValue()));
     }
 
     @Test
@@ -190,7 +216,8 @@ public class ApresentacaoResourceIntTest {
         Apresentacao updatedApresentacao = apresentacaoRepository.findOne(apresentacao.getId());
         updatedApresentacao
             .data(UPDATED_DATA)
-            .flgagendamentoaprovado(UPDATED_FLGAGENDAMENTOAPROVADO);
+            .flgagendamentoaprovado(UPDATED_FLGAGENDAMENTOAPROVADO)
+            .flgproposta(UPDATED_FLGPROPOSTA);
         ApresentacaoDTO apresentacaoDTO = apresentacaoMapper.toDto(updatedApresentacao);
 
         restApresentacaoMockMvc.perform(put("/api/apresentacaos")
@@ -204,6 +231,7 @@ public class ApresentacaoResourceIntTest {
         Apresentacao testApresentacao = apresentacaoList.get(apresentacaoList.size() - 1);
         assertThat(testApresentacao.getData()).isEqualTo(UPDATED_DATA);
         assertThat(testApresentacao.isFlgagendamentoaprovado()).isEqualTo(UPDATED_FLGAGENDAMENTOAPROVADO);
+        assertThat(testApresentacao.isFlgproposta()).isEqualTo(UPDATED_FLGPROPOSTA);
     }
 
     @Test

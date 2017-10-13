@@ -15,9 +15,9 @@
             "detail": {
                 "title": "Aluno"
             },
-            "nome": "Nome",
             "artigo": "Artigo",
             "propostaTese": "Proposta Tese",
+            "user": "User",
             "orientador": "Orientador",
             "coOrientador": "Co Orientador"
         }

@@ -1,16 +1,19 @@
 {
     "fluentMethods": true,
-    "relationships": [],
-    "fields": [
+    "relationships": [
         {
-            "fieldName": "nome",
-            "fieldType": "String"
+            "relationshipType": "one-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "funcionario"
         }
     ],
-    "changelogDate": "20171012224559",
+    "fields": [],
+    "changelogDate": "20171013015200",
     "entityTableName": "funcionario",
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
-    "service": "no",
-    "angularJSSuffix": "mySuffix"
+    "service": "serviceImpl"
 }

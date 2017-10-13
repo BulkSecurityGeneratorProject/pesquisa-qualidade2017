@@ -11,10 +11,9 @@
             "fieldType": "String"
         }
     ],
-    "changelogDate": "20171012224604",
+    "changelogDate": "20171013015205",
     "entityTableName": "area_pesquisa",
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
-    "service": "serviceImpl",
-    "angularJSSuffix": "mySuffix"
+    "service": "serviceImpl"
 }

@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -28,6 +29,10 @@ public class Apresentacao implements Serializable {
 
     @Column(name = "flgagendamentoaprovado")
     private Boolean flgagendamentoaprovado;
+
+    @NotNull
+    @Column(name = "flgproposta", nullable = false)
+    private Boolean flgproposta;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -66,6 +71,19 @@ public class Apresentacao implements Serializable {
 
     public void setFlgagendamentoaprovado(Boolean flgagendamentoaprovado) {
         this.flgagendamentoaprovado = flgagendamentoaprovado;
+    }
+
+    public Boolean isFlgproposta() {
+        return flgproposta;
+    }
+
+    public Apresentacao flgproposta(Boolean flgproposta) {
+        this.flgproposta = flgproposta;
+        return this;
+    }
+
+    public void setFlgproposta(Boolean flgproposta) {
+        this.flgproposta = flgproposta;
     }
 
     public Banca getBanca() {
@@ -108,6 +126,7 @@ public class Apresentacao implements Serializable {
             "id=" + getId() +
             ", data='" + getData() + "'" +
             ", flgagendamentoaprovado='" + isFlgagendamentoaprovado() + "'" +
+            ", flgproposta='" + isFlgproposta() + "'" +
             "}";
     }
 }

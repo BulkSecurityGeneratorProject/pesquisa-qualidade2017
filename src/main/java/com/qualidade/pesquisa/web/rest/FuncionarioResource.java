@@ -1,13 +1,10 @@
 package com.qualidade.pesquisa.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.qualidade.pesquisa.domain.Funcionario;
-
-import com.qualidade.pesquisa.repository.FuncionarioRepository;
+import com.qualidade.pesquisa.service.FuncionarioService;
 import com.qualidade.pesquisa.web.rest.util.HeaderUtil;
 import com.qualidade.pesquisa.web.rest.util.PaginationUtil;
 import com.qualidade.pesquisa.service.dto.FuncionarioDTO;
-import com.qualidade.pesquisa.service.mapper.FuncionarioMapper;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -36,13 +33,10 @@ public class FuncionarioResource {
 
     private static final String ENTITY_NAME = "funcionario";
 
-    private final FuncionarioRepository funcionarioRepository;
+    private final FuncionarioService funcionarioService;
 
-    private final FuncionarioMapper funcionarioMapper;
-
-    public FuncionarioResource(FuncionarioRepository funcionarioRepository, FuncionarioMapper funcionarioMapper) {
-        this.funcionarioRepository = funcionarioRepository;
-        this.funcionarioMapper = funcionarioMapper;
+    public FuncionarioResource(FuncionarioService funcionarioService) {
+        this.funcionarioService = funcionarioService;
     }
 
     /**
@@ -59,9 +53,7 @@ public class FuncionarioResource {
         if (funcionarioDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new funcionario cannot already have an ID")).body(null);
         }
-        Funcionario funcionario = funcionarioMapper.toEntity(funcionarioDTO);
-        funcionario = funcionarioRepository.save(funcionario);
-        FuncionarioDTO result = funcionarioMapper.toDto(funcionario);
+        FuncionarioDTO result = funcionarioService.save(funcionarioDTO);
         return ResponseEntity.created(new URI("/api/funcionarios/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -83,9 +75,7 @@ public class FuncionarioResource {
         if (funcionarioDTO.getId() == null) {
             return createFuncionario(funcionarioDTO);
         }
-        Funcionario funcionario = funcionarioMapper.toEntity(funcionarioDTO);
-        funcionario = funcionarioRepository.save(funcionario);
-        FuncionarioDTO result = funcionarioMapper.toDto(funcionario);
+        FuncionarioDTO result = funcionarioService.save(funcionarioDTO);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, funcionarioDTO.getId().toString()))
             .body(result);
@@ -101,9 +91,9 @@ public class FuncionarioResource {
     @Timed
     public ResponseEntity<List<FuncionarioDTO>> getAllFuncionarios(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Funcionarios");
-        Page<Funcionario> page = funcionarioRepository.findAll(pageable);
+        Page<FuncionarioDTO> page = funcionarioService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/funcionarios");
-        return new ResponseEntity<>(funcionarioMapper.toDto(page.getContent()), headers, HttpStatus.OK);
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
@@ -116,8 +106,7 @@ public class FuncionarioResource {
     @Timed
     public ResponseEntity<FuncionarioDTO> getFuncionario(@PathVariable Long id) {
         log.debug("REST request to get Funcionario : {}", id);
-        Funcionario funcionario = funcionarioRepository.findOne(id);
-        FuncionarioDTO funcionarioDTO = funcionarioMapper.toDto(funcionario);
+        FuncionarioDTO funcionarioDTO = funcionarioService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(funcionarioDTO));
     }
 
@@ -131,7 +120,7 @@ public class FuncionarioResource {
     @Timed
     public ResponseEntity<Void> deleteFuncionario(@PathVariable Long id) {
         log.debug("REST request to delete Funcionario : {}", id);
-        funcionarioRepository.delete(id);
+        funcionarioService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

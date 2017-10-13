@@ -4,6 +4,7 @@ import com.qualidade.pesquisa.JhipsterApp;
 
 import com.qualidade.pesquisa.domain.Professor;
 import com.qualidade.pesquisa.repository.ProfessorRepository;
+import com.qualidade.pesquisa.service.ProfessorService;
 import com.qualidade.pesquisa.service.dto.ProfessorDTO;
 import com.qualidade.pesquisa.service.mapper.ProfessorMapper;
 import com.qualidade.pesquisa.web.rest.errors.ExceptionTranslator;
@@ -39,14 +40,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = JhipsterApp.class)
 public class ProfessorResourceIntTest {
 
-    private static final String DEFAULT_NOME = "AAAAAAAAAA";
-    private static final String UPDATED_NOME = "BBBBBBBBBB";
-
     @Autowired
     private ProfessorRepository professorRepository;
 
     @Autowired
     private ProfessorMapper professorMapper;
+
+    @Autowired
+    private ProfessorService professorService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -67,7 +68,7 @@ public class ProfessorResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ProfessorResource professorResource = new ProfessorResource(professorRepository, professorMapper);
+        final ProfessorResource professorResource = new ProfessorResource(professorService);
         this.restProfessorMockMvc = MockMvcBuilders.standaloneSetup(professorResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -81,8 +82,7 @@ public class ProfessorResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static Professor createEntity(EntityManager em) {
-        Professor professor = new Professor()
-            .nome(DEFAULT_NOME);
+        Professor professor = new Professor();
         return professor;
     }
 
@@ -107,7 +107,6 @@ public class ProfessorResourceIntTest {
         List<Professor> professorList = professorRepository.findAll();
         assertThat(professorList).hasSize(databaseSizeBeforeCreate + 1);
         Professor testProfessor = professorList.get(professorList.size() - 1);
-        assertThat(testProfessor.getNome()).isEqualTo(DEFAULT_NOME);
     }
 
     @Test
@@ -140,8 +139,7 @@ public class ProfessorResourceIntTest {
         restProfessorMockMvc.perform(get("/api/professors?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(professor.getId().intValue())))
-            .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME.toString())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(professor.getId().intValue())));
     }
 
     @Test
@@ -154,8 +152,7 @@ public class ProfessorResourceIntTest {
         restProfessorMockMvc.perform(get("/api/professors/{id}", professor.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(professor.getId().intValue()))
-            .andExpect(jsonPath("$.nome").value(DEFAULT_NOME.toString()));
+            .andExpect(jsonPath("$.id").value(professor.getId().intValue()));
     }
 
     @Test
@@ -175,8 +172,6 @@ public class ProfessorResourceIntTest {
 
         // Update the professor
         Professor updatedProfessor = professorRepository.findOne(professor.getId());
-        updatedProfessor
-            .nome(UPDATED_NOME);
         ProfessorDTO professorDTO = professorMapper.toDto(updatedProfessor);
 
         restProfessorMockMvc.perform(put("/api/professors")
@@ -188,7 +183,6 @@ public class ProfessorResourceIntTest {
         List<Professor> professorList = professorRepository.findAll();
         assertThat(professorList).hasSize(databaseSizeBeforeUpdate);
         Professor testProfessor = professorList.get(professorList.size() - 1);
-        assertThat(testProfessor.getNome()).isEqualTo(UPDATED_NOME);
     }
 
     @Test

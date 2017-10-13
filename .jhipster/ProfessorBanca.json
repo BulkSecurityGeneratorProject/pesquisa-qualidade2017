@@ -20,10 +20,9 @@
             "fieldType": "Double"
         }
     ],
-    "changelogDate": "20171012224600",
+    "changelogDate": "20171013015201",
     "entityTableName": "professor_banca",
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
-    "service": "serviceImpl",
-    "angularJSSuffix": "mySuffix"
+    "service": "serviceImpl"
 }

@@ -39,10 +39,9 @@
             ]
         }
     ],
-    "changelogDate": "20171012224554",
+    "changelogDate": "20171013015155",
     "entityTableName": "artigo",
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
-    "service": "serviceImpl",
-    "angularJSSuffix": "mySuffix"
+    "service": "serviceImpl"
 }

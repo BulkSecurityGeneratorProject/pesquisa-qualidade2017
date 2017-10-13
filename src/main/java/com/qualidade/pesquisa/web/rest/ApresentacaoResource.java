@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -48,7 +49,7 @@ public class ApresentacaoResource {
      */
     @PostMapping("/apresentacaos")
     @Timed
-    public ResponseEntity<ApresentacaoDTO> createApresentacao(@RequestBody ApresentacaoDTO apresentacaoDTO) throws URISyntaxException {
+    public ResponseEntity<ApresentacaoDTO> createApresentacao(@Valid @RequestBody ApresentacaoDTO apresentacaoDTO) throws URISyntaxException {
         log.debug("REST request to save Apresentacao : {}", apresentacaoDTO);
         if (apresentacaoDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new apresentacao cannot already have an ID")).body(null);
@@ -70,7 +71,7 @@ public class ApresentacaoResource {
      */
     @PutMapping("/apresentacaos")
     @Timed
-    public ResponseEntity<ApresentacaoDTO> updateApresentacao(@RequestBody ApresentacaoDTO apresentacaoDTO) throws URISyntaxException {
+    public ResponseEntity<ApresentacaoDTO> updateApresentacao(@Valid @RequestBody ApresentacaoDTO apresentacaoDTO) throws URISyntaxException {
         log.debug("REST request to update Apresentacao : {}", apresentacaoDTO);
         if (apresentacaoDTO.getId() == null) {
             return createApresentacao(apresentacaoDTO);

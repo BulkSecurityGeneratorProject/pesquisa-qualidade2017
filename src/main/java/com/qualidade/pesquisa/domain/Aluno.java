@@ -25,14 +25,15 @@ public class Aluno implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "nome")
-    private String nome;
-
     @ManyToOne
     private Artigo artigo;
 
     @ManyToOne
     private PropostaTese propostaTese;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
 
     @OneToMany(mappedBy = "aluno")
     @JsonIgnore
@@ -49,19 +50,6 @@ public class Aluno implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public Aluno nome(String nome) {
-        this.nome = nome;
-        return this;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public Artigo getArtigo() {
@@ -88,6 +76,19 @@ public class Aluno implements Serializable {
 
     public void setPropostaTese(PropostaTese propostaTese) {
         this.propostaTese = propostaTese;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Aluno user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Set<Professor> getOrientadors() {
@@ -153,7 +154,6 @@ public class Aluno implements Serializable {
     public String toString() {
         return "Aluno{" +
             "id=" + getId() +
-            ", nome='" + getNome() + "'" +
             "}";
     }
 }

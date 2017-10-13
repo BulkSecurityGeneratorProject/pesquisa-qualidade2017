@@ -22,22 +22,24 @@
             "otherEntityRelationshipName": "professor"
         },
         {
+            "relationshipType": "one-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "professor"
+        },
+        {
             "relationshipName": "coOrientador",
             "otherEntityName": "coOrientador",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
         }
     ],
-    "fields": [
-        {
-            "fieldName": "nome",
-            "fieldType": "String"
-        }
-    ],
-    "changelogDate": "20171012224602",
+    "fields": [],
+    "changelogDate": "20171013015203",
     "entityTableName": "professor",
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
-    "service": "no",
-    "angularJSSuffix": "mySuffix"
+    "service": "serviceImpl"
 }

@@ -18,12 +18,18 @@
         {
             "fieldName": "flgagendamentoaprovado",
             "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "flgproposta",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
-    "changelogDate": "20171012224557",
+    "changelogDate": "20171013015158",
     "entityTableName": "apresentacao",
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
-    "service": "serviceImpl",
-    "angularJSSuffix": "mySuffix"
+    "service": "serviceImpl"
 }

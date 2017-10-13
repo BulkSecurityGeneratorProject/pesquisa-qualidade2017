@@ -1,0 +1,43 @@
+
+<div *ngIf="propostaTese">
+    <h2><span jhiTranslate="jhipsterApp.propostaTese.detail.title">Proposta Tese</span> {{propostaTese.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="jhipsterApp.propostaTese.tema">Tema</span></dt>
+        <dd>
+            <span>{{propostaTese.tema}}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.propostaTese.descricao">Descricao</span></dt>
+        <dd>
+            <span>{{propostaTese.descricao}}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.propostaTese.flgaprovado">Flgaprovado</span></dt>
+        <dd>
+            <span>{{propostaTese.flgaprovado}}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.propostaTese.link">Link</span></dt>
+        <dd>
+            <span>{{propostaTese.link}}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.propostaTese.apresentacao">Apresentacao</span></dt>
+        <dd>
+            <div *ngIf="propostaTese.apresentacaoId">
+                <a [routerLink]="['/apresentacao', propostaTese.apresentacaoId]">{{propostaTese.apresentacaoId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'proposta-tese/'+ propostaTese.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

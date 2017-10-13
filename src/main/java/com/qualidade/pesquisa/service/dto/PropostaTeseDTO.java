@@ -19,7 +19,7 @@ public class PropostaTeseDTO implements Serializable {
 
     private String descricao;
 
-    private String flgaprovado;
+    private Boolean flgaprovado;
 
     private String link;
 
@@ -49,11 +49,11 @@ public class PropostaTeseDTO implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getFlgaprovado() {
+    public Boolean isFlgaprovado() {
         return flgaprovado;
     }
 
-    public void setFlgaprovado(String flgaprovado) {
+    public void setFlgaprovado(Boolean flgaprovado) {
         this.flgaprovado = flgaprovado;
     }
 
@@ -100,7 +100,7 @@ public class PropostaTeseDTO implements Serializable {
             "id=" + getId() +
             ", tema='" + getTema() + "'" +
             ", descricao='" + getDescricao() + "'" +
-            ", flgaprovado='" + getFlgaprovado() + "'" +
+            ", flgaprovado='" + isFlgaprovado() + "'" +
             ", link='" + getLink() + "'" +
             "}";
     }

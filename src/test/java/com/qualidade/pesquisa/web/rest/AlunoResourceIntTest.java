@@ -4,6 +4,7 @@ import com.qualidade.pesquisa.JhipsterApp;
 
 import com.qualidade.pesquisa.domain.Aluno;
 import com.qualidade.pesquisa.repository.AlunoRepository;
+import com.qualidade.pesquisa.service.AlunoService;
 import com.qualidade.pesquisa.service.dto.AlunoDTO;
 import com.qualidade.pesquisa.service.mapper.AlunoMapper;
 import com.qualidade.pesquisa.web.rest.errors.ExceptionTranslator;
@@ -39,14 +40,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = JhipsterApp.class)
 public class AlunoResourceIntTest {
 
-    private static final String DEFAULT_NOME = "AAAAAAAAAA";
-    private static final String UPDATED_NOME = "BBBBBBBBBB";
-
     @Autowired
     private AlunoRepository alunoRepository;
 
     @Autowired
     private AlunoMapper alunoMapper;
+
+    @Autowired
+    private AlunoService alunoService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -67,7 +68,7 @@ public class AlunoResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final AlunoResource alunoResource = new AlunoResource(alunoRepository, alunoMapper);
+        final AlunoResource alunoResource = new AlunoResource(alunoService);
         this.restAlunoMockMvc = MockMvcBuilders.standaloneSetup(alunoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -81,8 +82,7 @@ public class AlunoResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static Aluno createEntity(EntityManager em) {
-        Aluno aluno = new Aluno()
-            .nome(DEFAULT_NOME);
+        Aluno aluno = new Aluno();
         return aluno;
     }
 
@@ -107,7 +107,6 @@ public class AlunoResourceIntTest {
         List<Aluno> alunoList = alunoRepository.findAll();
         assertThat(alunoList).hasSize(databaseSizeBeforeCreate + 1);
         Aluno testAluno = alunoList.get(alunoList.size() - 1);
-        assertThat(testAluno.getNome()).isEqualTo(DEFAULT_NOME);
     }
 
     @Test
@@ -140,8 +139,7 @@ public class AlunoResourceIntTest {
         restAlunoMockMvc.perform(get("/api/alunos?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(aluno.getId().intValue())))
-            .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME.toString())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(aluno.getId().intValue())));
     }
 
     @Test
@@ -154,8 +152,7 @@ public class AlunoResourceIntTest {
         restAlunoMockMvc.perform(get("/api/alunos/{id}", aluno.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(aluno.getId().intValue()))
-            .andExpect(jsonPath("$.nome").value(DEFAULT_NOME.toString()));
+            .andExpect(jsonPath("$.id").value(aluno.getId().intValue()));
     }
 
     @Test
@@ -175,8 +172,6 @@ public class AlunoResourceIntTest {
 
         // Update the aluno
         Aluno updatedAluno = alunoRepository.findOne(aluno.getId());
-        updatedAluno
-            .nome(UPDATED_NOME);
         AlunoDTO alunoDTO = alunoMapper.toDto(updatedAluno);
 
         restAlunoMockMvc.perform(put("/api/alunos")
@@ -188,7 +183,6 @@ public class AlunoResourceIntTest {
         List<Aluno> alunoList = alunoRepository.findAll();
         assertThat(alunoList).hasSize(databaseSizeBeforeUpdate);
         Aluno testAluno = alunoList.get(alunoList.size() - 1);
-        assertThat(testAluno.getNome()).isEqualTo(UPDATED_NOME);
     }
 
     @Test

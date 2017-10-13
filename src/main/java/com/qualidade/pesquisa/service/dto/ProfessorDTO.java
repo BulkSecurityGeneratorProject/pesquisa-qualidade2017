@@ -13,13 +13,13 @@ public class ProfessorDTO implements Serializable {
 
     private Long id;
 
-    private String nome;
-
     private Long professorBancaId;
 
     private Long alunoId;
 
     private Long areaId;
+
+    private Long userId;
 
     private Long coOrientadorId;
 
@@ -29,14 +29,6 @@ public class ProfessorDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public Long getProfessorBancaId() {
@@ -61,6 +53,14 @@ public class ProfessorDTO implements Serializable {
 
     public void setAreaId(Long areaPesquisaId) {
         this.areaId = areaPesquisaId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getCoOrientadorId() {
@@ -96,7 +96,6 @@ public class ProfessorDTO implements Serializable {
     public String toString() {
         return "ProfessorDTO{" +
             "id=" + getId() +
-            ", nome='" + getNome() + "'" +
             "}";
     }
 }

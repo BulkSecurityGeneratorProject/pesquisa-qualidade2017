@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Professor.
+    -->
+    <changeSet id="20171013015203-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="professor_banca_id"
+                                 baseTableName="professor"
+                                 constraintName="fk_professor_professor_banca_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="professor_banca"/>
+
+        <addForeignKeyConstraint baseColumnNames="aluno_id"
+                                 baseTableName="professor"
+                                 constraintName="fk_professor_aluno_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="aluno"/>
+
+        <addForeignKeyConstraint baseColumnNames="area_id"
+                                 baseTableName="professor"
+                                 constraintName="fk_professor_area_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="area_pesquisa"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="professor"
+                                 constraintName="fk_professor_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="co_orientador_id"
+                                 baseTableName="professor"
+                                 constraintName="fk_professor_co_orientador_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="co_orientador"/>
+
+    </changeSet>
+</databaseChangeLog>

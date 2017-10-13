@@ -29,70 +29,70 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
-                    <li>
-                        <a class="dropdown-item" routerLink="artigo-my-suffix" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_ALUNO']">
+                        <a class="dropdown-item" routerLink="artigo" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.artigoMySuffix">Artigo My Suffix</span>
+                            <span jhiTranslate="global.menu.entities.artigo">Artigo</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="proposta-tese-my-suffix" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_ALUNO', 'ROLE_PROFESSOR']">
+                        <a class="dropdown-item" routerLink="proposta-tese" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.propostaTeseMySuffix">Proposta Tese My Suffix</span>
+                            <span jhiTranslate="global.menu.entities.propostaTese">Proposta Tese</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="tese-my-suffix" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_ALUNO', 'ROLE_SECRETARIA', 'ROLE_PROFESSOR']">
+                        <a class="dropdown-item" routerLink="tese" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.teseMySuffix">Tese My Suffix</span>
+                            <span jhiTranslate="global.menu.entities.tese">Tese</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="apresentacao-my-suffix" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_ALUNO', 'ROLE_PROFESSOR']">
+                        <a class="dropdown-item" routerLink="apresentacao" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.apresentacaoMySuffix">Apresentacao My Suffix</span>
+                            <span jhiTranslate="global.menu.entities.apresentacao">Apresentacao</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="banca-my-suffix" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_SECRETARIA', 'ROLE_PROFESSOR']">
+                        <a class="dropdown-item" routerLink="banca" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.bancaMySuffix">Banca My Suffix</span>
+                            <span jhiTranslate="global.menu.entities.banca">Banca</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="funcionario-my-suffix" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <li *jhiHasAnyAuthority="['ROLE_ADMIN']">
+                        <a class="dropdown-item" routerLink="funcionario" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.funcionarioMySuffix">Funcionario My Suffix</span>
+                            <span jhiTranslate="global.menu.entities.funcionario">Funcionario</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="professor-banca-my-suffix" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_PROFESSOR']">
+                        <a class="dropdown-item" routerLink="professor-banca" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.professorBancaMySuffix">Professor Banca My Suffix</span>
+                            <span jhiTranslate="global.menu.entities.professorBanca">Professor Banca</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="aluno-my-suffix" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <li *jhiHasAnyAuthority="['ROLE_ADMIN']">
+                        <a class="dropdown-item" routerLink="aluno" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.alunoMySuffix">Aluno My Suffix</span>
+                            <span jhiTranslate="global.menu.entities.aluno">Aluno</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="professor-my-suffix" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <li *jhiHasAnyAuthority="['ROLE_ADMIN']">
+                        <a class="dropdown-item" routerLink="professor" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.professorMySuffix">Professor My Suffix</span>
+                            <span jhiTranslate="global.menu.entities.professor">Professor</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="co-orientador-my-suffix" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <li *jhiHasAnyAuthority="['ROLE_ADMIN']">
+                        <a class="dropdown-item" routerLink="co-orientador" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.coOrientadorMySuffix">Co Orientador My Suffix</span>
+                            <span jhiTranslate="global.menu.entities.coOrientador">Co Orientador</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item" routerLink="area-pesquisa-my-suffix" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                    <li *jhiHasAnyAuthority="['ROLE_ADMIN']">
+                        <a class="dropdown-item" routerLink="area-pesquisa" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.areaPesquisaMySuffix">Area Pesquisa My Suffix</span>
+                            <span jhiTranslate="global.menu.entities.areaPesquisa">Area Pesquisa</span>
                         </a>
                     </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->

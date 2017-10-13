@@ -28,10 +28,9 @@
             "fieldType": "String"
         }
     ],
-    "changelogDate": "20171012224556",
+    "changelogDate": "20171013015157",
     "entityTableName": "tese",
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
-    "service": "serviceImpl",
-    "angularJSSuffix": "mySuffix"
+    "service": "serviceImpl"
 }

@@ -22,9 +22,6 @@ public class Professor implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "nome")
-    private String nome;
-
     @ManyToOne
     private ProfessorBanca professorBanca;
 
@@ -34,6 +31,10 @@ public class Professor implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private AreaPesquisa area;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
 
     @ManyToOne
     private CoOrientador coOrientador;
@@ -45,19 +46,6 @@ public class Professor implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public Professor nome(String nome) {
-        this.nome = nome;
-        return this;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public ProfessorBanca getProfessorBanca() {
@@ -99,6 +87,19 @@ public class Professor implements Serializable {
         this.area = areaPesquisa;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public Professor user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public CoOrientador getCoOrientador() {
         return coOrientador;
     }
@@ -137,7 +138,6 @@ public class Professor implements Serializable {
     public String toString() {
         return "Professor{" +
             "id=" + getId() +
-            ", nome='" + getNome() + "'" +
             "}";
     }
 }

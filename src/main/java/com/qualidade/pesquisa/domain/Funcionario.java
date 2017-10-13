@@ -22,8 +22,9 @@ public class Funcionario implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "nome")
-    private String nome;
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -34,17 +35,17 @@ public class Funcionario implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public User getUser() {
+        return user;
     }
 
-    public Funcionario nome(String nome) {
-        this.nome = nome;
+    public Funcionario user(User user) {
+        this.user = user;
         return this;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setUser(User user) {
+        this.user = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -72,7 +73,6 @@ public class Funcionario implements Serializable {
     public String toString() {
         return "Funcionario{" +
             "id=" + getId() +
-            ", nome='" + getNome() + "'" +
             "}";
     }
 }

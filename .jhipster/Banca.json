@@ -14,10 +14,9 @@
             "fieldType": "Boolean"
         }
     ],
-    "changelogDate": "20171012224558",
+    "changelogDate": "20171013015159",
     "entityTableName": "banca",
     "dto": "mapstruct",
     "pagination": "infinite-scroll",
-    "service": "serviceImpl",
-    "angularJSSuffix": "mySuffix"
+    "service": "serviceImpl"
 }

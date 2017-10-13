@@ -29,7 +29,6 @@ entity Banca {
 }
 
 entity Funcionario {
-	nome String
 }
 
 entity ProfessorBanca {
@@ -38,12 +37,10 @@ entity ProfessorBanca {
 
 
 entity Aluno {
-	nome String
 }
 
 
 entity Professor {
-	nome String
 }
 
 entity CoOrientador {
@@ -71,7 +68,10 @@ relationship OneToOne {
     Professor{area} to AreaPesquisa,
     Apresentacao{banca} to Banca,
     Tese{apresentacao} to Apresentacao,
-    PropostaTese{apresentacao} to Apresentacao    
+    PropostaTese{apresentacao} to Apresentacao,
+    Aluno{user} to User,
+    Funcionario{user} to User,
+    Professor{user} to User   
 }
 
 
@@ -80,6 +80,4 @@ paginate * with infinite-scroll
 dto * with mapstruct
 
 // Set service options to all except few
-service all with serviceImpl except Aluno, Funcionario, Professor
-// Set an angular suffix
-angularSuffix * with mySuffix
+service all with serviceImpl

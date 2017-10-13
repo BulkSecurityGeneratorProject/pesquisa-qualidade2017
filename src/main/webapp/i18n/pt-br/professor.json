@@ -15,10 +15,10 @@
             "detail": {
                 "title": "Professor"
             },
-            "nome": "Nome",
             "professorBanca": "Professor Banca",
             "aluno": "Aluno",
             "area": "Area",
+            "user": "User",
             "coOrientador": "Co Orientador"
         }
     }
