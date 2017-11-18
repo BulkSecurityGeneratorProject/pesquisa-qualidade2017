@@ -14,7 +14,7 @@ export const apresentacaoRoute: Routes = [
         path: 'apresentacao',
         component: ApresentacaoComponent,
         data: {
-            authorities: ['ROLE_USER', 'ROLE_ALUNO', 'ROLE_PROFESSOR'],
+            authorities: ['ROLE_USER',  'ROLE_PROFESSOR'],
             pageTitle: 'jhipsterApp.apresentacao.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -22,7 +22,7 @@ export const apresentacaoRoute: Routes = [
         path: 'apresentacao/:id',
         component: ApresentacaoDetailComponent,
         data: {
-            authorities: ['ROLE_USER', 'ROLE_ALUNO', 'ROLE_PROFESSOR'],
+            authorities: ['ROLE_USER',  'ROLE_PROFESSOR'],
             pageTitle: 'jhipsterApp.apresentacao.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -31,10 +31,10 @@ export const apresentacaoRoute: Routes = [
 
 export const apresentacaoPopupRoute: Routes = [
     {
-        path: 'apresentacao-new',
+        path: 'apresentacao-new/:idTeseProposta/:isProposta',
         component: ApresentacaoPopupComponent,
         data: {
-            authorities: ['ROLE_USER', 'ROLE_ALUNO', 'ROLE_PROFESSOR'],
+            authorities: ['ROLE_USER', 'ROLE_PROFESSOR'],
             pageTitle: 'jhipsterApp.apresentacao.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -44,7 +44,7 @@ export const apresentacaoPopupRoute: Routes = [
         path: 'apresentacao/:id/edit',
         component: ApresentacaoPopupComponent,
         data: {
-            authorities: ['ROLE_USER', 'ROLE_ALUNO', 'ROLE_PROFESSOR'],
+            authorities: ['ROLE_USER', 'ROLE_PROFESSOR'],
             pageTitle: 'jhipsterApp.apresentacao.home.title'
         },
         canActivate: [UserRouteAccessService],
@@ -54,7 +54,7 @@ export const apresentacaoPopupRoute: Routes = [
         path: 'apresentacao/:id/delete',
         component: ApresentacaoDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER', 'ROLE_ALUNO', 'ROLE_PROFESSOR'],
+            authorities: ['ROLE_USER', 'ROLE_PROFESSOR'],
             pageTitle: 'jhipsterApp.apresentacao.home.title'
         },
         canActivate: [UserRouteAccessService],

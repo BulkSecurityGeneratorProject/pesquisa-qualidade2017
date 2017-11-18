@@ -1,14 +1,11 @@
 package com.qualidade.pesquisa.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -43,10 +40,9 @@ public class PropostaTese implements Serializable {
     @JoinColumn(unique = true)
     private Apresentacao apresentacao;
 
-    @OneToMany(mappedBy = "propostaTese")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Aluno> alunos = new HashSet<>();
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Aluno aluno;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -122,29 +118,17 @@ public class PropostaTese implements Serializable {
         this.apresentacao = apresentacao;
     }
 
-    public Set<Aluno> getAlunos() {
-        return alunos;
+    public Aluno getAluno() {
+        return aluno;
     }
 
-    public PropostaTese alunos(Set<Aluno> alunos) {
-        this.alunos = alunos;
+    public PropostaTese aluno(Aluno aluno) {
+        this.aluno = aluno;
         return this;
     }
 
-    public PropostaTese addAluno(Aluno aluno) {
-        this.alunos.add(aluno);
-        aluno.setPropostaTese(this);
-        return this;
-    }
-
-    public PropostaTese removeAluno(Aluno aluno) {
-        this.alunos.remove(aluno);
-        aluno.setPropostaTese(null);
-        return this;
-    }
-
-    public void setAlunos(Set<Aluno> alunos) {
-        this.alunos = alunos;
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

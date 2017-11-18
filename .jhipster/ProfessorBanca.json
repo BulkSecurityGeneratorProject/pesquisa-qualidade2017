@@ -2,13 +2,13 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipType": "one-to-many",
+            "relationshipType": "many-to-one",
             "relationshipName": "professor",
             "otherEntityName": "professor",
             "otherEntityRelationshipName": "professorBanca"
         },
         {
-            "relationshipType": "one-to-many",
+            "relationshipType": "many-to-one",
             "relationshipName": "banca",
             "otherEntityName": "banca",
             "otherEntityRelationshipName": "professorBanca"

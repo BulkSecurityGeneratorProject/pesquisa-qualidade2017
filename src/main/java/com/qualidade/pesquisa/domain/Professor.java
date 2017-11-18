@@ -22,11 +22,8 @@ public class Professor implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @ManyToOne
-    private ProfessorBanca professorBanca;
-
-    @ManyToOne
-    private Aluno aluno;
+    @Column(name = "nome")
+    private String nome;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -35,9 +32,6 @@ public class Professor implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private User user;
-
-    @ManyToOne
-    private CoOrientador coOrientador;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -48,30 +42,17 @@ public class Professor implements Serializable {
         this.id = id;
     }
 
-    public ProfessorBanca getProfessorBanca() {
-        return professorBanca;
+    public String getNome() {
+        return nome;
     }
 
-    public Professor professorBanca(ProfessorBanca professorBanca) {
-        this.professorBanca = professorBanca;
+    public Professor nome(String nome) {
+        this.nome = nome;
         return this;
     }
 
-    public void setProfessorBanca(ProfessorBanca professorBanca) {
-        this.professorBanca = professorBanca;
-    }
-
-    public Aluno getAluno() {
-        return aluno;
-    }
-
-    public Professor aluno(Aluno aluno) {
-        this.aluno = aluno;
-        return this;
-    }
-
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public AreaPesquisa getArea() {
@@ -99,19 +80,6 @@ public class Professor implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-
-    public CoOrientador getCoOrientador() {
-        return coOrientador;
-    }
-
-    public Professor coOrientador(CoOrientador coOrientador) {
-        this.coOrientador = coOrientador;
-        return this;
-    }
-
-    public void setCoOrientador(CoOrientador coOrientador) {
-        this.coOrientador = coOrientador;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -138,6 +106,7 @@ public class Professor implements Serializable {
     public String toString() {
         return "Professor{" +
             "id=" + getId() +
+            ", nome='" + getNome() + "'" +
             "}";
     }
 }

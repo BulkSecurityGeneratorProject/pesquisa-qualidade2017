@@ -4,6 +4,18 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="jhipsterApp.coOrientador.aluno">Aluno</span></dt>
+        <dd>
+            <div *ngIf="coOrientador.alunoId">
+                <a [routerLink]="['/aluno', coOrientador.alunoId]">{{coOrientador.alunoId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.coOrientador.professor">Professor</span></dt>
+        <dd>
+            <div *ngIf="coOrientador.professorId">
+                <a [routerLink]="['/professor', coOrientador.professorId]">{{coOrientador.professorId}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

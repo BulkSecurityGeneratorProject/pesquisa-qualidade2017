@@ -10,6 +10,7 @@ import { PropostaTese } from './proposta-tese.model';
 import { PropostaTesePopupService } from './proposta-tese-popup.service';
 import { PropostaTeseService } from './proposta-tese.service';
 import { Apresentacao, ApresentacaoService } from '../apresentacao';
+import { Aluno, AlunoService } from '../aluno';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -23,11 +24,14 @@ export class PropostaTeseDialogComponent implements OnInit {
 
     apresentacaos: Apresentacao[];
 
+    alunos: Aluno[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private propostaTeseService: PropostaTeseService,
         private apresentacaoService: ApresentacaoService,
+        private alunoService: AlunoService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -44,6 +48,19 @@ export class PropostaTeseDialogComponent implements OnInit {
                         .find(this.propostaTese.apresentacaoId)
                         .subscribe((subRes: Apresentacao) => {
                             this.apresentacaos = [subRes].concat(res.json);
+                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
+                }
+            }, (res: ResponseWrapper) => this.onError(res.json));
+        this.alunoService
+            .query({filter: 'propostatese-is-null'})
+            .subscribe((res: ResponseWrapper) => {
+                if (!this.propostaTese.alunoId) {
+                    this.alunos = res.json;
+                } else {
+                    this.alunoService
+                        .find(this.propostaTese.alunoId)
+                        .subscribe((subRes: Aluno) => {
+                            this.alunos = [subRes].concat(res.json);
                         }, (subRes: ResponseWrapper) => this.onError(subRes.json));
                 }
             }, (res: ResponseWrapper) => this.onError(res.json));
@@ -84,6 +101,10 @@ export class PropostaTeseDialogComponent implements OnInit {
     }
 
     trackApresentacaoById(index: number, item: Apresentacao) {
+        return item.id;
+    }
+
+    trackAlunoById(index: number, item: Aluno) {
         return item.id;
     }
 }

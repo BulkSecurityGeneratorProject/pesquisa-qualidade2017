@@ -1,0 +1,292 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-1">
+        <createSequence sequenceName="hibernate_sequence"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-2">
+        <createTable tableName="aluno">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="alunoPK"/>
+            </column>
+            <column name="orientador_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-3">
+        <createTable tableName="apresentacao">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="apresentacaoPK"/>
+            </column>
+            <column name="data" type="BINARY(255)"/>
+            <column name="flgagendamentoaprovado" type="BOOLEAN"/>
+            <column name="flgproposta" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="banca_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-4">
+        <createTable tableName="area_pesquisa">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="area_pesquisaPK"/>
+            </column>
+            <column name="descricao" type="VARCHAR(255)"/>
+            <column name="nome" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-5">
+        <createTable tableName="artigo">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="artigoPK"/>
+            </column>
+            <column name="datapublicacao" type="BINARY(255)"/>
+            <column name="flgrelacionadopesquisa" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jhi_link" type="VARCHAR(255)"/>
+            <column name="nome" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="titulo" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="aluno_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-6">
+        <createTable tableName="banca">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="bancaPK"/>
+            </column>
+            <column name="flgaprovadasecretaria" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-7">
+        <createTable tableName="co_orientador">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="co_orientadorPK"/>
+            </column>
+            <column name="aluno_id" type="BIGINT"/>
+            <column name="professor_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-8">
+        <createTable tableName="funcionario">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="funcionarioPK"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-9">
+        <createTable tableName="jhi_authority">
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-10">
+        <createTable tableName="jhi_persistent_audit_event">
+            <column autoIncrement="true" name="event_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="jhi_persistent_audit_eventPK"/>
+            </column>
+            <column name="event_date" type="BINARY(255)"/>
+            <column name="event_type" type="VARCHAR(255)"/>
+            <column name="principal" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-11">
+        <createTable tableName="jhi_persistent_audit_evt_data">
+            <column name="event_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-12">
+        <createTable tableName="jhi_user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="jhi_userPK"/>
+            </column>
+            <column name="created_by" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="BINARY(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_by" type="VARCHAR(50)"/>
+            <column name="last_modified_date" type="BINARY(255)"/>
+            <column name="activated" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="activation_key" type="VARCHAR(20)"/>
+            <column name="email" type="VARCHAR(100)"/>
+            <column name="first_name" type="VARCHAR(50)"/>
+            <column name="image_url" type="VARCHAR(256)"/>
+            <column name="lang_key" type="VARCHAR(5)"/>
+            <column name="last_name" type="VARCHAR(50)"/>
+            <column name="login" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password_hash" type="VARCHAR(60)"/>
+            <column name="reset_date" type="BINARY(255)"/>
+            <column name="reset_key" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-13">
+        <createTable tableName="jhi_user_authority">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-14">
+        <createTable tableName="professor">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="professorPK"/>
+            </column>
+            <column name="area_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-15">
+        <createTable tableName="professor_banca">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="professor_bancaPK"/>
+            </column>
+            <column name="nota" type="DOUBLE"/>
+            <column name="banca_id" type="BIGINT"/>
+            <column name="professor_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-16">
+        <createTable tableName="proposta_tese">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="proposta_tesePK"/>
+            </column>
+            <column name="descricao" type="VARCHAR(255)"/>
+            <column name="flgaprovado" type="BOOLEAN"/>
+            <column name="jhi_link" type="VARCHAR(255)"/>
+            <column name="tema" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="aluno_id" type="BIGINT"/>
+            <column name="apresentacao_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-17">
+        <createTable tableName="tese">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="tesePK"/>
+            </column>
+            <column name="jhi_link" type="VARCHAR(255)"/>
+            <column name="nota" type="DOUBLE"/>
+            <column name="aluno_id" type="BIGINT"/>
+            <column name="apresentacao_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-18">
+        <addPrimaryKey columnNames="event_id, name" tableName="jhi_persistent_audit_evt_data"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-19">
+        <addPrimaryKey columnNames="user_id, authority_name" tableName="jhi_user_authority"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-20">
+        <addPrimaryKey columnNames="name" constraintName="jhi_authorityPK" tableName="jhi_authority"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-21">
+        <addUniqueConstraint columnNames="user_id" constraintName="UC_ALUNOUSER_ID_COL" tableName="aluno"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-22">
+        <addUniqueConstraint columnNames="banca_id" constraintName="UC_APRESENTACAOBANCA_ID_COL" tableName="apresentacao"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-23">
+        <addUniqueConstraint columnNames="user_id" constraintName="UC_FUNCIONARIOUSER_ID_COL" tableName="funcionario"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-24">
+        <addUniqueConstraint columnNames="email" constraintName="UC_JHI_USEREMAIL_COL" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-25">
+        <addUniqueConstraint columnNames="login" constraintName="UC_JHI_USERLOGIN_COL" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-26">
+        <addUniqueConstraint columnNames="area_id" constraintName="UC_PROFESSORAREA_ID_COL" tableName="professor"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-27">
+        <addUniqueConstraint columnNames="user_id" constraintName="UC_PROFESSORUSER_ID_COL" tableName="professor"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-28">
+        <addUniqueConstraint columnNames="aluno_id" constraintName="UC_PROPOSTA_TESEALUNO_ID_COL" tableName="proposta_tese"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-29">
+        <addUniqueConstraint columnNames="apresentacao_id" constraintName="UC_PROPOSTA_TESEAPRESENTACAO_ID_COL" tableName="proposta_tese"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-30">
+        <addUniqueConstraint columnNames="aluno_id" constraintName="UC_TESEALUNO_ID_COL" tableName="tese"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-31">
+        <addUniqueConstraint columnNames="apresentacao_id" constraintName="UC_TESEAPRESENTACAO_ID_COL" tableName="tese"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-32">
+        <addForeignKeyConstraint baseColumnNames="aluno_id" baseTableName="tese" constraintName="FK1sn2br2dtf9da47ncydpc3e7p" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="aluno"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-33">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="funcionario" constraintName="FK213sxv3j7xtqr57j8jd4aqnyo" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-34">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="jhi_user_authority" constraintName="FK290okww5jujghp4el5i7mgwu0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-35">
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="jhi_persistent_audit_evt_data" constraintName="FK2ehnyx2si4tjd2nt4q7y40v8m" deferrable="false" initiallyDeferred="false" referencedColumnNames="event_id" referencedTableName="jhi_persistent_audit_event"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-36">
+        <addForeignKeyConstraint baseColumnNames="authority_name" baseTableName="jhi_user_authority" constraintName="FK4psxl0jtx6nr7rhqbynr6itoc" deferrable="false" initiallyDeferred="false" referencedColumnNames="name" referencedTableName="jhi_authority"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-37">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="aluno" constraintName="FK54p79aucs51lope8b5pbgl7ns" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-38">
+        <addForeignKeyConstraint baseColumnNames="aluno_id" baseTableName="proposta_tese" constraintName="FK5shgsvf5wl3md8n30lwx4ki3q" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="aluno"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-39">
+        <addForeignKeyConstraint baseColumnNames="aluno_id" baseTableName="artigo" constraintName="FK8mqbopiu2ugxx2933q7f55qpd" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="aluno"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-40">
+        <addForeignKeyConstraint baseColumnNames="professor_id" baseTableName="professor_banca" constraintName="FK8ssd3cg8iox2y4r00kwrnow5h" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="professor"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-41">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="professor" constraintName="FKafxod81ajbysqb8aqde0l7rpc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-42">
+        <addForeignKeyConstraint baseColumnNames="professor_id" baseTableName="co_orientador" constraintName="FKap7o3sjh1w99sdhyc2vqjo2b3" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="professor"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-43">
+        <addForeignKeyConstraint baseColumnNames="banca_id" baseTableName="apresentacao" constraintName="FKbaiuo1njhrbj7uneccs1b3s66" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="banca"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-44">
+        <addForeignKeyConstraint baseColumnNames="area_id" baseTableName="professor" constraintName="FKf0qr0dccb9mwr0t3xu1lhmrns" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="area_pesquisa"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-45">
+        <addForeignKeyConstraint baseColumnNames="apresentacao_id" baseTableName="proposta_tese" constraintName="FKg7qmt7eilm5lhie3248g258jf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="apresentacao"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-46">
+        <addForeignKeyConstraint baseColumnNames="apresentacao_id" baseTableName="tese" constraintName="FKgn9a0y3j5rdkm3y7m4abdboxc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="apresentacao"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-47">
+        <addForeignKeyConstraint baseColumnNames="orientador_id" baseTableName="aluno" constraintName="FKgokcjshohd1k01xvwy254viv2" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="professor"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-48">
+        <addForeignKeyConstraint baseColumnNames="aluno_id" baseTableName="co_orientador" constraintName="FKjplk8ks9kt7b7yui7yxq4q23h" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="aluno"/>
+    </changeSet>
+    <changeSet author="Caio Ramos (generated)" id="1511012068399-49">
+        <addForeignKeyConstraint baseColumnNames="banca_id" baseTableName="professor_banca" constraintName="FKsw94kb10sokflkbjnankdlf41" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="banca"/>
+    </changeSet>
+</databaseChangeLog>

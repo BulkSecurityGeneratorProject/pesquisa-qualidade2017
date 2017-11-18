@@ -9,10 +9,8 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Aluno } from './aluno.model';
 import { AlunoPopupService } from './aluno-popup.service';
 import { AlunoService } from './aluno.service';
-import { Artigo, ArtigoService } from '../artigo';
-import { PropostaTese, PropostaTeseService } from '../proposta-tese';
 import { User, UserService } from '../../shared';
-import { CoOrientador, CoOrientadorService } from '../co-orientador';
+import { Professor, ProfessorService } from '../professor';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -24,36 +22,26 @@ export class AlunoDialogComponent implements OnInit {
     aluno: Aluno;
     isSaving: boolean;
 
-    artigos: Artigo[];
-
-    propostatese: PropostaTese[];
-
     users: User[];
 
-    coorientadors: CoOrientador[];
+    professors: Professor[];
 
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private alunoService: AlunoService,
-        private artigoService: ArtigoService,
-        private propostaTeseService: PropostaTeseService,
         private userService: UserService,
-        private coOrientadorService: CoOrientadorService,
+        private professorService: ProfessorService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.artigoService.query()
-            .subscribe((res: ResponseWrapper) => { this.artigos = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.propostaTeseService.query()
-            .subscribe((res: ResponseWrapper) => { this.propostatese = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.userService.query()
             .subscribe((res: ResponseWrapper) => { this.users = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.coOrientadorService.query()
-            .subscribe((res: ResponseWrapper) => { this.coorientadors = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.professorService.query()
+            .subscribe((res: ResponseWrapper) => { this.professors = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -90,19 +78,11 @@ export class AlunoDialogComponent implements OnInit {
         this.jhiAlertService.error(error.message, null, null);
     }
 
-    trackArtigoById(index: number, item: Artigo) {
-        return item.id;
-    }
-
-    trackPropostaTeseById(index: number, item: PropostaTese) {
-        return item.id;
-    }
-
     trackUserById(index: number, item: User) {
         return item.id;
     }
 
-    trackCoOrientadorById(index: number, item: CoOrientador) {
+    trackProfessorById(index: number, item: Professor) {
         return item.id;
     }
 }

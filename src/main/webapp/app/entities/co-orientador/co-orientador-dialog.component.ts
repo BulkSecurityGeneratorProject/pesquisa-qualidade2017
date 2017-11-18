@@ -9,6 +9,9 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { CoOrientador } from './co-orientador.model';
 import { CoOrientadorPopupService } from './co-orientador-popup.service';
 import { CoOrientadorService } from './co-orientador.service';
+import { Aluno, AlunoService } from '../aluno';
+import { Professor, ProfessorService } from '../professor';
+import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-co-orientador-dialog',
@@ -19,16 +22,26 @@ export class CoOrientadorDialogComponent implements OnInit {
     coOrientador: CoOrientador;
     isSaving: boolean;
 
+    alunos: Aluno[];
+
+    professors: Professor[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private coOrientadorService: CoOrientadorService,
+        private alunoService: AlunoService,
+        private professorService: ProfessorService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.alunoService.query()
+            .subscribe((res: ResponseWrapper) => { this.alunos = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.professorService.query()
+            .subscribe((res: ResponseWrapper) => { this.professors = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -63,6 +76,14 @@ export class CoOrientadorDialogComponent implements OnInit {
 
     private onError(error: any) {
         this.jhiAlertService.error(error.message, null, null);
+    }
+
+    trackAlunoById(index: number, item: Aluno) {
+        return item.id;
+    }
+
+    trackProfessorById(index: number, item: Professor) {
+        return item.id;
     }
 }
 

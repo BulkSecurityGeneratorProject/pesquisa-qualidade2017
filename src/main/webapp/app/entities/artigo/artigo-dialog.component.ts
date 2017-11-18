@@ -9,6 +9,8 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Artigo } from './artigo.model';
 import { ArtigoPopupService } from './artigo-popup.service';
 import { ArtigoService } from './artigo.service';
+import { Aluno, AlunoService } from '../aluno';
+import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-artigo-dialog',
@@ -18,18 +20,23 @@ export class ArtigoDialogComponent implements OnInit {
 
     artigo: Artigo;
     isSaving: boolean;
+
+    alunos: Aluno[];
     datapublicacaoDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private artigoService: ArtigoService,
+        private alunoService: AlunoService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.alunoService.query()
+            .subscribe((res: ResponseWrapper) => { this.alunos = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -64,6 +71,10 @@ export class ArtigoDialogComponent implements OnInit {
 
     private onError(error: any) {
         this.jhiAlertService.error(error.message, null, null);
+    }
+
+    trackAlunoById(index: number, item: Aluno) {
+        return item.id;
     }
 }
 

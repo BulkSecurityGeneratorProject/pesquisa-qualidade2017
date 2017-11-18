@@ -25,9 +25,6 @@ public class Banca implements Serializable {
     @Column(name = "flgaprovadasecretaria")
     private Boolean flgaprovadasecretaria;
 
-    @ManyToOne
-    private ProfessorBanca professorBanca;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -48,19 +45,6 @@ public class Banca implements Serializable {
 
     public void setFlgaprovadasecretaria(Boolean flgaprovadasecretaria) {
         this.flgaprovadasecretaria = flgaprovadasecretaria;
-    }
-
-    public ProfessorBanca getProfessorBanca() {
-        return professorBanca;
-    }
-
-    public Banca professorBanca(ProfessorBanca professorBanca) {
-        this.professorBanca = professorBanca;
-        return this;
-    }
-
-    public void setProfessorBanca(ProfessorBanca professorBanca) {
-        this.professorBanca = professorBanca;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

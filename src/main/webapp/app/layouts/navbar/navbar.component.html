@@ -47,7 +47,7 @@
                             <span jhiTranslate="global.menu.entities.tese">Tese</span>
                         </a>
                     </li>
-                    <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_ALUNO', 'ROLE_PROFESSOR']">
+                    <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_PROFESSOR']">
                         <a class="dropdown-item" routerLink="apresentacao" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.entities.apresentacao">Apresentacao</span>

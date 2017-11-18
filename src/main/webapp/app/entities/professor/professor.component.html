@@ -17,27 +17,16 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="professorBancaId"><span jhiTranslate="jhipsterApp.professor.professorBanca">Professor Banca</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="alunoId"><span jhiTranslate="jhipsterApp.professor.aluno">Aluno</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="nome"><span jhiTranslate="jhipsterApp.professor.nome">Nome</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="areaId"><span jhiTranslate="jhipsterApp.professor.area">Area</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="userId"><span jhiTranslate="jhipsterApp.professor.user">User</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="coOrientadorId"><span jhiTranslate="jhipsterApp.professor.coOrientador">Co Orientador</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let professor of professors ;trackBy: trackId">
                 <td><a [routerLink]="['../professor', professor.id ]">{{professor.id}}</a></td>
-                <td>
-                    <div *ngIf="professor.professorBancaId">
-                        <a [routerLink]="['../professor-banca', professor.professorBancaId  ]" >{{professor.professorBancaId}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="professor.alunoId">
-                        <a [routerLink]="['../aluno', professor.alunoId  ]" >{{professor.alunoId}}</a>
-                    </div>
-                </td>
+                <td>{{professor.nome}}</td>
                 <td>
                     <div *ngIf="professor.areaId">
                         <a [routerLink]="['../area-pesquisa', professor.areaId  ]" >{{professor.areaId}}</a>
@@ -45,11 +34,6 @@
                 </td>
                 <td>
                     {{professor.userId}}
-                </td>
-                <td>
-                    <div *ngIf="professor.coOrientadorId">
-                        <a [routerLink]="['../co-orientador', professor.coOrientadorId  ]" >{{professor.coOrientadorId}}</a>
-                    </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

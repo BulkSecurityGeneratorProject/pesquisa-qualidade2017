@@ -15,11 +15,9 @@
             "detail": {
                 "title": "Aluno"
             },
-            "artigo": "Artigo",
-            "propostaTese": "Proposta Tese",
+            "nome": "Nome",
             "user": "User",
-            "orientador": "Orientador",
-            "coOrientador": "Co Orientador"
+            "orientador": "Orientador"
         }
     }
 }

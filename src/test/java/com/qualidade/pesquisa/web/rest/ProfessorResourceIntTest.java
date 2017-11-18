@@ -40,6 +40,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = JhipsterApp.class)
 public class ProfessorResourceIntTest {
 
+    private static final String DEFAULT_NOME = "AAAAAAAAAA";
+    private static final String UPDATED_NOME = "BBBBBBBBBB";
+
     @Autowired
     private ProfessorRepository professorRepository;
 
@@ -82,7 +85,8 @@ public class ProfessorResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static Professor createEntity(EntityManager em) {
-        Professor professor = new Professor();
+        Professor professor = new Professor()
+            .nome(DEFAULT_NOME);
         return professor;
     }
 
@@ -107,6 +111,7 @@ public class ProfessorResourceIntTest {
         List<Professor> professorList = professorRepository.findAll();
         assertThat(professorList).hasSize(databaseSizeBeforeCreate + 1);
         Professor testProfessor = professorList.get(professorList.size() - 1);
+        assertThat(testProfessor.getNome()).isEqualTo(DEFAULT_NOME);
     }
 
     @Test
@@ -139,7 +144,8 @@ public class ProfessorResourceIntTest {
         restProfessorMockMvc.perform(get("/api/professors?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(professor.getId().intValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(professor.getId().intValue())))
+            .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME.toString())));
     }
 
     @Test
@@ -152,7 +158,8 @@ public class ProfessorResourceIntTest {
         restProfessorMockMvc.perform(get("/api/professors/{id}", professor.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(professor.getId().intValue()));
+            .andExpect(jsonPath("$.id").value(professor.getId().intValue()))
+            .andExpect(jsonPath("$.nome").value(DEFAULT_NOME.toString()));
     }
 
     @Test
@@ -172,6 +179,8 @@ public class ProfessorResourceIntTest {
 
         // Update the professor
         Professor updatedProfessor = professorRepository.findOne(professor.getId());
+        updatedProfessor
+            .nome(UPDATED_NOME);
         ProfessorDTO professorDTO = professorMapper.toDto(updatedProfessor);
 
         restProfessorMockMvc.perform(put("/api/professors")
@@ -183,6 +192,7 @@ public class ProfessorResourceIntTest {
         List<Professor> professorList = professorRepository.findAll();
         assertThat(professorList).hasSize(databaseSizeBeforeUpdate);
         Professor testProfessor = professorList.get(professorList.size() - 1);
+        assertThat(testProfessor.getNome()).isEqualTo(UPDATED_NOME);
     }
 
     @Test

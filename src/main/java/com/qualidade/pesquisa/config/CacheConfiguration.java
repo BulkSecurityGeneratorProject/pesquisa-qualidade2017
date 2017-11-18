@@ -59,6 +59,9 @@ public class CacheConfiguration {
             cm.createCache(com.qualidade.pesquisa.domain.CoOrientador.class.getName() + ".alunos", jcacheConfiguration);
             cm.createCache(com.qualidade.pesquisa.domain.CoOrientador.class.getName() + ".professors", jcacheConfiguration);
             cm.createCache(com.qualidade.pesquisa.domain.AreaPesquisa.class.getName(), jcacheConfiguration);
+            cm.createCache(com.qualidade.pesquisa.domain.Aluno.class.getName() + ".artigos", jcacheConfiguration);
+            cm.createCache(com.qualidade.pesquisa.domain.Aluno.class.getName() + ".propostaTese", jcacheConfiguration);
+            cm.createCache(com.qualidade.pesquisa.domain.Aluno.class.getName() + ".coOrientadors", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

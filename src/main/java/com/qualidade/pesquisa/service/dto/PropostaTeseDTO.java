@@ -25,6 +25,8 @@ public class PropostaTeseDTO implements Serializable {
 
     private Long apresentacaoId;
 
+    private Long alunoId;
+
     public Long getId() {
         return id;
     }
@@ -71,6 +73,14 @@ public class PropostaTeseDTO implements Serializable {
 
     public void setApresentacaoId(Long apresentacaoId) {
         this.apresentacaoId = apresentacaoId;
+    }
+
+    public Long getAlunoId() {
+        return alunoId;
+    }
+
+    public void setAlunoId(Long alunoId) {
+        this.alunoId = alunoId;
     }
 
     @Override

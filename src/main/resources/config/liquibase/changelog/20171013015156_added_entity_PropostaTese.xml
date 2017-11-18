@@ -38,6 +38,8 @@
             </column>
             <column name="apresentacao_id" type="bigint">
                 <constraints unique="true" nullable="true" />
+            </column>            <column name="aluno_id" type="bigint">
+                <constraints unique="true" nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>

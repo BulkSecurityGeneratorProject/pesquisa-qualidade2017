@@ -8,14 +8,10 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Banca and its DTO BancaDTO.
  */
-@Mapper(componentModel = "spring", uses = {ProfessorBancaMapper.class, })
+@Mapper(componentModel = "spring", uses = {})
 public interface BancaMapper extends EntityMapper <BancaDTO, Banca> {
-
-    @Mapping(source = "professorBanca.id", target = "professorBancaId")
-    BancaDTO toDto(Banca banca); 
-
-    @Mapping(source = "professorBancaId", target = "professorBanca")
-    Banca toEntity(BancaDTO bancaDTO); 
+    
+    
     default Banca fromId(Long id) {
         if (id == null) {
             return null;

@@ -18,8 +18,8 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="data"><span jhiTranslate="jhipsterApp.apresentacao.data">Data</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="flgagendamentoaprovado"><span jhiTranslate="jhipsterApp.apresentacao.flgagendamentoaprovado">Flgagendamentoaprovado</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="flgproposta"><span jhiTranslate="jhipsterApp.apresentacao.flgproposta">Flgproposta</span> <span class="fa fa-sort"></span></th>
+            <!-- <th jhiSortBy="flgagendamentoaprovado"><span jhiTranslate="jhipsterApp.apresentacao.flgagendamentoaprovado">Flgagendamentoaprovado</span> <span class="fa fa-sort"></span></th> -->
+            <!-- <th jhiSortBy="flgproposta"><span jhiTranslate="jhipsterApp.apresentacao.flgproposta">Flgproposta</span> <span class="fa fa-sort"></span></th> -->
             <th jhiSortBy="bancaId"><span jhiTranslate="jhipsterApp.apresentacao.banca">Banca</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
@@ -28,8 +28,8 @@
             <tr *ngFor="let apresentacao of apresentacaos ;trackBy: trackId">
                 <td><a [routerLink]="['../apresentacao', apresentacao.id ]">{{apresentacao.id}}</a></td>
                 <td>{{apresentacao.data | date:'mediumDate'}}</td>
-                <td>{{apresentacao.flgagendamentoaprovado}}</td>
-                <td>{{apresentacao.flgproposta}}</td>
+                <!-- <td>{{apresentacao.flgagendamentoaprovado}}</td> -->
+                <!-- <td>{{apresentacao.flgproposta}}</td> -->
                 <td>
                     <div *ngIf="apresentacao.bancaId">
                         <a [routerLink]="['../banca', apresentacao.bancaId  ]" >{{apresentacao.bancaId}}</a>

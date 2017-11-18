@@ -40,6 +40,13 @@
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
+                                [routerLink]=  
+                                "propostaTese.apresentacaoId ? ['/', { outlets: { popup: 'apresentacao/' + propostaTese.apresentacaoId + '/edit' } }] : ['/', { outlets: { popup: 'apresentacao-new/' + propostaTese.id + '/true' } }]"
+                            class="btn btn-warning btn-sm">
+                            <span class="fa fa-calendar"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="jhipsterApp.propostaTese.apresentacao">Apresentacao</span>
+                        </button>
+                        <button type="submit"
                                 [routerLink]="['../proposta-tese', propostaTese.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
@@ -64,5 +71,7 @@
             </tr>
             </tbody>
         </table>
+
+        
     </div>
 </div>

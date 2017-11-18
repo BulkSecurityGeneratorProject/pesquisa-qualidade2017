@@ -9,6 +9,9 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { ProfessorBanca } from './professor-banca.model';
 import { ProfessorBancaPopupService } from './professor-banca-popup.service';
 import { ProfessorBancaService } from './professor-banca.service';
+import { Professor, ProfessorService } from '../professor';
+import { Banca, BancaService } from '../banca';
+import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-professor-banca-dialog',
@@ -19,16 +22,26 @@ export class ProfessorBancaDialogComponent implements OnInit {
     professorBanca: ProfessorBanca;
     isSaving: boolean;
 
+    professors: Professor[];
+
+    bancas: Banca[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private professorBancaService: ProfessorBancaService,
+        private professorService: ProfessorService,
+        private bancaService: BancaService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.professorService.query()
+            .subscribe((res: ResponseWrapper) => { this.professors = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.bancaService.query()
+            .subscribe((res: ResponseWrapper) => { this.bancas = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -63,6 +76,14 @@ export class ProfessorBancaDialogComponent implements OnInit {
 
     private onError(error: any) {
         this.jhiAlertService.error(error.message, null, null);
+    }
+
+    trackProfessorById(index: number, item: Professor) {
+        return item.id;
+    }
+
+    trackBancaById(index: number, item: Banca) {
+        return item.id;
     }
 }
 

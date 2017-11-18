@@ -26,6 +26,12 @@
                 <a [routerLink]="['/apresentacao', propostaTese.apresentacaoId]">{{propostaTese.apresentacaoId}}</a>
             </div>
         </dd>
+        <dt><span jhiTranslate="jhipsterApp.propostaTese.aluno">Aluno</span></dt>
+        <dd>
+            <div *ngIf="propostaTese.alunoId">
+                <a [routerLink]="['/aluno', propostaTese.alunoId]">{{propostaTese.alunoId}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

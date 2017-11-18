@@ -7,6 +7,7 @@ export class Apresentacao implements BaseEntity {
         public flgagendamentoaprovado?: boolean,
         public flgproposta?: boolean,
         public bancaId?: number,
+        public idTeseProposta?: number
     ) {
         this.flgagendamentoaprovado = false;
         this.flgproposta = false;

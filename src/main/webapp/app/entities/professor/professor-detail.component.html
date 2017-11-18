@@ -4,17 +4,9 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="jhipsterApp.professor.professorBanca">Professor Banca</span></dt>
+        <dt><span jhiTranslate="jhipsterApp.professor.nome">Nome</span></dt>
         <dd>
-            <div *ngIf="professor.professorBancaId">
-                <a [routerLink]="['/professor-banca', professor.professorBancaId]">{{professor.professorBancaId}}</a>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="jhipsterApp.professor.aluno">Aluno</span></dt>
-        <dd>
-            <div *ngIf="professor.alunoId">
-                <a [routerLink]="['/aluno', professor.alunoId]">{{professor.alunoId}}</a>
-            </div>
+            <span>{{professor.nome}}</span>
         </dd>
         <dt><span jhiTranslate="jhipsterApp.professor.area">Area</span></dt>
         <dd>
@@ -25,12 +17,6 @@
         <dt><span jhiTranslate="jhipsterApp.professor.user">User</span></dt>
         <dd>
             {{professor.userId}}
-        </dd>
-        <dt><span jhiTranslate="jhipsterApp.professor.coOrientador">Co Orientador</span></dt>
-        <dd>
-            <div *ngIf="professor.coOrientadorId">
-                <a [routerLink]="['/co-orientador', professor.coOrientadorId]">{{professor.coOrientadorId}}</a>
-            </div>
         </dd>
     </dl>
 

@@ -4,26 +4,18 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="jhipsterApp.aluno.artigo">Artigo</span></dt>
+        <dt><span jhiTranslate="jhipsterApp.aluno.nome">Nome</span></dt>
         <dd>
-            <div *ngIf="aluno.artigoId">
-                <a [routerLink]="['/artigo', aluno.artigoId]">{{aluno.artigoId}}</a>
-            </div>
-        </dd>
-        <dt><span jhiTranslate="jhipsterApp.aluno.propostaTese">Proposta Tese</span></dt>
-        <dd>
-            <div *ngIf="aluno.propostaTeseId">
-                <a [routerLink]="['/proposta-tese', aluno.propostaTeseId]">{{aluno.propostaTeseId}}</a>
-            </div>
+            <span>{{aluno.nome}}</span>
         </dd>
         <dt><span jhiTranslate="jhipsterApp.aluno.user">User</span></dt>
         <dd>
             {{aluno.userId}}
         </dd>
-        <dt><span jhiTranslate="jhipsterApp.aluno.coOrientador">Co Orientador</span></dt>
+        <dt><span jhiTranslate="jhipsterApp.aluno.orientador">Orientador</span></dt>
         <dd>
-            <div *ngIf="aluno.coOrientadorId">
-                <a [routerLink]="['/co-orientador', aluno.coOrientadorId]">{{aluno.coOrientadorId}}</a>
+            <div *ngIf="aluno.orientadorId">
+                <a [routerLink]="['/professor', aluno.orientadorId]">{{aluno.orientadorId}}</a>
             </div>
         </dd>
     </dl>

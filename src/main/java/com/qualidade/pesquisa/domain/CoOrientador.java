@@ -1,13 +1,10 @@
 package com.qualidade.pesquisa.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -25,15 +22,11 @@ public class CoOrientador implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @OneToMany(mappedBy = "coOrientador")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Aluno> alunos = new HashSet<>();
+    @ManyToOne
+    private Aluno aluno;
 
-    @OneToMany(mappedBy = "coOrientador")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Professor> professors = new HashSet<>();
+    @ManyToOne
+    private Professor professor;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -44,54 +37,30 @@ public class CoOrientador implements Serializable {
         this.id = id;
     }
 
-    public Set<Aluno> getAlunos() {
-        return alunos;
+    public Aluno getAluno() {
+        return aluno;
     }
 
-    public CoOrientador alunos(Set<Aluno> alunos) {
-        this.alunos = alunos;
+    public CoOrientador aluno(Aluno aluno) {
+        this.aluno = aluno;
         return this;
     }
 
-    public CoOrientador addAluno(Aluno aluno) {
-        this.alunos.add(aluno);
-        aluno.setCoOrientador(this);
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public CoOrientador professor(Professor professor) {
+        this.professor = professor;
         return this;
     }
 
-    public CoOrientador removeAluno(Aluno aluno) {
-        this.alunos.remove(aluno);
-        aluno.setCoOrientador(null);
-        return this;
-    }
-
-    public void setAlunos(Set<Aluno> alunos) {
-        this.alunos = alunos;
-    }
-
-    public Set<Professor> getProfessors() {
-        return professors;
-    }
-
-    public CoOrientador professors(Set<Professor> professors) {
-        this.professors = professors;
-        return this;
-    }
-
-    public CoOrientador addProfessor(Professor professor) {
-        this.professors.add(professor);
-        professor.setCoOrientador(this);
-        return this;
-    }
-
-    public CoOrientador removeProfessor(Professor professor) {
-        this.professors.remove(professor);
-        professor.setCoOrientador(null);
-        return this;
-    }
-
-    public void setProfessors(Set<Professor> professors) {
-        this.professors = professors;
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

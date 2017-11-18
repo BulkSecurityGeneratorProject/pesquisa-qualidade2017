@@ -22,6 +22,8 @@ public class ApresentacaoDTO implements Serializable {
     @NotNull
     private Boolean flgproposta;
 
+    private Long idTeseProposta;
+
     private Long bancaId;
 
     public Long getId() {
@@ -30,6 +32,14 @@ public class ApresentacaoDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getIdTeseProposta() {
+        return idTeseProposta;
+    }
+
+    public void setIdTeseProposta(Long idTeseProposta) {
+        this.idTeseProposta = idTeseProposta;
     }
 
     public LocalDate getData() {

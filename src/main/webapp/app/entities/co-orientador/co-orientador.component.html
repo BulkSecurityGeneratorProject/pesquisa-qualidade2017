@@ -17,12 +17,24 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="alunoId"><span jhiTranslate="jhipsterApp.coOrientador.aluno">Aluno</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="professorId"><span jhiTranslate="jhipsterApp.coOrientador.professor">Professor</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let coOrientador of coOrientadors ;trackBy: trackId">
                 <td><a [routerLink]="['../co-orientador', coOrientador.id ]">{{coOrientador.id}}</a></td>
+                <td>
+                    <div *ngIf="coOrientador.alunoId">
+                        <a [routerLink]="['../aluno', coOrientador.alunoId  ]" >{{coOrientador.alunoId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="coOrientador.professorId">
+                        <a [routerLink]="['../professor', coOrientador.professorId  ]" >{{coOrientador.professorId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

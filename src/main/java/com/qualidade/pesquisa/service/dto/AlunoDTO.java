@@ -13,13 +13,11 @@ public class AlunoDTO implements Serializable {
 
     private Long id;
 
-    private Long artigoId;
-
-    private Long propostaTeseId;
+    private String nome;
 
     private Long userId;
 
-    private Long coOrientadorId;
+    private Long orientadorId;
 
     public Long getId() {
         return id;
@@ -29,20 +27,12 @@ public class AlunoDTO implements Serializable {
         this.id = id;
     }
 
-    public Long getArtigoId() {
-        return artigoId;
+    public String getNome() {
+        return nome;
     }
 
-    public void setArtigoId(Long artigoId) {
-        this.artigoId = artigoId;
-    }
-
-    public Long getPropostaTeseId() {
-        return propostaTeseId;
-    }
-
-    public void setPropostaTeseId(Long propostaTeseId) {
-        this.propostaTeseId = propostaTeseId;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Long getUserId() {
@@ -53,12 +43,12 @@ public class AlunoDTO implements Serializable {
         this.userId = userId;
     }
 
-    public Long getCoOrientadorId() {
-        return coOrientadorId;
+    public Long getOrientadorId() {
+        return orientadorId;
     }
 
-    public void setCoOrientadorId(Long coOrientadorId) {
-        this.coOrientadorId = coOrientadorId;
+    public void setOrientadorId(Long professorId) {
+        this.orientadorId = professorId;
     }
 
     @Override
@@ -86,6 +76,7 @@ public class AlunoDTO implements Serializable {
     public String toString() {
         return "AlunoDTO{" +
             "id=" + getId() +
+            ", nome='" + getNome() + "'" +
             "}";
     }
 }

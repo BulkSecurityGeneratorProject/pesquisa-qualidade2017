@@ -15,6 +15,10 @@ public class ProfessorBancaDTO implements Serializable {
 
     private Double nota;
 
+    private Long professorId;
+
+    private Long bancaId;
+
     public Long getId() {
         return id;
     }
@@ -29,6 +33,22 @@ public class ProfessorBancaDTO implements Serializable {
 
     public void setNota(Double nota) {
         this.nota = nota;
+    }
+
+    public Long getProfessorId() {
+        return professorId;
+    }
+
+    public void setProfessorId(Long professorId) {
+        this.professorId = professorId;
+    }
+
+    public Long getBancaId() {
+        return bancaId;
+    }
+
+    public void setBancaId(Long bancaId) {
+        this.bancaId = bancaId;
     }
 
     @Override

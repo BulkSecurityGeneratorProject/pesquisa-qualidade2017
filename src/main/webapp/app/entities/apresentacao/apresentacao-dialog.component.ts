@@ -34,6 +34,7 @@ export class ApresentacaoDialogComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log(this.apresentacao);
         this.isSaving = false;
         this.bancaService
             .query({filter: 'apresentacao-is-null'})
@@ -107,6 +108,9 @@ export class ApresentacaoPopupComponent implements OnInit, OnDestroy {
             if ( params['id'] ) {
                 this.apresentacaoPopupService
                     .open(ApresentacaoDialogComponent as Component, params['id']);
+            } else if ( params['idTeseProposta'] ) {
+                this.apresentacaoPopupService
+                    .open(ApresentacaoDialogComponent as Component, undefined, params['idTeseProposta'], params['isProposta']);
             } else {
                 this.apresentacaoPopupService
                     .open(ApresentacaoDialogComponent as Component);

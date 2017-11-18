@@ -46,6 +46,13 @@
                 <option [ngValue]="apresentacaoOption.id" *ngFor="let apresentacaoOption of apresentacaos; trackBy: trackApresentacaoById">{{apresentacaoOption.id}}</option>
             </select>
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.propostaTese.aluno" for="field_aluno">Aluno</label>
+            <select class="form-control" id="field_aluno" name="aluno" [(ngModel)]="propostaTese.alunoId">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="alunoOption.id" *ngFor="let alunoOption of alunos; trackBy: trackAlunoById">{{alunoOption.id}}</option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

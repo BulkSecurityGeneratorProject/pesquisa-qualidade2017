@@ -5,6 +5,8 @@ import com.qualidade.pesquisa.JhipsterApp;
 import com.qualidade.pesquisa.domain.Apresentacao;
 import com.qualidade.pesquisa.repository.ApresentacaoRepository;
 import com.qualidade.pesquisa.service.ApresentacaoService;
+import com.qualidade.pesquisa.service.PropostaTeseService;
+import com.qualidade.pesquisa.service.TeseService;
 import com.qualidade.pesquisa.service.dto.ApresentacaoDTO;
 import com.qualidade.pesquisa.service.mapper.ApresentacaoMapper;
 import com.qualidade.pesquisa.web.rest.errors.ExceptionTranslator;
@@ -61,6 +63,12 @@ public class ApresentacaoResourceIntTest {
     private ApresentacaoService apresentacaoService;
 
     @Autowired
+    private PropostaTeseService propostaService;
+
+    @Autowired
+    private TeseService teseService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -79,7 +87,7 @@ public class ApresentacaoResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ApresentacaoResource apresentacaoResource = new ApresentacaoResource(apresentacaoService);
+        final ApresentacaoResource apresentacaoResource = new ApresentacaoResource(apresentacaoService, propostaService, teseService);
         this.restApresentacaoMockMvc = MockMvcBuilders.standaloneSetup(apresentacaoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

@@ -8,7 +8,7 @@ export class PropostaTese implements BaseEntity {
         public flgaprovado?: boolean,
         public link?: string,
         public apresentacaoId?: number,
-        public alunos?: BaseEntity[],
+        public alunoId?: number,
     ) {
         this.flgaprovado = false;
     }

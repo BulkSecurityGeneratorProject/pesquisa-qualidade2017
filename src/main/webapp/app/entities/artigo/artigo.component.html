@@ -22,6 +22,7 @@
             <th jhiSortBy="datapublicacao"><span jhiTranslate="jhipsterApp.artigo.datapublicacao">Datapublicacao</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="link"><span jhiTranslate="jhipsterApp.artigo.link">Link</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="flgrelacionadopesquisa"><span jhiTranslate="jhipsterApp.artigo.flgrelacionadopesquisa">Flgrelacionadopesquisa</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="alunoId"><span jhiTranslate="jhipsterApp.artigo.aluno">Aluno</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -33,6 +34,11 @@
                 <td>{{artigo.datapublicacao | date:'mediumDate'}}</td>
                 <td>{{artigo.link}}</td>
                 <td>{{artigo.flgrelacionadopesquisa}}</td>
+                <td>
+                    <div *ngIf="artigo.alunoId">
+                        <a [routerLink]="['../aluno', artigo.alunoId  ]" >{{artigo.alunoId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

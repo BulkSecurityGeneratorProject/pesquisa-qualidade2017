@@ -18,6 +18,8 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="nota"><span jhiTranslate="jhipsterApp.professorBanca.nota">Nota</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="professorId"><span jhiTranslate="jhipsterApp.professorBanca.professor">Professor</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="bancaId"><span jhiTranslate="jhipsterApp.professorBanca.banca">Banca</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -25,6 +27,16 @@
             <tr *ngFor="let professorBanca of professorBancas ;trackBy: trackId">
                 <td><a [routerLink]="['../professor-banca', professorBanca.id ]">{{professorBanca.id}}</a></td>
                 <td>{{professorBanca.nota}}</td>
+                <td>
+                    <div *ngIf="professorBanca.professorId">
+                        <a [routerLink]="['../professor', professorBanca.professorId  ]" >{{professorBanca.professorId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="professorBanca.bancaId">
+                        <a [routerLink]="['../banca', professorBanca.bancaId  ]" >{{professorBanca.bancaId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

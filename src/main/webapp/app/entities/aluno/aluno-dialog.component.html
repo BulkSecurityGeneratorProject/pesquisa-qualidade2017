@@ -12,21 +12,12 @@
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="aluno.id" readonly />
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.aluno.nome" for="field_nome">Nome</label>
+            <input type="text" class="form-control" name="nome" id="field_nome"
+                [(ngModel)]="aluno.nome"  />
+        </div>
 
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="jhipsterApp.aluno.artigo" for="field_artigo">Artigo</label>
-            <select class="form-control" id="field_artigo" name="artigo" [(ngModel)]="aluno.artigoId" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="artigoOption.id" *ngFor="let artigoOption of artigos; trackBy: trackArtigoById">{{artigoOption.id}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="jhipsterApp.aluno.propostaTese" for="field_propostaTese">Proposta Tese</label>
-            <select class="form-control" id="field_propostaTese" name="propostaTese" [(ngModel)]="aluno.propostaTeseId" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="propostaTeseOption.id" *ngFor="let propostaTeseOption of propostatese; trackBy: trackPropostaTeseById">{{propostaTeseOption.id}}</option>
-            </select>
-        </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="jhipsterApp.aluno.user" for="field_user">User</label>
             <select class="form-control" id="field_user" name="user" [(ngModel)]="aluno.userId" >
@@ -35,10 +26,10 @@
             </select>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="jhipsterApp.aluno.coOrientador" for="field_coOrientador">Co Orientador</label>
-            <select class="form-control" id="field_coOrientador" name="coOrientador" [(ngModel)]="aluno.coOrientadorId" >
+            <label class="form-control-label" jhiTranslate="jhipsterApp.aluno.orientador" for="field_orientador">Orientador</label>
+            <select class="form-control" id="field_orientador" name="orientador" [(ngModel)]="aluno.orientadorId" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="coOrientadorOption.id" *ngFor="let coOrientadorOption of coorientadors; trackBy: trackCoOrientadorById">{{coOrientadorOption.id}}</option>
+                <option [ngValue]="professorOption.id" *ngFor="let professorOption of professors; trackBy: trackProfessorById">{{professorOption.id}}</option>
             </select>
         </div>
     </div>

@@ -2,9 +2,10 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipType": "one-to-many",
+            "relationshipType": "many-to-one",
             "relationshipName": "aluno",
             "otherEntityName": "aluno",
+            "ownerSide": true,
             "otherEntityRelationshipName": "artigo"
         }
     ],

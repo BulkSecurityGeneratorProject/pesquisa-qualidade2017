@@ -24,6 +24,12 @@
         <dd>
             <span>{{artigo.flgrelacionadopesquisa}}</span>
         </dd>
+        <dt><span jhiTranslate="jhipsterApp.artigo.aluno">Aluno</span></dt>
+        <dd>
+            <div *ngIf="artigo.alunoId">
+                <a [routerLink]="['/aluno', artigo.alunoId]">{{artigo.alunoId}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

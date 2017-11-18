@@ -10,9 +10,10 @@
             "otherEntityRelationshipName": "propostaTese"
         },
         {
-            "relationshipType": "one-to-many",
+            "relationshipType": "one-to-one",
             "relationshipName": "aluno",
             "otherEntityName": "aluno",
+            "ownerSide": true,
             "otherEntityRelationshipName": "propostaTese"
         }
     ],

@@ -17,7 +17,7 @@ export class ApresentacaoPopupService {
         this.ngbModalRef = null;
     }
 
-    open(component: Component, id?: number | any): Promise<NgbModalRef> {
+    open(component: Component, id?: number | any, idTeseProposta?: number | any, isProposta?: boolean): Promise<NgbModalRef> {
         return new Promise<NgbModalRef>((resolve, reject) => {
             const isOpen = this.ngbModalRef !== null;
             if (isOpen) {
@@ -33,9 +33,21 @@ export class ApresentacaoPopupService {
                             day: apresentacao.data.getDate()
                         };
                     }
+                    setTimeout(() => {
+                        this.ngbModalRef = this.apresentacaoModalRef(component, apresentacao);
+                        resolve(this.ngbModalRef);
+                    }, 0);
+                });
+            } else if (idTeseProposta) {
+                let apresentacao = new Apresentacao();
+                apresentacao.idTeseProposta = idTeseProposta;
+                apresentacao.flgproposta = isProposta;
+
+                setTimeout(() => {
                     this.ngbModalRef = this.apresentacaoModalRef(component, apresentacao);
                     resolve(this.ngbModalRef);
-                });
+                }, 0);
+                
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                 setTimeout(() => {

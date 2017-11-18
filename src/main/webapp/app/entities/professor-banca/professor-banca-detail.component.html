@@ -8,6 +8,18 @@
         <dd>
             <span>{{professorBanca.nota}}</span>
         </dd>
+        <dt><span jhiTranslate="jhipsterApp.professorBanca.professor">Professor</span></dt>
+        <dd>
+            <div *ngIf="professorBanca.professorId">
+                <a [routerLink]="['/professor', professorBanca.professorId]">{{professorBanca.professorId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.professorBanca.banca">Banca</span></dt>
+        <dd>
+            <div *ngIf="professorBanca.bancaId">
+                <a [routerLink]="['/banca', professorBanca.bancaId]">{{professorBanca.bancaId}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

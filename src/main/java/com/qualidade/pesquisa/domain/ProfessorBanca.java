@@ -1,13 +1,10 @@
 package com.qualidade.pesquisa.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -28,15 +25,11 @@ public class ProfessorBanca implements Serializable {
     @Column(name = "nota")
     private Double nota;
 
-    @OneToMany(mappedBy = "professorBanca")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Professor> professors = new HashSet<>();
+    @ManyToOne
+    private Professor professor;
 
-    @OneToMany(mappedBy = "professorBanca")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Banca> bancas = new HashSet<>();
+    @ManyToOne
+    private Banca banca;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -60,54 +53,30 @@ public class ProfessorBanca implements Serializable {
         this.nota = nota;
     }
 
-    public Set<Professor> getProfessors() {
-        return professors;
+    public Professor getProfessor() {
+        return professor;
     }
 
-    public ProfessorBanca professors(Set<Professor> professors) {
-        this.professors = professors;
+    public ProfessorBanca professor(Professor professor) {
+        this.professor = professor;
         return this;
     }
 
-    public ProfessorBanca addProfessor(Professor professor) {
-        this.professors.add(professor);
-        professor.setProfessorBanca(this);
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
+    }
+
+    public Banca getBanca() {
+        return banca;
+    }
+
+    public ProfessorBanca banca(Banca banca) {
+        this.banca = banca;
         return this;
     }
 
-    public ProfessorBanca removeProfessor(Professor professor) {
-        this.professors.remove(professor);
-        professor.setProfessorBanca(null);
-        return this;
-    }
-
-    public void setProfessors(Set<Professor> professors) {
-        this.professors = professors;
-    }
-
-    public Set<Banca> getBancas() {
-        return bancas;
-    }
-
-    public ProfessorBanca bancas(Set<Banca> bancas) {
-        this.bancas = bancas;
-        return this;
-    }
-
-    public ProfessorBanca addBanca(Banca banca) {
-        this.bancas.add(banca);
-        banca.setProfessorBanca(this);
-        return this;
-    }
-
-    public ProfessorBanca removeBanca(Banca banca) {
-        this.bancas.remove(banca);
-        banca.setProfessorBanca(null);
-        return this;
-    }
-
-    public void setBancas(Set<Banca> bancas) {
-        this.bancas = bancas;
+    public void setBanca(Banca banca) {
+        this.banca = banca;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

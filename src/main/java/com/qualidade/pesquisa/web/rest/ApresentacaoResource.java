@@ -2,9 +2,13 @@ package com.qualidade.pesquisa.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.qualidade.pesquisa.service.ApresentacaoService;
+import com.qualidade.pesquisa.service.PropostaTeseService;
+import com.qualidade.pesquisa.service.TeseService;
 import com.qualidade.pesquisa.web.rest.util.HeaderUtil;
 import com.qualidade.pesquisa.web.rest.util.PaginationUtil;
 import com.qualidade.pesquisa.service.dto.ApresentacaoDTO;
+import com.qualidade.pesquisa.service.dto.PropostaTeseDTO;
+import com.qualidade.pesquisa.service.dto.TeseDTO;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -35,9 +39,13 @@ public class ApresentacaoResource {
     private static final String ENTITY_NAME = "apresentacao";
 
     private final ApresentacaoService apresentacaoService;
+    private final PropostaTeseService propostaService;
+    private final TeseService teseService;
 
-    public ApresentacaoResource(ApresentacaoService apresentacaoService) {
+    public ApresentacaoResource(ApresentacaoService apresentacaoService, PropostaTeseService propostaService, TeseService teseService) {
         this.apresentacaoService = apresentacaoService;
+        this.propostaService = propostaService;
+        this.teseService = teseService;
     }
 
     /**
@@ -54,7 +62,22 @@ public class ApresentacaoResource {
         if (apresentacaoDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new apresentacao cannot already have an ID")).body(null);
         }
+
+
+        
         ApresentacaoDTO result = apresentacaoService.save(apresentacaoDTO);
+
+
+        if (apresentacaoDTO.isFlgproposta()){
+            PropostaTeseDTO propostaDTO = propostaService.findOne(apresentacaoDTO.getIdTeseProposta());
+            propostaDTO.setApresentacaoId(result.getId());
+            propostaService.save(propostaDTO); 
+        } else {
+            TeseDTO teseDTO = teseService.findOne(apresentacaoDTO.getIdTeseProposta());
+            teseDTO.setApresentacaoId(result.getId());
+            teseService.save(teseDTO);
+        }
+
         return ResponseEntity.created(new URI("/api/apresentacaos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);

@@ -4,8 +4,8 @@ export class ProfessorBanca implements BaseEntity {
     constructor(
         public id?: number,
         public nota?: number,
-        public professors?: BaseEntity[],
-        public bancas?: BaseEntity[],
+        public professorId?: number,
+        public bancaId?: number,
     ) {
     }
 }

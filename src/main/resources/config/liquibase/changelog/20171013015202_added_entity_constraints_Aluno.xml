@@ -8,29 +8,17 @@
     -->
     <changeSet id="20171013015202-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="artigo_id"
-                                 baseTableName="aluno"
-                                 constraintName="fk_aluno_artigo_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="artigo"/>
-
-        <addForeignKeyConstraint baseColumnNames="proposta_tese_id"
-                                 baseTableName="aluno"
-                                 constraintName="fk_aluno_proposta_tese_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="proposta_tese"/>
-
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="aluno"
                                  constraintName="fk_aluno_user_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
-        <addForeignKeyConstraint baseColumnNames="co_orientador_id"
+        <addForeignKeyConstraint baseColumnNames="orientador_id"
                                  baseTableName="aluno"
-                                 constraintName="fk_aluno_co_orientador_id"
+                                 constraintName="fk_aluno_orientador_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="co_orientador"/>
+                                 referencedTableName="professor"/>
 
     </changeSet>
 </databaseChangeLog>

@@ -9,11 +9,8 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Professor } from './professor.model';
 import { ProfessorPopupService } from './professor-popup.service';
 import { ProfessorService } from './professor.service';
-import { ProfessorBanca, ProfessorBancaService } from '../professor-banca';
-import { Aluno, AlunoService } from '../aluno';
 import { AreaPesquisa, AreaPesquisaService } from '../area-pesquisa';
 import { User, UserService } from '../../shared';
-import { CoOrientador, CoOrientadorService } from '../co-orientador';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -25,35 +22,22 @@ export class ProfessorDialogComponent implements OnInit {
     professor: Professor;
     isSaving: boolean;
 
-    professorbancas: ProfessorBanca[];
-
-    alunos: Aluno[];
-
     areas: AreaPesquisa[];
 
     users: User[];
-
-    coorientadors: CoOrientador[];
 
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private professorService: ProfessorService,
-        private professorBancaService: ProfessorBancaService,
-        private alunoService: AlunoService,
         private areaPesquisaService: AreaPesquisaService,
         private userService: UserService,
-        private coOrientadorService: CoOrientadorService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.professorBancaService.query()
-            .subscribe((res: ResponseWrapper) => { this.professorbancas = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.alunoService.query()
-            .subscribe((res: ResponseWrapper) => { this.alunos = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
         this.areaPesquisaService
             .query({filter: 'professor-is-null'})
             .subscribe((res: ResponseWrapper) => {
@@ -69,8 +53,6 @@ export class ProfessorDialogComponent implements OnInit {
             }, (res: ResponseWrapper) => this.onError(res.json));
         this.userService.query()
             .subscribe((res: ResponseWrapper) => { this.users = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.coOrientadorService.query()
-            .subscribe((res: ResponseWrapper) => { this.coorientadors = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -107,23 +89,11 @@ export class ProfessorDialogComponent implements OnInit {
         this.jhiAlertService.error(error.message, null, null);
     }
 
-    trackProfessorBancaById(index: number, item: ProfessorBanca) {
-        return item.id;
-    }
-
-    trackAlunoById(index: number, item: Aluno) {
-        return item.id;
-    }
-
     trackAreaPesquisaById(index: number, item: AreaPesquisa) {
         return item.id;
     }
 
     trackUserById(index: number, item: User) {
-        return item.id;
-    }
-
-    trackCoOrientadorById(index: number, item: CoOrientador) {
         return item.id;
     }
 }

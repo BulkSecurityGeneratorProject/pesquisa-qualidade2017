@@ -9,8 +9,6 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Banca } from './banca.model';
 import { BancaPopupService } from './banca-popup.service';
 import { BancaService } from './banca.service';
-import { ProfessorBanca, ProfessorBancaService } from '../professor-banca';
-import { ResponseWrapper } from '../../shared';
 
 @Component({
     selector: 'jhi-banca-dialog',
@@ -21,21 +19,16 @@ export class BancaDialogComponent implements OnInit {
     banca: Banca;
     isSaving: boolean;
 
-    professorbancas: ProfessorBanca[];
-
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private bancaService: BancaService,
-        private professorBancaService: ProfessorBancaService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.professorBancaService.query()
-            .subscribe((res: ResponseWrapper) => { this.professorbancas = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
     }
 
     clear() {
@@ -70,10 +63,6 @@ export class BancaDialogComponent implements OnInit {
 
     private onError(error: any) {
         this.jhiAlertService.error(error.message, null, null);
-    }
-
-    trackProfessorBancaById(index: number, item: ProfessorBanca) {
-        return item.id;
     }
 }
 

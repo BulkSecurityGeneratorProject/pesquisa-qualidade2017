@@ -15,11 +15,9 @@
             "detail": {
                 "title": "Professor"
             },
-            "professorBanca": "Professor Banca",
-            "aluno": "Aluno",
+            "nome": "Nome",
             "area": "Area",
-            "user": "User",
-            "coOrientador": "Co Orientador"
+            "user": "User"
         }
     }
 }

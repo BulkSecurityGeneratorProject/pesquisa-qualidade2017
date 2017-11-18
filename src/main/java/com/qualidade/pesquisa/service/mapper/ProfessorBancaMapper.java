@@ -8,11 +8,17 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity ProfessorBanca and its DTO ProfessorBancaDTO.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {ProfessorMapper.class, BancaMapper.class, })
 public interface ProfessorBancaMapper extends EntityMapper <ProfessorBancaDTO, ProfessorBanca> {
-    
-    @Mapping(target = "professors", ignore = true)
-    @Mapping(target = "bancas", ignore = true)
+
+    @Mapping(source = "professor.id", target = "professorId")
+
+    @Mapping(source = "banca.id", target = "bancaId")
+    ProfessorBancaDTO toDto(ProfessorBanca professorBanca); 
+
+    @Mapping(source = "professorId", target = "professor")
+
+    @Mapping(source = "bancaId", target = "banca")
     ProfessorBanca toEntity(ProfessorBancaDTO professorBancaDTO); 
     default ProfessorBanca fromId(Long id) {
         if (id == null) {

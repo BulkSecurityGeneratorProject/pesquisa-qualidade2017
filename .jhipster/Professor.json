@@ -2,18 +2,6 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipName": "professorBanca",
-            "otherEntityName": "professorBanca",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipName": "aluno",
-            "otherEntityName": "aluno",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        },
-        {
             "relationshipType": "one-to-one",
             "relationshipName": "area",
             "otherEntityName": "areaPesquisa",
@@ -28,15 +16,14 @@
             "otherEntityField": "id",
             "ownerSide": true,
             "otherEntityRelationshipName": "professor"
-        },
-        {
-            "relationshipName": "coOrientador",
-            "otherEntityName": "coOrientador",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
         }
     ],
-    "fields": [],
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String"
+        }
+    ],
     "changelogDate": "20171013015203",
     "entityTableName": "professor",
     "dto": "mapstruct",

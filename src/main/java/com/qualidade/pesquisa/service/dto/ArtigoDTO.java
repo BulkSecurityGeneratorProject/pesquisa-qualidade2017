@@ -28,6 +28,8 @@ public class ArtigoDTO implements Serializable {
     @NotNull
     private Boolean flgrelacionadopesquisa;
 
+    private Long alunoId;
+
     public Long getId() {
         return id;
     }
@@ -74,6 +76,14 @@ public class ArtigoDTO implements Serializable {
 
     public void setFlgrelacionadopesquisa(Boolean flgrelacionadopesquisa) {
         this.flgrelacionadopesquisa = flgrelacionadopesquisa;
+    }
+
+    public Long getAlunoId() {
+        return alunoId;
+    }
+
+    public void setAlunoId(Long alunoId) {
+        this.alunoId = alunoId;
     }
 
     @Override

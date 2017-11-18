@@ -2,8 +2,6 @@ package com.qualidade.pesquisa.service.dto;
 
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -14,8 +12,6 @@ public class BancaDTO implements Serializable {
     private Long id;
 
     private Boolean flgaprovadasecretaria;
-
-    private Long professorBancaId;
 
     public Long getId() {
         return id;
@@ -31,14 +27,6 @@ public class BancaDTO implements Serializable {
 
     public void setFlgaprovadasecretaria(Boolean flgaprovadasecretaria) {
         this.flgaprovadasecretaria = flgaprovadasecretaria;
-    }
-
-    public Long getProfessorBancaId() {
-        return professorBancaId;
-    }
-
-    public void setProfessorBancaId(Long professorBancaId) {
-        this.professorBancaId = professorBancaId;
     }
 
     @Override

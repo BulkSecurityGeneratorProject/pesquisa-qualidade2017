@@ -1,12 +1,6 @@
 {
     "fluentMethods": true,
     "relationships": [
-        {
-            "relationshipName": "professorBanca",
-            "otherEntityName": "professorBanca",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        }
     ],
     "fields": [
         {
