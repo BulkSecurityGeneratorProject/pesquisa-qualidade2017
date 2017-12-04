@@ -17,7 +17,7 @@ export class PropostaTesePopupService {
         this.ngbModalRef = null;
     }
 
-    open(component: Component, id?: number | any): Promise<NgbModalRef> {
+    open(component: Component, id?: number | any, userId?: number): Promise<NgbModalRef> {
         return new Promise<NgbModalRef>((resolve, reject) => {
             const isOpen = this.ngbModalRef !== null;
             if (isOpen) {
@@ -29,6 +29,14 @@ export class PropostaTesePopupService {
                     this.ngbModalRef = this.propostaTeseModalRef(component, propostaTese);
                     resolve(this.ngbModalRef);
                 });
+            } else if (userId) {
+                let propostaTese  = new PropostaTese();
+                propostaTese.userId = userId;
+                
+                setTimeout(() => {
+                    this.ngbModalRef = this.propostaTeseModalRef(component, propostaTese);
+                    resolve(this.ngbModalRef);
+                }, 0);
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                 setTimeout(() => {

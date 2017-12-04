@@ -31,7 +31,7 @@ export const teseRoute: Routes = [
 
 export const tesePopupRoute: Routes = [
     {
-        path: 'tese-new',
+        path: 'tese-new/:userId',
         component: TesePopupComponent,
         data: {
             authorities: ['ROLE_USER', 'ROLE_ALUNO', 'ROLE_PROFESSOR', 'ROLE_SECRETARIA'],

@@ -2,7 +2,7 @@
     "fluentMethods": true,
     "relationships": [
         {
-            "relationshipType": "one-to-one",
+            "relationshipType": "many-to-one",
             "relationshipName": "aluno",
             "otherEntityName": "aluno",
             "otherEntityField": "id",
@@ -16,6 +16,14 @@
             "otherEntityField": "id",
             "ownerSide": true,
             "otherEntityRelationshipName": "tese"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "propostaTese",
+            "otherEntityName": "propostaTese",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "propostaTese"
         }
     ],
     "fields": [

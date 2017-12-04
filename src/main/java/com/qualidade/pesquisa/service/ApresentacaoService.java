@@ -24,7 +24,8 @@ public interface ApresentacaoService {
      *  @return the list of entities
      */
     Page<ApresentacaoDTO> findAll(Pageable pageable);
-
+    Page<ApresentacaoDTO> findAllByIdProfessor(Long idProfessor, Pageable pageable);
+    
     /**
      *  Get the "id" apresentacao.
      *

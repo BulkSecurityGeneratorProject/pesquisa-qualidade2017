@@ -5,6 +5,9 @@ import com.qualidade.pesquisa.domain.Professor;
 import com.qualidade.pesquisa.repository.ProfessorRepository;
 import com.qualidade.pesquisa.service.dto.ProfessorDTO;
 import com.qualidade.pesquisa.service.mapper.ProfessorMapper;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -59,6 +62,24 @@ public class ProfessorServiceImpl implements ProfessorService{
             .map(professorMapper::toDto);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Page<ProfessorDTO> findByBanca(Long idBanca, Pageable pageable) {
+        return professorRepository.findByIdBanca(idBanca, pageable)
+            .map(professorMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<ProfessorDTO> findNaoConvidadosBanca(Long idBanca, Pageable pageable) {
+        return professorRepository.findNaoConvidadosBanca(idBanca, pageable)
+            .map(professorMapper::toDto);
+    }
+
+    
+
+    
+
     /**
      *  Get one professor by id.
      *
@@ -72,6 +93,15 @@ public class ProfessorServiceImpl implements ProfessorService{
         Professor professor = professorRepository.findOne(id);
         return professorMapper.toDto(professor);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public ProfessorDTO findByUserId(Long userId) {
+        log.debug("Request to get Professor : {}", userId);
+        Professor professor = professorRepository.findByUserId(userId);
+        return professorMapper.toDto(professor);
+    }
+
 
     /**
      *  Delete the  professor by id.

@@ -40,17 +40,27 @@ export class TeseComponent implements OnInit, OnDestroy {
         };
         this.predicate = 'id';
         this.reverse = true;
+        this.currentAccount = {};
     }
 
     loadAll() {
-        this.teseService.query({
-            page: this.page,
-            size: this.itemsPerPage,
-            sort: this.sort()
-        }).subscribe(
-            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
-            (res: ResponseWrapper) => this.onError(res.json)
-        );
+        if (this.currentAccount.authorities.indexOf("ROLE_PROFESSOR") > -1) {
+            this.teseService.findProfessorByUserId(this.currentAccount.id).subscribe(
+                (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+                (res: ResponseWrapper) => this.onError(res.json)
+            );
+        } else if (this.currentAccount.authorities.indexOf("ROLE_ALUNO") > -1){
+            this.teseService.findAlunoByUserId(this.currentAccount.id).subscribe(
+                (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+                (res: ResponseWrapper) => this.onError(res.json)
+            );
+        } else {
+            this.teseService.query().subscribe(
+                (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+                (res: ResponseWrapper) => this.onError(res.json)
+            );
+        }
+        
     }
 
     reset() {
@@ -64,9 +74,9 @@ export class TeseComponent implements OnInit, OnDestroy {
         this.loadAll();
     }
     ngOnInit() {
-        this.loadAll();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
+            this.loadAll();
         });
         this.registerChangeInTese();
     }

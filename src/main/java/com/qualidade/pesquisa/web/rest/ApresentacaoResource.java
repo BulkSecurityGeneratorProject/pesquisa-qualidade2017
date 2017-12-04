@@ -3,12 +3,16 @@ package com.qualidade.pesquisa.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.qualidade.pesquisa.service.ApresentacaoService;
 import com.qualidade.pesquisa.service.PropostaTeseService;
+import com.qualidade.pesquisa.service.ProfessorService;
 import com.qualidade.pesquisa.service.TeseService;
+import com.qualidade.pesquisa.service.BancaService;
 import com.qualidade.pesquisa.web.rest.util.HeaderUtil;
 import com.qualidade.pesquisa.web.rest.util.PaginationUtil;
 import com.qualidade.pesquisa.service.dto.ApresentacaoDTO;
 import com.qualidade.pesquisa.service.dto.PropostaTeseDTO;
+import com.qualidade.pesquisa.service.dto.ProfessorDTO;
 import com.qualidade.pesquisa.service.dto.TeseDTO;
+import com.qualidade.pesquisa.service.dto.BancaDTO;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -41,11 +45,15 @@ public class ApresentacaoResource {
     private final ApresentacaoService apresentacaoService;
     private final PropostaTeseService propostaService;
     private final TeseService teseService;
+    private final ProfessorService professorService;
+    private final BancaService bancaService;
 
-    public ApresentacaoResource(ApresentacaoService apresentacaoService, PropostaTeseService propostaService, TeseService teseService) {
+    public ApresentacaoResource(ApresentacaoService apresentacaoService, PropostaTeseService propostaService, TeseService teseService, ProfessorService professorService, BancaService bancaService) {
         this.apresentacaoService = apresentacaoService;
         this.propostaService = propostaService;
         this.teseService = teseService;
+        this.professorService = professorService;
+        this.bancaService = bancaService;
     }
 
     /**
@@ -63,11 +71,12 @@ public class ApresentacaoResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new apresentacao cannot already have an ID")).body(null);
         }
 
+        BancaDTO banca = new BancaDTO();
+        banca.setFlgaprovadasecretaria(false);
+        BancaDTO bancaResult = bancaService.save(banca);
+        apresentacaoDTO.setBancaId(bancaResult.getId());
 
-        
         ApresentacaoDTO result = apresentacaoService.save(apresentacaoDTO);
-
-
         if (apresentacaoDTO.isFlgproposta()){
             PropostaTeseDTO propostaDTO = propostaService.findOne(apresentacaoDTO.getIdTeseProposta());
             propostaDTO.setApresentacaoId(result.getId());
@@ -77,6 +86,8 @@ public class ApresentacaoResource {
             teseDTO.setApresentacaoId(result.getId());
             teseService.save(teseDTO);
         }
+
+
 
         return ResponseEntity.created(new URI("/api/apresentacaos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -111,11 +122,12 @@ public class ApresentacaoResource {
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of apresentacaos in body
      */
-    @GetMapping("/apresentacaos")
+    @GetMapping("/apresentacaos/user/{idUser}")
     @Timed
-    public ResponseEntity<List<ApresentacaoDTO>> getAllApresentacaos(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<ApresentacaoDTO>> getAllApresentacaos(@PathVariable Long idUser, @ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Apresentacaos");
-        Page<ApresentacaoDTO> page = apresentacaoService.findAll(pageable);
+        ProfessorDTO professorDTO = professorService.findByUserId(idUser);
+        Page<ApresentacaoDTO> page = apresentacaoService.findAllByIdProfessor(professorDTO.getId(), pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/apresentacaos");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

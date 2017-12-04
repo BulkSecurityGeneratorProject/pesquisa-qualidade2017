@@ -12,29 +12,23 @@
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="tese.id" readonly />
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="jhipsterApp.tese.nota" for="field_nota">Nota</label>
-            <input type="number" class="form-control" name="nota" id="field_nota"
-                [(ngModel)]="tese.nota"  />
-        </div>
-        <div class="form-group">
+        <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_SECRETARIA']">
+                <label class="form-control-label" jhiTranslate="jhipsterApp.tese.nota" for="field_nota">Nota</label>
+                <input type="text" class="form-control" name="nota" id="field_nota"
+                    [(ngModel)]="tese.nota"  />
+            </div>
+        <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_ALUNO']">
             <label class="form-control-label" jhiTranslate="jhipsterApp.tese.link" for="field_link">Link</label>
             <input type="text" class="form-control" name="link" id="field_link"
                 [(ngModel)]="tese.link"  />
         </div>
-
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="jhipsterApp.tese.aluno" for="field_aluno">Aluno</label>
-            <select class="form-control" id="field_aluno" name="aluno" [(ngModel)]="tese.alunoId">
+        <div class="form-group" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_ALUNO']">
+            <label class="form-control-label" jhiTranslate="jhipsterApp.tese.propostaTese" for="field_propostaTese">Proposta Tese</label>
+            <select class="form-control" id="field_propostaTese" name="propostaTese" [(ngModel)]="tese.propostaTeseId">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="alunoOption.id" *ngFor="let alunoOption of alunos; trackBy: trackAlunoById">{{alunoOption.id}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="jhipsterApp.tese.apresentacao" for="field_apresentacao">Apresentacao</label>
-            <select class="form-control" id="field_apresentacao" name="apresentacao" [(ngModel)]="tese.apresentacaoId">
-                <option [ngValue]="null"></option>
-                <option [ngValue]="apresentacaoOption.id" *ngFor="let apresentacaoOption of apresentacaos; trackBy: trackApresentacaoById">{{apresentacaoOption.id}}</option>
+                <ng-container *ngFor="let propostaTeseOption of propostatese; trackBy: trackPropostaTeseById">
+                    <option [ngValue]="propostaTeseOption.id"  *ngIf="propostaTeseOption.flgaprovado">{{propostaTeseOption.id}}</option>
+                </ng-container>
             </select>
         </div>
     </div>

@@ -7,6 +7,7 @@ import { Banca } from './banca.model';
 import { BancaService } from './banca.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'jhi-banca',
@@ -52,7 +53,18 @@ export class BancaComponent implements OnInit, OnDestroy {
             (res: ResponseWrapper) => this.onError(res.json)
         );
     }
+    
+    statusBanca(banca: any, status: boolean){
+        banca.flgaprovadasecretaria = status;
+        this.subscribeToSaveResponse(
+            this.bancaService.update(banca));
+        
+    }
 
+    private subscribeToSaveResponse(result: Observable<Banca>) {
+        result.subscribe((res: Banca) =>
+            {} , (res: Response) => {});
+    }
     reset() {
         this.page = 0;
         this.bancas = [];

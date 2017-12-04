@@ -59,6 +59,14 @@ public class ApresentacaoServiceImpl implements ApresentacaoService{
             .map(apresentacaoMapper::toDto);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Page<ApresentacaoDTO> findAllByIdProfessor(Long idProfessor, Pageable pageable){
+        log.debug("Request to get all Apresentacaos");
+        return apresentacaoRepository.findAllByIdProfessor(idProfessor, pageable)
+            .map(apresentacaoMapper::toDto);
+    }
+
     /**
      *  Get one apresentacao by id.
      *

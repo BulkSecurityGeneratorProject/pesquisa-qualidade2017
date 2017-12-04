@@ -73,6 +73,15 @@ public class AlunoServiceImpl implements AlunoService{
         return alunoMapper.toDto(aluno);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public AlunoDTO findByUserId(Long userId) {
+        log.debug("Request to get Aluno : {}", userId);
+        Aluno aluno = alunoRepository.findByUserId(userId);
+        return alunoMapper.toDto(aluno);
+    }
+
+
     /**
      *  Delete the  aluno by id.
      *

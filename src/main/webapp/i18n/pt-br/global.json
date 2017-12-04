@@ -107,7 +107,9 @@
             "edit": "Editar",
             "open": "Open",
             "save": "Salvar",
-            "view": "Visualizar"
+            "view": "Visualizar",
+            "accept": "Aceitar",
+            "refuse": "Recusar"
         },
         "detail": {
             "field": "Campo",
@@ -115,6 +117,12 @@
         },
         "delete": {
             "title": "Confirme a exclusão"
+        },
+        "accept": {
+            "title": "Aceitar agendamento"
+        },
+        "refuse": {
+            "title": "Recusar agendamento"
         },
         "validation": {
             "required": "O campo é obrigatório.",

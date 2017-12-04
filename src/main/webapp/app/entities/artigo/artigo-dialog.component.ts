@@ -34,6 +34,7 @@ export class ArtigoDialogComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log(this.artigo);
         this.isSaving = false;
         this.alunoService.query()
             .subscribe((res: ResponseWrapper) => { this.alunos = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
@@ -96,6 +97,9 @@ export class ArtigoPopupComponent implements OnInit, OnDestroy {
             if ( params['id'] ) {
                 this.artigoPopupService
                     .open(ArtigoDialogComponent as Component, params['id']);
+            }else if ( params['userId'] ) {
+                this.artigoPopupService
+                    .open(ArtigoDialogComponent as Component, undefined, params['userId']);
             } else {
                 this.artigoPopupService
                     .open(ArtigoDialogComponent as Component);

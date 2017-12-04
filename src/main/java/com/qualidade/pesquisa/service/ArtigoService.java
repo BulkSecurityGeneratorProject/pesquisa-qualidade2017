@@ -24,7 +24,8 @@ public interface ArtigoService {
      *  @return the list of entities
      */
     Page<ArtigoDTO> findAll(Pageable pageable);
-
+    Page<ArtigoDTO> findAllByUserId(Long userId, Pageable pageable);
+    
     /**
      *  Get the "id" artigo.
      *

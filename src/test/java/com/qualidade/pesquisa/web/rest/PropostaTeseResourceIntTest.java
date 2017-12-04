@@ -5,6 +5,7 @@ import com.qualidade.pesquisa.JhipsterApp;
 import com.qualidade.pesquisa.domain.PropostaTese;
 import com.qualidade.pesquisa.repository.PropostaTeseRepository;
 import com.qualidade.pesquisa.service.PropostaTeseService;
+import com.qualidade.pesquisa.service.AlunoService;
 import com.qualidade.pesquisa.service.dto.PropostaTeseDTO;
 import com.qualidade.pesquisa.service.mapper.PropostaTeseMapper;
 import com.qualidade.pesquisa.web.rest.errors.ExceptionTranslator;
@@ -62,6 +63,9 @@ public class PropostaTeseResourceIntTest {
     private PropostaTeseService propostaTeseService;
 
     @Autowired
+    private AlunoService alunoService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -80,7 +84,7 @@ public class PropostaTeseResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PropostaTeseResource propostaTeseResource = new PropostaTeseResource(propostaTeseService);
+        final PropostaTeseResource propostaTeseResource = new PropostaTeseResource(propostaTeseService, alunoService);
         this.restPropostaTeseMockMvc = MockMvcBuilders.standaloneSetup(propostaTeseResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

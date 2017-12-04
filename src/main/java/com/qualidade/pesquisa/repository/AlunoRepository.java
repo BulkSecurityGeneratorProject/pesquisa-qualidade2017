@@ -13,4 +13,7 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 
+    @Query("select A from Aluno A where A.user.id = ?1")
+    Aluno findByUserId(Long userId);
+
 }

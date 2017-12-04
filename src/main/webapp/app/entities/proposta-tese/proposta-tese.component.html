@@ -1,7 +1,8 @@
 <div>
     <h2>
         <span jhiTranslate="jhipsterApp.propostaTese.home.title">Proposta Tese</span>
-        <button class="btn btn-primary float-right jh-create-entity create-proposta-tese" [routerLink]="['/', { outlets: { popup: ['proposta-tese-new'] } }]">
+        <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_ALUNO']"
+        class="btn btn-primary float-right jh-create-entity create-proposta-tese" [routerLink]="['/', { outlets: { popup: ['proposta-tese-new', currentAccount.id] } }]">
             <span class="fa fa-plus"></span>
             <span  jhiTranslate="jhipsterApp.propostaTese.home.createLabel">
             Create new Proposta Tese
@@ -39,7 +40,19 @@
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
+
+                        <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_PROFESSOR']">
+                            <button type="submit" *ngIf="!propostaTese.flgaprovado"
+                                (click) = "aprovarProposta(propostaTese)"                                   
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                                <span class="fa fa-check"></span>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.approve">Aprovar</span>
+                            </button>
+                        </div>
+                        
                         <button type="submit"
+                             *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_ALUNO']"
                                 [routerLink]=  
                                 "propostaTese.apresentacaoId ? ['/', { outlets: { popup: 'apresentacao/' + propostaTese.apresentacaoId + '/edit' } }] : ['/', { outlets: { popup: 'apresentacao-new/' + propostaTese.id + '/true' } }]"
                             class="btn btn-warning btn-sm">
@@ -52,14 +65,14 @@
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_ALUNO']"
                                 [routerLink]="['/', { outlets: { popup: 'proposta-tese/'+ propostaTese.id + '/edit'} }]"
                                 replaceUrl="true"
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_ALUNO']"
                                 [routerLink]="['/', { outlets: { popup: 'proposta-tese/'+ propostaTese.id + '/delete'} }]"
                                 replaceUrl="true"
                                 class="btn btn-danger btn-sm">

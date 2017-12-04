@@ -23,6 +23,7 @@ export class ProfessorBancaDialogComponent implements OnInit {
     isSaving: boolean;
 
     professors: Professor[];
+    listaConvidados: Professor[];
 
     bancas: Banca[];
 
@@ -38,10 +39,17 @@ export class ProfessorBancaDialogComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.professorService.query()
-            .subscribe((res: ResponseWrapper) => { this.professors = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
-        this.bancaService.query()
+        this.professorService.findNotInvited(this.professorBanca.bancaId)
+            .subscribe((res: ResponseWrapper) => { 
+                this.professors = res.json;             
+            }, (res: ResponseWrapper) => this.onError(res.json));        
+        
+            this.bancaService.query()
             .subscribe((res: ResponseWrapper) => { this.bancas = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+
+            if(this.professorBanca.id == null) {
+                this.professorBanca.invite = true;
+            }
     }
 
     clear() {
@@ -66,6 +74,7 @@ export class ProfessorBancaDialogComponent implements OnInit {
 
     private onSaveSuccess(result: ProfessorBanca) {
         this.eventManager.broadcast({ name: 'professorBancaListModification', content: 'OK'});
+        this.eventManager.broadcast({ name: 'bancaListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -105,7 +114,10 @@ export class ProfessorBancaPopupComponent implements OnInit, OnDestroy {
             if ( params['id'] ) {
                 this.professorBancaPopupService
                     .open(ProfessorBancaDialogComponent as Component, params['id']);
-            } else {
+            } else if ( params['idBanca'] ) {
+                this.professorBancaPopupService
+                    .open(ProfessorBancaDialogComponent as Component, undefined, params['idBanca'] );
+            }  else {
                 this.professorBancaPopupService
                     .open(ProfessorBancaDialogComponent as Component);
             }

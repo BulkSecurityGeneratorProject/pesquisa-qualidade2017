@@ -25,6 +25,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="invite" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
             <column name="professor_id" type="bigint">
                 <constraints nullable="true" />
             </column>

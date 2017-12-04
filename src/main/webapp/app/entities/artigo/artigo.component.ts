@@ -40,14 +40,11 @@ export class ArtigoComponent implements OnInit, OnDestroy {
         };
         this.predicate = 'id';
         this.reverse = true;
+        this.currentAccount = {};
     }
 
     loadAll() {
-        this.artigoService.query({
-            page: this.page,
-            size: this.itemsPerPage,
-            sort: this.sort()
-        }).subscribe(
+        this.artigoService.findByUserId(this.currentAccount.id).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
@@ -64,9 +61,10 @@ export class ArtigoComponent implements OnInit, OnDestroy {
         this.loadAll();
     }
     ngOnInit() {
-        this.loadAll();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
+            this.loadAll();
+        
         });
         this.registerChangeInArtigos();
     }

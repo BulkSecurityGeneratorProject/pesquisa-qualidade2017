@@ -15,7 +15,9 @@
             "detail": {
                 "title": "Banca"
             },
-            "flgaprovadasecretaria": "Flgaprovadasecretaria"
+            "flgaprovadasecretaria": "Flgaprovadasecretaria",
+            "convidados": "Professores convidados",
+            "convidar": "Convidar professor"
         }
     }
 }

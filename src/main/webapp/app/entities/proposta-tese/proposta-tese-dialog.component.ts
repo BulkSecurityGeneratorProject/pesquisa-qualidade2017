@@ -37,20 +37,8 @@ export class PropostaTeseDialogComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log(this.propostaTese);
         this.isSaving = false;
-        this.apresentacaoService
-            .query({filter: 'propostatese-is-null'})
-            .subscribe((res: ResponseWrapper) => {
-                if (!this.propostaTese.apresentacaoId) {
-                    this.apresentacaos = res.json;
-                } else {
-                    this.apresentacaoService
-                        .find(this.propostaTese.apresentacaoId)
-                        .subscribe((subRes: Apresentacao) => {
-                            this.apresentacaos = [subRes].concat(res.json);
-                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
-                }
-            }, (res: ResponseWrapper) => this.onError(res.json));
         this.alunoService
             .query({filter: 'propostatese-is-null'})
             .subscribe((res: ResponseWrapper) => {
@@ -127,6 +115,9 @@ export class PropostaTesePopupComponent implements OnInit, OnDestroy {
             if ( params['id'] ) {
                 this.propostaTesePopupService
                     .open(PropostaTeseDialogComponent as Component, params['id']);
+            } else if ( params['userId'] ) {
+                this.propostaTesePopupService
+                    .open(PropostaTeseDialogComponent as Component, undefined, params['userId']);
             } else {
                 this.propostaTesePopupService
                     .open(PropostaTeseDialogComponent as Component);

@@ -18,7 +18,8 @@
             "nota": "Nota",
             "link": "Link",
             "aluno": "Aluno",
-            "apresentacao": "Apresentacao"
+            "apresentacao": "Apresentacao",
+            "propostaTese": "Proposta Tese"
         }
     }
 }

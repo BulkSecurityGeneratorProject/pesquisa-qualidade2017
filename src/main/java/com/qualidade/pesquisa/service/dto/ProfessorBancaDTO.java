@@ -15,6 +15,8 @@ public class ProfessorBancaDTO implements Serializable {
 
     private Double nota;
 
+    private Boolean invite;
+
     private Long professorId;
 
     private Long bancaId;
@@ -33,6 +35,14 @@ public class ProfessorBancaDTO implements Serializable {
 
     public void setNota(Double nota) {
         this.nota = nota;
+    }
+
+    public Boolean isInvite() {
+        return invite;
+    }
+
+    public void setInvite(Boolean invite) {
+        this.invite = invite;
     }
 
     public Long getProfessorId() {
@@ -77,6 +87,7 @@ public class ProfessorBancaDTO implements Serializable {
         return "ProfessorBancaDTO{" +
             "id=" + getId() +
             ", nota='" + getNota() + "'" +
+            ", invite='" + isInvite() + "'" +
             "}";
     }
 }

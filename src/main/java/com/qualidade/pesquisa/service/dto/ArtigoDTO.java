@@ -30,6 +30,8 @@ public class ArtigoDTO implements Serializable {
 
     private Long alunoId;
 
+    private Long userId;
+
     public Long getId() {
         return id;
     }
@@ -84,6 +86,14 @@ public class ArtigoDTO implements Serializable {
 
     public void setAlunoId(Long alunoId) {
         this.alunoId = alunoId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override

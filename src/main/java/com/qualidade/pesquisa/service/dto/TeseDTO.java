@@ -21,12 +21,23 @@ public class TeseDTO implements Serializable {
 
     private Long apresentacaoId;
 
+    private Long propostaTeseId;
+
+    private Long userId;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Double getNota() {
@@ -59,6 +70,14 @@ public class TeseDTO implements Serializable {
 
     public void setApresentacaoId(Long apresentacaoId) {
         this.apresentacaoId = apresentacaoId;
+    }
+
+    public Long getPropostaTeseId() {
+        return propostaTeseId;
+    }
+
+    public void setPropostaTeseId(Long propostaTeseId) {
+        this.propostaTeseId = propostaTeseId;
     }
 
     @Override

@@ -73,6 +73,7 @@ export class ApresentacaoDialogComponent implements OnInit {
 
     private onSaveSuccess(result: Apresentacao) {
         this.eventManager.broadcast({ name: 'apresentacaoListModification', content: 'OK'});
+        this.eventManager.broadcast({ name: 'propostaTeseListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }

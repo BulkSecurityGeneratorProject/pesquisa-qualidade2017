@@ -42,6 +42,19 @@ export class TeseService {
             .map((res: Response) => this.convertResponse(res));
     }
 
+    findProfessorByUserId(userId: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/professor/${userId}`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
+    findAlunoByUserId(userId: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/aluno/${userId}`)
+            .map((res: Response) => this.convertResponse(res));
+    }
+
+    
+    
+
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }

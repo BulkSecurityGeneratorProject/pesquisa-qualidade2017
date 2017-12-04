@@ -1,7 +1,7 @@
 <div>
     <h2>
         <span jhiTranslate="jhipsterApp.tese.home.title">Tese</span>
-        <button class="btn btn-primary float-right jh-create-entity create-tese" [routerLink]="['/', { outlets: { popup: ['tese-new'] } }]">
+        <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_ALUNO']" class="btn btn-primary float-right jh-create-entity create-tese" [routerLink]="['/', { outlets: { popup: ['tese-new', currentAccount.id] } }]">
             <span class="fa fa-plus"></span>
             <span  jhiTranslate="jhipsterApp.tese.home.createLabel">
             Create new Tese
@@ -21,6 +21,7 @@
             <th jhiSortBy="link"><span jhiTranslate="jhipsterApp.tese.link">Link</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="alunoId"><span jhiTranslate="jhipsterApp.tese.aluno">Aluno</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="apresentacaoId"><span jhiTranslate="jhipsterApp.tese.apresentacao">Apresentacao</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="propostaTeseId"><span jhiTranslate="jhipsterApp.tese.propostaTese">Proposta Tese</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -39,14 +40,22 @@
                         <a [routerLink]="['../apresentacao', tese.apresentacaoId  ]" >{{tese.apresentacaoId}}</a>
                     </div>
                 </td>
+                <td>
+                    <div *ngIf="tese.propostaTeseId">
+                        <a [routerLink]="['../proposta-tese', tese.propostaTeseId  ]" >{{tese.propostaTeseId}}</a>
+                    </div>
+                </td>
                 <td class="text-right">
+
+
                     <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
+
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_ALUNO']"
                                 [routerLink]=  
                                 "tese.apresentacaoId ? ['/', { outlets: { popup: 'apresentacao/' + tese.apresentacaoId + '/edit' } }] : ['/', { outlets: { popup: 'apresentacao-new/' + tese.id + '/false' } }]"
                             class="btn btn-warning btn-sm">
                             <span class="fa fa-calendar"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="jhipsterApp.tese.apresentacao">Apresentacao</span>
+                            <span class="d-none d-md-inline" jhiTranslate="jhipsterApp.propostaTese.apresentacao">Apresentacao</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['../tese', tese.id ]"
@@ -54,14 +63,14 @@
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_ALUNO', 'ROLE_SECRETARIA']"
                                 [routerLink]="['/', { outlets: { popup: 'tese/'+ tese.id + '/edit'} }]"
                                 replaceUrl="true"
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
-                        <button type="submit"
+                        <button type="submit" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_ALUNO']"
                                 [routerLink]="['/', { outlets: { popup: 'tese/'+ tese.id + '/delete'} }]"
                                 replaceUrl="true"
                                 class="btn btn-danger btn-sm">

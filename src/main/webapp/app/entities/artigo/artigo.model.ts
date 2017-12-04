@@ -9,6 +9,7 @@ export class Artigo implements BaseEntity {
         public link?: string,
         public flgrelacionadopesquisa?: boolean,
         public alunoId?: number,
+        public userId?: number,
     ) {
         this.flgrelacionadopesquisa = false;
     }

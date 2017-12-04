@@ -40,17 +40,32 @@ export class PropostaTeseComponent implements OnInit, OnDestroy {
         };
         this.predicate = 'id';
         this.reverse = true;
+        this.currentAccount = {};
     }
 
     loadAll() {
-        this.propostaTeseService.query({
-            page: this.page,
-            size: this.itemsPerPage,
-            sort: this.sort()
-        }).subscribe(
-            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
-            (res: ResponseWrapper) => this.onError(res.json)
-        );
+        
+        if (this.currentAccount.authorities.indexOf("ROLE_PROFESSOR") > -1) {
+            this.propostaTeseService.findProfessorByUserId(this.currentAccount.id).subscribe(
+                (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+                (res: ResponseWrapper) => this.onError(res.json)
+            );
+        } else if (this.currentAccount.authorities.indexOf("ROLE_ALUNO") > -1){
+            this.propostaTeseService.findAlunoByUserId(this.currentAccount.id).subscribe(
+                (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+                (res: ResponseWrapper) => this.onError(res.json)
+            );
+        } else {
+            this.propostaTeseService.query().subscribe(
+                (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+                (res: ResponseWrapper) => this.onError(res.json)
+            );
+        }
+    }
+
+    aprovarProposta(proposta: any){
+        proposta.flgaprovado = true;
+        this.propostaTeseService.update(proposta).subscribe(()=>{}, ()=> {});
     }
 
     reset() {
@@ -64,9 +79,9 @@ export class PropostaTeseComponent implements OnInit, OnDestroy {
         this.loadAll();
     }
     ngOnInit() {
-        this.loadAll();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
+             this.loadAll();            
         });
         this.registerChangeInPropostaTese();
     }
@@ -96,6 +111,7 @@ export class PropostaTeseComponent implements OnInit, OnDestroy {
         for (let i = 0; i < data.length; i++) {
             this.propostaTese.push(data[i]);
         }
+        console.log(this.propostaTese);
     }
 
     private onError(error) {

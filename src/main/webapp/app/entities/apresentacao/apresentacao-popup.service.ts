@@ -17,7 +17,7 @@ export class ApresentacaoPopupService {
         this.ngbModalRef = null;
     }
 
-    open(component: Component, id?: number | any, idTeseProposta?: number | any, isProposta?: boolean): Promise<NgbModalRef> {
+    open(component: Component, id?: number | any, idTeseProposta?: number | any, isProposta?: boolean, accept?: Boolean): Promise<NgbModalRef> {
         return new Promise<NgbModalRef>((resolve, reject) => {
             const isOpen = this.ngbModalRef !== null;
             if (isOpen) {
@@ -32,6 +32,9 @@ export class ApresentacaoPopupService {
                             month: apresentacao.data.getMonth() + 1,
                             day: apresentacao.data.getDate()
                         };
+                    }
+                    if(accept != undefined){
+                        apresentacao.flgagendamentoaprovado = !!accept;
                     }
                     setTimeout(() => {
                         this.ngbModalRef = this.apresentacaoModalRef(component, apresentacao);

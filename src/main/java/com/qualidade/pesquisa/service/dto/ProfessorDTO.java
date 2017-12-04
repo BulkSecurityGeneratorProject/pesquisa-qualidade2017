@@ -19,12 +19,32 @@ public class ProfessorDTO implements Serializable {
 
     private Long userId;
 
+    private Boolean invite;
+
+    private Double nota;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+    public Double getNota() {
+        return nota;
+    }
+
+    public void setNota(Double nota) {
+        this.nota = nota;
+    }
+    
+
+    public void setInvite(Boolean invite) {
+        this.invite = invite;
+    }
+
+    public Boolean getInvite() {
+        return invite;
     }
 
     public String getNome() {

@@ -40,10 +40,11 @@ export class ApresentacaoComponent implements OnInit, OnDestroy {
         };
         this.predicate = 'id';
         this.reverse = true;
+        this.currentAccount = {}
     }
 
     loadAll() {
-        this.apresentacaoService.query({
+        this.apresentacaoService.query( this.currentAccount.id,{
             page: this.page,
             size: this.itemsPerPage,
             sort: this.sort()
@@ -64,9 +65,9 @@ export class ApresentacaoComponent implements OnInit, OnDestroy {
         this.loadAll();
     }
     ngOnInit() {
-        this.loadAll();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
+            this.loadAll();
         });
         this.registerChangeInApresentacaos();
     }

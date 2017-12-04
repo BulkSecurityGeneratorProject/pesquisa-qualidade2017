@@ -43,11 +43,7 @@ export class ProfessorBancaComponent implements OnInit, OnDestroy {
     }
 
     loadAll() {
-        this.professorBancaService.query({
-            page: this.page,
-            size: this.itemsPerPage,
-            sort: this.sort()
-        }).subscribe(
+        this.professorBancaService.findByUserId(this.currentAccount.id).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
@@ -64,11 +60,20 @@ export class ProfessorBancaComponent implements OnInit, OnDestroy {
         this.loadAll();
     }
     ngOnInit() {
-        this.loadAll();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
+            this.loadAll();
         });
         this.registerChangeInProfessorBancas();
+    }
+
+    statusProfessorBanca(professorBanca: any, status: boolean){
+        if (status){
+            professorBanca.invite = false;
+            this.professorBancaService.update(professorBanca).subscribe(()=>{}, ()=>{})
+        } else {
+            this.professorBancaService.delete(professorBanca).subscribe(()=>{}, ()=>{})
+        }
     }
 
     ngOnDestroy() {

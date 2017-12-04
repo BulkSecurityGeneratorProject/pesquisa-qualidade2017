@@ -41,7 +41,12 @@ export class ProfessorService {
         return this.http.get(this.resourceUrl, options)
             .map((res: Response) => this.convertResponse(res));
     }
+    findNotInvited(idBanca: number): Observable<ResponseWrapper> {
+        return this.http.get(`${this.resourceUrl}/banca/${idBanca}`)
+            .map((res: Response) => this.convertResponse(res));
+    }
 
+    
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
     }

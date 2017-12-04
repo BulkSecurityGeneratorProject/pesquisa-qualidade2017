@@ -12,6 +12,12 @@
             "delete": {
                 "question": "Tem certeza de que deseja excluir Apresentacao {{ id }}?"
             },
+            "accept": {
+                "question": "Tem certeza de que aceitar o agendamento da apresentacao {{ id }}?"
+            },
+            "refuse": {
+                "question": "Tem certeza de que deseja recusar o agendamento da Apresentacao {{ id }}?"
+            },
             "detail": {
                 "title": "Apresentacao"
             },

@@ -17,7 +17,7 @@ export class ArtigoPopupService {
         this.ngbModalRef = null;
     }
 
-    open(component: Component, id?: number | any): Promise<NgbModalRef> {
+    open(component: Component, id?: number | any, userId?: number): Promise<NgbModalRef> {
         return new Promise<NgbModalRef>((resolve, reject) => {
             const isOpen = this.ngbModalRef !== null;
             if (isOpen) {
@@ -36,7 +36,12 @@ export class ArtigoPopupService {
                     this.ngbModalRef = this.artigoModalRef(component, artigo);
                     resolve(this.ngbModalRef);
                 });
-            } else {
+            } else if (userId) {
+                    let artigo = new Artigo();
+                    artigo.userId = userId;
+                    this.ngbModalRef = this.artigoModalRef(component, artigo);
+                    resolve(this.ngbModalRef);
+            }  else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedError
                 setTimeout(() => {
                     this.ngbModalRef = this.artigoModalRef(component, new Artigo());

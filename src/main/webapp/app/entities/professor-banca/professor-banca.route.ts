@@ -31,7 +31,7 @@ export const professorBancaRoute: Routes = [
 
 export const professorBancaPopupRoute: Routes = [
     {
-        path: 'professor-banca-new',
+        path: 'professor-banca-new/:idBanca',
         component: ProfessorBancaPopupComponent,
         data: {
             authorities: ['ROLE_USER', 'ROLE_PROFESSOR'],

@@ -28,4 +28,7 @@ public interface ProfessorMapper extends EntityMapper <ProfessorDTO, Professor> 
         professor.setId(id);
         return professor;
     }
+
+
+
 }

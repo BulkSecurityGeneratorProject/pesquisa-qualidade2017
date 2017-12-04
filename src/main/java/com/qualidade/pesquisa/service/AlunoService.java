@@ -33,6 +33,8 @@ public interface AlunoService {
      */
     AlunoDTO findOne(Long id);
 
+    AlunoDTO findByUserId(Long userId);
+
     /**
      *  Delete the "id" aluno.
      *

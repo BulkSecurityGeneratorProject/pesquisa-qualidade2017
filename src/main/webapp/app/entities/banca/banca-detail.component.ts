@@ -33,6 +33,7 @@ export class BancaDetailComponent implements OnInit, OnDestroy {
     load(id) {
         this.bancaService.find(id).subscribe((banca) => {
             this.banca = banca;
+            console.log(banca)
         });
     }
     previousState() {

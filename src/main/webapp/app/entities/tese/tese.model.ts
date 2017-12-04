@@ -7,6 +7,8 @@ export class Tese implements BaseEntity {
         public link?: string,
         public alunoId?: number,
         public apresentacaoId?: number,
+        public propostaTeseId?: number,
+        public userId?: number,
     ) {
     }
 }

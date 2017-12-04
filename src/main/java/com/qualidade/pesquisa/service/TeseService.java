@@ -24,6 +24,10 @@ public interface TeseService {
      *  @return the list of entities
      */
     Page<TeseDTO> findAll(Pageable pageable);
+    Page<TeseDTO> findAllProfessorByUserId(Long userId,Pageable pageable);
+    Page<TeseDTO> findAllAlunoByUserId(Long userId,Pageable pageable);
+
+    
 
     /**
      *  Get the "id" tese.

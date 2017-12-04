@@ -59,6 +59,21 @@ public class PropostaTeseServiceImpl implements PropostaTeseService{
             .map(propostaTeseMapper::toDto);
     }
 
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<PropostaTeseDTO> findAllProfessorByUserId(Long userId, Pageable pageable) {
+        return propostaTeseRepository.findAllOrientadorByUserId(userId, pageable)
+            .map(propostaTeseMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<PropostaTeseDTO> findAllAlunoByUserId(Long userId, Pageable pageable) {
+        log.debug("Request to get all Tese");
+        return propostaTeseRepository.findAllAlunoByUserId(userId, pageable)
+            .map(propostaTeseMapper::toDto);
+    }
     /**
      *  Get one propostaTese by id.
      *

@@ -11,7 +11,8 @@ import java.util.Objects;
  * A ProfessorBanca.
  */
 @Entity
-@Table(name = "professor_banca")
+@Table(name = "professor_banca", uniqueConstraints=
+@UniqueConstraint(columnNames={"professor_id", "banca_id"}))
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class ProfessorBanca implements Serializable {
 
@@ -24,6 +25,9 @@ public class ProfessorBanca implements Serializable {
 
     @Column(name = "nota")
     private Double nota;
+
+    @Column(name = "invite")
+    private Boolean invite;
 
     @ManyToOne
     private Professor professor;
@@ -51,6 +55,19 @@ public class ProfessorBanca implements Serializable {
 
     public void setNota(Double nota) {
         this.nota = nota;
+    }
+
+    public Boolean isInvite() {
+        return invite;
+    }
+
+    public ProfessorBanca invite(Boolean invite) {
+        this.invite = invite;
+        return this;
+    }
+
+    public void setInvite(Boolean invite) {
+        this.invite = invite;
     }
 
     public Professor getProfessor() {
@@ -105,6 +122,7 @@ public class ProfessorBanca implements Serializable {
         return "ProfessorBanca{" +
             "id=" + getId() +
             ", nota='" + getNota() + "'" +
+            ", invite='" + isInvite() + "'" +
             "}";
     }
 }

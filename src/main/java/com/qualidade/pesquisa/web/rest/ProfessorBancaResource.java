@@ -96,6 +96,14 @@ public class ProfessorBancaResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/professor-bancas/user/{userId}")
+    @Timed
+    public ResponseEntity<List<ProfessorBancaDTO>> getAllProfessorBancasByUserId(@PathVariable Long userId, @ApiParam Pageable pageable) {
+        Page<ProfessorBancaDTO> page = professorBancaService.findAllByUserId(userId,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/professor-bancas");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
     /**
      * GET  /professor-bancas/:id : get the "id" professorBanca.
      *

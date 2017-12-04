@@ -5,6 +5,8 @@ import com.qualidade.pesquisa.JhipsterApp;
 import com.qualidade.pesquisa.domain.Banca;
 import com.qualidade.pesquisa.repository.BancaRepository;
 import com.qualidade.pesquisa.service.BancaService;
+import com.qualidade.pesquisa.service.ProfessorService;
+import com.qualidade.pesquisa.service.ProfessorBancaService;
 import com.qualidade.pesquisa.service.dto.BancaDTO;
 import com.qualidade.pesquisa.service.mapper.BancaMapper;
 import com.qualidade.pesquisa.web.rest.errors.ExceptionTranslator;
@@ -53,6 +55,12 @@ public class BancaResourceIntTest {
     private BancaService bancaService;
 
     @Autowired
+    private ProfessorService professorService;
+
+    @Autowired
+    private ProfessorBancaService professorBancaService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -71,7 +79,7 @@ public class BancaResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final BancaResource bancaResource = new BancaResource(bancaService);
+        final BancaResource bancaResource = new BancaResource(bancaService, professorService, professorBancaService);
         this.restBancaMockMvc = MockMvcBuilders.standaloneSetup(bancaResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

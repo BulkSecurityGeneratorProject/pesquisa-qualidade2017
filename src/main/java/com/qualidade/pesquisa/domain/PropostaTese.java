@@ -40,8 +40,7 @@ public class PropostaTese implements Serializable {
     @JoinColumn(unique = true)
     private Apresentacao apresentacao;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
     private Aluno aluno;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

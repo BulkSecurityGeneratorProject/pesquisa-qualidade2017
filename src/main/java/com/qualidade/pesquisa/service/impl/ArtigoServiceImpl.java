@@ -59,6 +59,15 @@ public class ArtigoServiceImpl implements ArtigoService{
             .map(artigoMapper::toDto);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Page<ArtigoDTO> findAllByUserId(Long userId,Pageable pageable) {
+        log.debug("Request to get all Artigos");
+        return artigoRepository.findAllByUserId(userId,pageable)
+            .map(artigoMapper::toDto);
+    }
+    
+
     /**
      *  Get one artigo by id.
      *

@@ -28,9 +28,13 @@
             <column name="jhi_link" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
             <column name="aluno_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="apresentacao_id" type="bigint">
                 <constraints unique="true" nullable="true" />
-            </column>            <column name="apresentacao_id" type="bigint">
+            </column>            <column name="proposta_tese_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->

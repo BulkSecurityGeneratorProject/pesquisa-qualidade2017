@@ -5,6 +5,7 @@ import com.qualidade.pesquisa.JhipsterApp;
 import com.qualidade.pesquisa.domain.Artigo;
 import com.qualidade.pesquisa.repository.ArtigoRepository;
 import com.qualidade.pesquisa.service.ArtigoService;
+import com.qualidade.pesquisa.service.AlunoService;
 import com.qualidade.pesquisa.service.dto.ArtigoDTO;
 import com.qualidade.pesquisa.service.mapper.ArtigoMapper;
 import com.qualidade.pesquisa.web.rest.errors.ExceptionTranslator;
@@ -67,6 +68,9 @@ public class ArtigoResourceIntTest {
     private ArtigoService artigoService;
 
     @Autowired
+    private AlunoService alunoService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -85,7 +89,7 @@ public class ArtigoResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ArtigoResource artigoResource = new ArtigoResource(artigoService);
+        final ArtigoResource artigoResource = new ArtigoResource(artigoService, alunoService);
         this.restArtigoMockMvc = MockMvcBuilders.standaloneSetup(artigoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

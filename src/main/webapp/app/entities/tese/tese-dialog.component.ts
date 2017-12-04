@@ -11,6 +11,7 @@ import { TesePopupService } from './tese-popup.service';
 import { TeseService } from './tese.service';
 import { Aluno, AlunoService } from '../aluno';
 import { Apresentacao, ApresentacaoService } from '../apresentacao';
+import { PropostaTese, PropostaTeseService } from '../proposta-tese';
 import { ResponseWrapper } from '../../shared';
 
 @Component({
@@ -26,41 +27,33 @@ export class TeseDialogComponent implements OnInit {
 
     apresentacaos: Apresentacao[];
 
+    propostatese: PropostaTese[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private teseService: TeseService,
         private alunoService: AlunoService,
         private apresentacaoService: ApresentacaoService,
+        private propostaTeseService: PropostaTeseService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.alunoService
-            .query({filter: 'tese-is-null'})
+        this.alunoService.query()
+            .subscribe((res: ResponseWrapper) => { this.alunos = res.json; }, (res: ResponseWrapper) => this.onError(res.json));
+        this.propostaTeseService
+            .query({filter: 'propostatese-is-null'})
             .subscribe((res: ResponseWrapper) => {
-                if (!this.tese.alunoId) {
-                    this.alunos = res.json;
+                if (!this.tese.propostaTeseId) {
+                    this.propostatese = res.json;
                 } else {
-                    this.alunoService
-                        .find(this.tese.alunoId)
-                        .subscribe((subRes: Aluno) => {
-                            this.alunos = [subRes].concat(res.json);
-                        }, (subRes: ResponseWrapper) => this.onError(subRes.json));
-                }
-            }, (res: ResponseWrapper) => this.onError(res.json));
-        this.apresentacaoService
-            .query({filter: 'tese-is-null'})
-            .subscribe((res: ResponseWrapper) => {
-                if (!this.tese.apresentacaoId) {
-                    this.apresentacaos = res.json;
-                } else {
-                    this.apresentacaoService
-                        .find(this.tese.apresentacaoId)
-                        .subscribe((subRes: Apresentacao) => {
-                            this.apresentacaos = [subRes].concat(res.json);
+                    this.propostaTeseService
+                        .find(this.tese.propostaTeseId)
+                        .subscribe((subRes: PropostaTese) => {
+                            this.propostatese = [subRes].concat(res.json);
                         }, (subRes: ResponseWrapper) => this.onError(subRes.json));
                 }
             }, (res: ResponseWrapper) => this.onError(res.json));
@@ -107,6 +100,10 @@ export class TeseDialogComponent implements OnInit {
     trackApresentacaoById(index: number, item: Apresentacao) {
         return item.id;
     }
+
+    trackPropostaTeseById(index: number, item: PropostaTese) {
+        return item.id;
+    }
 }
 
 @Component({
@@ -127,6 +124,9 @@ export class TesePopupComponent implements OnInit, OnDestroy {
             if ( params['id'] ) {
                 this.tesePopupService
                     .open(TeseDialogComponent as Component, params['id']);
+            }else if ( params['userId'] ) {
+                this.tesePopupService
+                    .open(TeseDialogComponent as Component, undefined, params['userId']);
             } else {
                 this.tesePopupService
                     .open(TeseDialogComponent as Component);

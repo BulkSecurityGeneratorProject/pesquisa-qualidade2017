@@ -2,9 +2,13 @@ package com.qualidade.pesquisa.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.qualidade.pesquisa.service.BancaService;
+import com.qualidade.pesquisa.service.ProfessorService;
+import com.qualidade.pesquisa.service.ProfessorBancaService;
 import com.qualidade.pesquisa.web.rest.util.HeaderUtil;
 import com.qualidade.pesquisa.web.rest.util.PaginationUtil;
 import com.qualidade.pesquisa.service.dto.BancaDTO;
+import com.qualidade.pesquisa.service.dto.ProfessorDTO;
+import com.qualidade.pesquisa.service.dto.ProfessorBancaDTO;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -34,9 +38,14 @@ public class BancaResource {
     private static final String ENTITY_NAME = "banca";
 
     private final BancaService bancaService;
+    private final ProfessorService professorService;
+    private final ProfessorBancaService professorBancaService;
+    
 
-    public BancaResource(BancaService bancaService) {
+    public BancaResource(BancaService bancaService, ProfessorService professorService, ProfessorBancaService professorBancaService) {
         this.bancaService = bancaService;
+        this.professorService = professorService;
+        this.professorBancaService = professorBancaService;
     }
 
     /**
@@ -104,9 +113,24 @@ public class BancaResource {
      */
     @GetMapping("/bancas/{id}")
     @Timed
-    public ResponseEntity<BancaDTO> getBanca(@PathVariable Long id) {
+    public ResponseEntity<BancaDTO> getBanca(@PathVariable Long id, @ApiParam Pageable pageable) {
         log.debug("REST request to get Banca : {}", id);
         BancaDTO bancaDTO = bancaService.findOne(id);
+        if (bancaDTO != null) {
+            Page<ProfessorDTO> professoresDTO = professorService.findByBanca(bancaDTO.getId(), pageable);
+            for (ProfessorDTO professorDTO : professoresDTO) {
+                //verify invite
+                ProfessorBancaDTO professorBancaDTO = new ProfessorBancaDTO();
+                professorBancaDTO.setProfessorId(professorDTO.getId());
+                professorBancaDTO.setBancaId(bancaDTO.getId());
+                professorBancaDTO = professorBancaService.findByBancaProfessor(professorBancaDTO);
+                if (professorBancaDTO.isInvite() != null) {
+                    professorDTO.setInvite(professorBancaDTO.isInvite());
+                    professorDTO.setNota(professorBancaDTO.getNota());
+                }
+            }
+            bancaDTO.setProfessoresDTO(professoresDTO);
+        }        
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(bancaDTO));
     }
 

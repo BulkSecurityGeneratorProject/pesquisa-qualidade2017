@@ -1,6 +1,9 @@
 package com.qualidade.pesquisa.service;
 
 import com.qualidade.pesquisa.service.dto.ProfessorBancaDTO;
+
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -24,6 +27,9 @@ public interface ProfessorBancaService {
      *  @return the list of entities
      */
     Page<ProfessorBancaDTO> findAll(Pageable pageable);
+    Page<ProfessorBancaDTO> findAllByUserId(Long userId, Pageable pageable);
+    
+    
 
     /**
      *  Get the "id" professorBanca.
@@ -32,6 +38,9 @@ public interface ProfessorBancaService {
      *  @return the entity
      */
     ProfessorBancaDTO findOne(Long id);
+    ProfessorBancaDTO findByBancaProfessor(ProfessorBancaDTO professorBancaDTO);
+    
+
 
     /**
      *  Delete the "id" professorBanca.

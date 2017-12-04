@@ -59,6 +59,21 @@ public class TeseServiceImpl implements TeseService{
             .map(teseMapper::toDto);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Page<TeseDTO> findAllProfessorByUserId(Long userId, Pageable pageable) {
+        return teseRepository.findAllOrientadorByUserId(userId, pageable)
+            .map(teseMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<TeseDTO> findAllAlunoByUserId(Long userId, Pageable pageable) {
+        log.debug("Request to get all Tese");
+        return teseRepository.findAllAlunoByUserId(userId, pageable)
+            .map(teseMapper::toDto);
+    }
+
     /**
      *  Get one tese by id.
      *

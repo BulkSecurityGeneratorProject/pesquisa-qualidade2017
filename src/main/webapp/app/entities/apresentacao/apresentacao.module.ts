@@ -10,7 +10,10 @@ import {
     ApresentacaoDialogComponent,
     ApresentacaoPopupComponent,
     ApresentacaoDeletePopupComponent,
+    ApresentacaoAceitarPopupComponent,
+    ApresentacaoRecusarPopupComponent,
     ApresentacaoDeleteDialogComponent,
+    ApresentacaoStatusDialogComponent,
     apresentacaoRoute,
     apresentacaoPopupRoute,
 } from './';
@@ -32,6 +35,9 @@ const ENTITY_STATES = [
         ApresentacaoDeleteDialogComponent,
         ApresentacaoPopupComponent,
         ApresentacaoDeletePopupComponent,
+        ApresentacaoStatusDialogComponent,
+        ApresentacaoAceitarPopupComponent,
+        ApresentacaoRecusarPopupComponent,
     ],
     entryComponents: [
         ApresentacaoComponent,
@@ -39,6 +45,9 @@ const ENTITY_STATES = [
         ApresentacaoPopupComponent,
         ApresentacaoDeleteDialogComponent,
         ApresentacaoDeletePopupComponent,
+        ApresentacaoStatusDialogComponent,
+        ApresentacaoAceitarPopupComponent,
+        ApresentacaoRecusarPopupComponent,
     ],
     providers: [
         ApresentacaoService,

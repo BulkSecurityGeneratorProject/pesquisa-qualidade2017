@@ -16,6 +16,7 @@
                 "title": "Professor Banca"
             },
             "nota": "Nota",
+            "invite": "Invite",
             "professor": "Professor",
             "banca": "Banca"
         }

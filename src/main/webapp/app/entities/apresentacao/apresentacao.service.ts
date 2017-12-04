@@ -38,9 +38,9 @@ export class ApresentacaoService {
         });
     }
 
-    query(req?: any): Observable<ResponseWrapper> {
+    query(idUser: number, req?: any): Observable<ResponseWrapper> {
         const options = createRequestOption(req);
-        return this.http.get(this.resourceUrl, options)
+        return this.http.get(`${this.resourceUrl}/user/${idUser}`, options)
             .map((res: Response) => this.convertResponse(res));
     }
 

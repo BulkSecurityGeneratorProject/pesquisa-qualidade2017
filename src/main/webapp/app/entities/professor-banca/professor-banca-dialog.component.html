@@ -12,24 +12,22 @@
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="professorBanca.id" readonly />
         </div>
-        <div class="form-group">
+        <div class="form-group" [hidden]="!professorBanca.id">
             <label class="form-control-label" jhiTranslate="jhipsterApp.professorBanca.nota" for="field_nota">Nota</label>
             <input type="number" class="form-control" name="nota" id="field_nota"
                 [(ngModel)]="professorBanca.nota"  />
         </div>
 
-        <div class="form-group">
+        <div class="form-group"  [hidden]="professorBanca.id">
             <label class="form-control-label" jhiTranslate="jhipsterApp.professorBanca.professor" for="field_professor">Professor</label>
             <select class="form-control" id="field_professor" name="professor" [(ngModel)]="professorBanca.professorId" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="professorOption.id" *ngFor="let professorOption of professors; trackBy: trackProfessorById">{{professorOption.id}}</option>
+                <option [ngValue]="professorOption.id" *ngFor="let professorOption of professors; trackBy: trackProfessorById">{{professorOption.nome}}</option>
             </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="jhipsterApp.professorBanca.banca" for="field_banca">Banca</label>
-            <select class="form-control" id="field_banca" name="banca" [(ngModel)]="professorBanca.bancaId" >
-                <option [ngValue]="null"></option>
-                <option [ngValue]="bancaOption.id" *ngFor="let bancaOption of bancas; trackBy: trackBancaById">{{bancaOption.id}}</option>
+            <select disabled class="form-control" id="field_banca" name="banca" [(ngModel)]="professorBanca.bancaId" >
+                <option [ngValue]="professorBanca.bancaId">{{professorBanca.bancaId}}</option>
             </select>
         </div>
     </div>

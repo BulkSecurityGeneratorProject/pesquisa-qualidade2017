@@ -25,7 +25,7 @@
                 <constraints nullable="true" />
             </column>
             <column name="area_id" type="bigint">
-                <constraints unique="true" nullable="true" />
+                <constraints nullable="true" />
             </column>            <column name="user_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>

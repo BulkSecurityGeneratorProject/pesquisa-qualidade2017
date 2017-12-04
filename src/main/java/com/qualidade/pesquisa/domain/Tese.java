@@ -4,6 +4,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -28,13 +30,17 @@ public class Tese implements Serializable {
     @Column(name = "jhi_link")
     private String link;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
     private Aluno aluno;
 
     @OneToOne
     @JoinColumn(unique = true)
     private Apresentacao apresentacao;
+
+    @NotNull
+    @OneToOne
+    @JoinColumn(unique = true)
+    private PropostaTese propostaTese;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -95,6 +101,19 @@ public class Tese implements Serializable {
 
     public void setApresentacao(Apresentacao apresentacao) {
         this.apresentacao = apresentacao;
+    }
+
+    public PropostaTese getPropostaTese() {
+        return propostaTese;
+    }
+
+    public Tese propostaTese(PropostaTese propostaTese) {
+        this.propostaTese = propostaTese;
+        return this;
+    }
+
+    public void setPropostaTese(PropostaTese propostaTese) {
+        this.propostaTese = propostaTese;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

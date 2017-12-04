@@ -31,7 +31,7 @@ export const artigoRoute: Routes = [
 
 export const artigoPopupRoute: Routes = [
     {
-        path: 'artigo-new',
+        path: 'artigo-new/:userId',
         component: ArtigoPopupComponent,
         data: {
             authorities: ['ROLE_USER', 'ROLE_ALUNO'],

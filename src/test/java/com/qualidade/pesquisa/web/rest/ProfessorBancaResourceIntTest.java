@@ -43,6 +43,9 @@ public class ProfessorBancaResourceIntTest {
     private static final Double DEFAULT_NOTA = 1D;
     private static final Double UPDATED_NOTA = 2D;
 
+    private static final Boolean DEFAULT_INVITE = false;
+    private static final Boolean UPDATED_INVITE = true;
+
     @Autowired
     private ProfessorBancaRepository professorBancaRepository;
 
@@ -86,7 +89,8 @@ public class ProfessorBancaResourceIntTest {
      */
     public static ProfessorBanca createEntity(EntityManager em) {
         ProfessorBanca professorBanca = new ProfessorBanca()
-            .nota(DEFAULT_NOTA);
+            .nota(DEFAULT_NOTA)
+            .invite(DEFAULT_INVITE);
         return professorBanca;
     }
 
@@ -112,6 +116,7 @@ public class ProfessorBancaResourceIntTest {
         assertThat(professorBancaList).hasSize(databaseSizeBeforeCreate + 1);
         ProfessorBanca testProfessorBanca = professorBancaList.get(professorBancaList.size() - 1);
         assertThat(testProfessorBanca.getNota()).isEqualTo(DEFAULT_NOTA);
+        assertThat(testProfessorBanca.isInvite()).isEqualTo(DEFAULT_INVITE);
     }
 
     @Test
@@ -145,7 +150,8 @@ public class ProfessorBancaResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(professorBanca.getId().intValue())))
-            .andExpect(jsonPath("$.[*].nota").value(hasItem(DEFAULT_NOTA.doubleValue())));
+            .andExpect(jsonPath("$.[*].nota").value(hasItem(DEFAULT_NOTA.doubleValue())))
+            .andExpect(jsonPath("$.[*].invite").value(hasItem(DEFAULT_INVITE.booleanValue())));
     }
 
     @Test
@@ -159,7 +165,8 @@ public class ProfessorBancaResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(professorBanca.getId().intValue()))
-            .andExpect(jsonPath("$.nota").value(DEFAULT_NOTA.doubleValue()));
+            .andExpect(jsonPath("$.nota").value(DEFAULT_NOTA.doubleValue()))
+            .andExpect(jsonPath("$.invite").value(DEFAULT_INVITE.booleanValue()));
     }
 
     @Test
@@ -180,7 +187,8 @@ public class ProfessorBancaResourceIntTest {
         // Update the professorBanca
         ProfessorBanca updatedProfessorBanca = professorBancaRepository.findOne(professorBanca.getId());
         updatedProfessorBanca
-            .nota(UPDATED_NOTA);
+            .nota(UPDATED_NOTA)
+            .invite(UPDATED_INVITE);
         ProfessorBancaDTO professorBancaDTO = professorBancaMapper.toDto(updatedProfessorBanca);
 
         restProfessorBancaMockMvc.perform(put("/api/professor-bancas")
@@ -193,6 +201,7 @@ public class ProfessorBancaResourceIntTest {
         assertThat(professorBancaList).hasSize(databaseSizeBeforeUpdate);
         ProfessorBanca testProfessorBanca = professorBancaList.get(professorBancaList.size() - 1);
         assertThat(testProfessorBanca.getNota()).isEqualTo(UPDATED_NOTA);
+        assertThat(testProfessorBanca.isInvite()).isEqualTo(UPDATED_INVITE);
     }
 
     @Test

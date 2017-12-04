@@ -6,3 +6,4 @@ export * from './apresentacao-delete-dialog.component';
 export * from './apresentacao-detail.component';
 export * from './apresentacao.component';
 export * from './apresentacao.route';
+export * from './apresentacao-status-dialog.component';

@@ -2,9 +2,11 @@ package com.qualidade.pesquisa.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.qualidade.pesquisa.service.TeseService;
+import com.qualidade.pesquisa.service.AlunoService;
 import com.qualidade.pesquisa.web.rest.util.HeaderUtil;
 import com.qualidade.pesquisa.web.rest.util.PaginationUtil;
 import com.qualidade.pesquisa.service.dto.TeseDTO;
+import com.qualidade.pesquisa.service.dto.AlunoDTO;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -34,9 +36,11 @@ public class TeseResource {
     private static final String ENTITY_NAME = "tese";
 
     private final TeseService teseService;
+    private final AlunoService alunoService;
 
-    public TeseResource(TeseService teseService) {
+    public TeseResource(TeseService teseService, AlunoService alunoService) {
         this.teseService = teseService;
+        this.alunoService = alunoService;
     }
 
     /**
@@ -53,6 +57,8 @@ public class TeseResource {
         if (teseDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new tese cannot already have an ID")).body(null);
         }
+        AlunoDTO alunoDTO = alunoService.findByUserId(teseDTO.getUserId());
+        teseDTO.setAlunoId(alunoDTO.getId());
         TeseDTO result = teseService.save(teseDTO);
         return ResponseEntity.created(new URI("/api/tese/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -92,6 +98,22 @@ public class TeseResource {
     public ResponseEntity<List<TeseDTO>> getAllTese(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Tese");
         Page<TeseDTO> page = teseService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tese");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/tese/aluno/{idUser}")
+    @Timed
+    public ResponseEntity<List<TeseDTO>> getAllTeseAluno(@PathVariable Long idUser,@ApiParam Pageable pageable) {
+        Page<TeseDTO> page = teseService.findAllAlunoByUserId(idUser, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tese");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/tese/professor/{idUser}")
+    @Timed
+    public ResponseEntity<List<TeseDTO>> getAllTeseProfessor(@PathVariable Long idUser,@ApiParam Pageable pageable) {
+        Page<TeseDTO> page = teseService.findAllProfessorByUserId(idUser, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tese");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

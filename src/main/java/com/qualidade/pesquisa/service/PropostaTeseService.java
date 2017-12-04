@@ -31,7 +31,9 @@ public interface PropostaTeseService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    PropostaTeseDTO findOne(Long id);
+    PropostaTeseDTO findOne(Long id);    
+    Page<PropostaTeseDTO> findAllProfessorByUserId(Long userId,Pageable pageable);
+    Page<PropostaTeseDTO> findAllAlunoByUserId(Long userId,Pageable pageable);
 
     /**
      *  Delete the "id" propostaTese.

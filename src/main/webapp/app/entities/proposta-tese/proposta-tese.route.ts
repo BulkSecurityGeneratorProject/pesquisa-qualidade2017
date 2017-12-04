@@ -31,7 +31,7 @@ export const propostaTeseRoute: Routes = [
 
 export const propostaTesePopupRoute: Routes = [
     {
-        path: 'proposta-tese-new',
+        path: 'proposta-tese-new/:userId',
         component: PropostaTesePopupComponent,
         data: {
             authorities: ['ROLE_USER', 'ROLE_ALUNO', 'ROLE_PROFESSOR'],

@@ -7,6 +7,8 @@ import com.qualidade.pesquisa.repository.ApresentacaoRepository;
 import com.qualidade.pesquisa.service.ApresentacaoService;
 import com.qualidade.pesquisa.service.PropostaTeseService;
 import com.qualidade.pesquisa.service.TeseService;
+import com.qualidade.pesquisa.service.ProfessorService;
+import com.qualidade.pesquisa.service.BancaService;
 import com.qualidade.pesquisa.service.dto.ApresentacaoDTO;
 import com.qualidade.pesquisa.service.mapper.ApresentacaoMapper;
 import com.qualidade.pesquisa.web.rest.errors.ExceptionTranslator;
@@ -69,6 +71,12 @@ public class ApresentacaoResourceIntTest {
     private TeseService teseService;
 
     @Autowired
+    private ProfessorService professorService;
+
+    @Autowired
+    private BancaService bancaService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -87,7 +95,7 @@ public class ApresentacaoResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ApresentacaoResource apresentacaoResource = new ApresentacaoResource(apresentacaoService, propostaService, teseService);
+        final ApresentacaoResource apresentacaoResource = new ApresentacaoResource(apresentacaoService, propostaService, teseService, professorService, bancaService);
         this.restApresentacaoMockMvc = MockMvcBuilders.standaloneSetup(apresentacaoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

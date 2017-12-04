@@ -29,30 +29,11 @@
                 [(ngModel)]="propostaTese.descricao"  />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="jhipsterApp.propostaTese.flgaprovado" for="field_flgaprovado">Flgaprovado</label>
-            <input type="checkbox" class="form-control" name="flgaprovado" id="field_flgaprovado"
-                [(ngModel)]="propostaTese.flgaprovado"  />
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="jhipsterApp.propostaTese.link" for="field_link">Link</label>
             <input type="text" class="form-control" name="link" id="field_link"
                 [(ngModel)]="propostaTese.link"  />
         </div>
 
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="jhipsterApp.propostaTese.apresentacao" for="field_apresentacao">Apresentacao</label>
-            <select class="form-control" id="field_apresentacao" name="apresentacao" [(ngModel)]="propostaTese.apresentacaoId">
-                <option [ngValue]="null"></option>
-                <option [ngValue]="apresentacaoOption.id" *ngFor="let apresentacaoOption of apresentacaos; trackBy: trackApresentacaoById">{{apresentacaoOption.id}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="jhipsterApp.propostaTese.aluno" for="field_aluno">Aluno</label>
-            <select class="form-control" id="field_aluno" name="aluno" [(ngModel)]="propostaTese.alunoId">
-                <option [ngValue]="null"></option>
-                <option [ngValue]="alunoOption.id" *ngFor="let alunoOption of alunos; trackBy: trackAlunoById">{{alunoOption.id}}</option>
-            </select>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">

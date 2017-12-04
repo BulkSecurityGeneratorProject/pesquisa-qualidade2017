@@ -6,6 +6,9 @@ export class ProfessorBanca implements BaseEntity {
         public nota?: number,
         public professorId?: number,
         public bancaId?: number,
+        public invite?: boolean,
+        public avaliando?: boolean
     ) {
+        this.avaliando=false;
     }
 }

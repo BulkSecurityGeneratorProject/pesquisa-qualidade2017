@@ -26,7 +26,6 @@ public class Professor implements Serializable {
     private String nome;
 
     @OneToOne
-    @JoinColumn(unique = true)
     private AreaPesquisa area;
 
     @OneToOne
@@ -45,7 +44,7 @@ public class Professor implements Serializable {
     public String getNome() {
         return nome;
     }
-
+    
     public Professor nome(String nome) {
         this.nome = nome;
         return this;

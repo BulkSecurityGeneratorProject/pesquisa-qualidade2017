@@ -5,6 +5,9 @@ import com.qualidade.pesquisa.domain.ProfessorBanca;
 import com.qualidade.pesquisa.repository.ProfessorBancaRepository;
 import com.qualidade.pesquisa.service.dto.ProfessorBancaDTO;
 import com.qualidade.pesquisa.service.mapper.ProfessorBancaMapper;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -59,6 +62,8 @@ public class ProfessorBancaServiceImpl implements ProfessorBancaService{
             .map(professorBancaMapper::toDto);
     }
 
+
+
     /**
      *  Get one professorBanca by id.
      *
@@ -72,7 +77,23 @@ public class ProfessorBancaServiceImpl implements ProfessorBancaService{
         ProfessorBanca professorBanca = professorBancaRepository.findOne(id);
         return professorBancaMapper.toDto(professorBanca);
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public ProfessorBancaDTO findByBancaProfessor(ProfessorBancaDTO professorBancaDTO){
+        ProfessorBanca professorBanca = professorBancaRepository.findByBancaProfessor(professorBancaDTO.getProfessorId(), professorBancaDTO.getBancaId());
+        return professorBancaMapper.toDto(professorBanca);
+    }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Page<ProfessorBancaDTO> findAllByUserId(Long userId, Pageable pageable) {
+        return professorBancaRepository.findAllByUserId(userId, pageable)
+            .map(professorBancaMapper::toDto);
+    }
+    
+
+    
     /**
      *  Delete the  professorBanca by id.
      *

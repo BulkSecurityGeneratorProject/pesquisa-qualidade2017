@@ -2,9 +2,11 @@ package com.qualidade.pesquisa.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.qualidade.pesquisa.service.ArtigoService;
+import com.qualidade.pesquisa.service.AlunoService;
 import com.qualidade.pesquisa.web.rest.util.HeaderUtil;
 import com.qualidade.pesquisa.web.rest.util.PaginationUtil;
 import com.qualidade.pesquisa.service.dto.ArtigoDTO;
+import com.qualidade.pesquisa.service.dto.AlunoDTO;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -35,9 +37,11 @@ public class ArtigoResource {
     private static final String ENTITY_NAME = "artigo";
 
     private final ArtigoService artigoService;
+    private final AlunoService alunoService;
 
-    public ArtigoResource(ArtigoService artigoService) {
+    public ArtigoResource(ArtigoService artigoService, AlunoService alunoService) {
         this.artigoService = artigoService;
+        this.alunoService = alunoService;
     }
 
     /**
@@ -54,6 +58,8 @@ public class ArtigoResource {
         if (artigoDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new artigo cannot already have an ID")).body(null);
         }
+        AlunoDTO alunoDTO = alunoService.findByUserId(artigoDTO.getUserId());
+        artigoDTO.setAlunoId(alunoDTO.getId());
         ArtigoDTO result = artigoService.save(artigoDTO);
         return ResponseEntity.created(new URI("/api/artigos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -93,6 +99,14 @@ public class ArtigoResource {
     public ResponseEntity<List<ArtigoDTO>> getAllArtigos(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Artigos");
         Page<ArtigoDTO> page = artigoService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/artigos");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/artigos/user/{userId}")
+    @Timed
+    public ResponseEntity<List<ArtigoDTO>> getAllArtigosByUserId(@PathVariable Long userId, @ApiParam Pageable pageable) {
+        Page<ArtigoDTO> page = artigoService.findAllByUserId(userId, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/artigos");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
